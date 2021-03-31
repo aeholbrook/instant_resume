@@ -1,20 +1,3 @@
-%%%%%%%%%%%%%%%%%
-% This is an example CV created using altacv.cls (v1.3, 10 May 2020) written by
-% LianTze Lim (liantze@gmail.com), based on the
-% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
-%
-%% It may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2003/12/01 or later.
-%%%%%%%%%%%%%%%%
-
-%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
-% \documentclass[10pt,a4paper,normalphoto]{altacv}
-
 \documentclass[8pt,a4paper,ragged2e,withhyper]{altacv}
 
 %% AltaCV uses the fontawesome5 and academicon fonts
@@ -25,6 +8,7 @@
 \geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm}
 
 % The paracol package lets you typeset columns of text in parallel
+%the etoolbox package allows for conditional statements
 \usepackage{paracol}
 \usepackage[T1]{fontenc}
 \usepackage{drm}
@@ -46,7 +30,7 @@
   \usepackage[default]{lato}
 \fi
 \usepackage[dfvipsnames]{xcolor}
-\usepackage{hyperref}
+%\usepackage{hyperref}
 
 % Change the colours if you want to
 \definecolor{VividPurple}{HTML}{3E0097}
@@ -92,9 +76,11 @@
    \phone{618-520-5434}
   \homepage{aeholbrook.com}
   \linkedin{aeholbrook}
-  \github{github.com/aeholbrook} 
+  \github{aeholbrook} 
+  \printinfo{\faInstagram}{@ae.holbrook}
   \mailaddress{203 Southpointe Dr. Apt. D -  Edwardsville, IL 62025}
 }
+
 \makecvheader
 
 
@@ -106,7 +92,7 @@
 \large{Today's Date: \today}
 
 \medskip
-%\header{\LARGE \color{accent} \textbf{Dear \emph{\empName{}} Hiring Team:}}
+ %\header{\LARGE \color{accent} \textbf{Dear \emph{\empName{}} Hiring Team:}}
 \header{\LARGE \color{accent} \textbf{To Whom it May Concern:}}
 \medskip
 \normalsize
@@ -116,15 +102,12 @@
 \setlength{\line}{}
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
-%\par Having recently learned of this \jobName{} opening at \empName{}, I was compelled to contact you right away and express in words my strong interest in this position. I love what I've seen of your culture and goals at \empName{}, and I'd be delighted to learn more and see what I can bring to your team.
 
-Hello! Having recently learned of an open \jobName{} \jobType{} at \empName{}, I was compelled to contact you right away and express in words my strong interest in this position. I love what I've seen of your culture and goals at \empName{}, and I'd be delighted to learn more and see what I can bring to your team. 
-
-%Also, I'm a St. Louis native, and I respect any business that keeps it local.
-
-In addition to my \textbf{attached resume}, I thought it would be prudent to provide for you a brief overview of my \textbf{background and qualifications}. I believe that in this \jobName{} \jobType{} I could make a skilled, reliable, and enthusiastic addition to the \empName{} team. I offer the following career highlights to support my candidacy:
+Hello! Having recently learned of an open \jobName{} \jobType{} at \empName{}, I was compelled to contact you right away and express in words my strong interest in this position. I believe that in this \jobName{} \jobType{} I could make a skilled, reliable, and enthusiastic addition to the \empName{} team. I offer the following career highlights to support my candidacy:
 
 \begin{itemize}
+
+    
     \item \textbf{\color{accent}Five Years}' history of \textbf{\color{accent}Mathematics and Statistics}, including experience in \textbf{advanced calculus, linear algebra, and computational statistical methods}, plus software including \textbf{R, SPSS, and Python}.
     \item \textbf{\color{accent}Four Years} of experience in \textbf{\color{accent}Data Analysis, Data Visualization, \& Machine Learning}, using \textbf{R \& Python} in addition to platforms like \textbf{Tableau and IBM SPSS}, plus a history of interest in statistics education and the use of analytical and machine learning tools to \textbf{tell stories from data}.
     \item \textbf{\color{accent}Four Years} of \textbf{\color{accent}Web Development} experience using both raw code and \textbf{CMS services} such as Wordpress, Wix, and Squarespace. This includes self-hosted sites on LAMP server stacks running Wordpress and \textbf{HTML, CSS, and JavaScript}, plus several projects also utilizing \textbf{PHP \& mySQL}.
@@ -141,16 +124,13 @@ Much of the experience I have gained can be represented by the projects I have c
 \makebox[0.33\linewidth][c]{\textbf{\color{accent}\href{http://www.smalltown.gallery}{Interactive Map \& Gallery Page}}}
 %\makebox[0.33\linewidth][c]{\textbf{\color{accent}\href{http://www.veteransculptor.com}{Sculptor's Portfolio Website}}}
 \makebox[0.33\linewidth][c]{\textbf{\color{accent}\href{https://github.com/aeholbrook/net4nets/blob/main/net4nets.ipynb}{A Neural Network to Classify EEGs}}}
-\makebox[0.33\linewidth][c]{\textbf{\color{accent}\href{http://www.aeholbrook.com}{My Photography Portfolio}}}
+\makebox[0.33\linewidth][c]{\textbf{\color{accent}\href{http://github.com/aeholbrook/instant_resume}{The Template for This Resume}}}
 
 \setlength{\parindent}{1.5em}
 
-With regards to my skill history, much of my previous work has involved experiment design and implementation as a research assistant and client negotiation and interaction as a research consultant. Much of this work involved \textbf{surveys}, \textbf{public data}, \textbf{time series analyses}, and other means of measurement, analyzed using \textbf{R}, \textbf{Python}, and \textbf{IBM SPSS}. I have also built a number of \textbf{web scrapers} and \textbf{machine learning} models in multiple languages for a number of \textbf{data projects}. I would be thrilled to find opportunities to apply these skills at your company.
+With regards to my skill history, much of my previous work has involved experiment design and implementation as a research assistant and client negotiation and interaction as a research consultant. Much of this work involved \textbf{surveys}, \textbf{public data}, \textbf{time series analyses}, and other means of measurement, analyzed using \textbf{R}, \textbf{Python}, and \textbf{IBM SPSS}. I have also built a number of \textbf{web scrapers} and \textbf{machine learning} models in multiple languages for a number of \textbf{data projects}. I possess \textbf{demonstrated strengths} in \textbf{communication}, \textbf{leadership}, and \textbf{problem solving}. I would be thrilled to find opportunities to apply these skills at your company.
 
-%As briefly mentioned above, I also possess experience working with multiple labs performing research on various topics in neuroscience and psychology. I performed extensive \textbf{data cleanup} and maintained \textbf{data pipelines} in these roles, and even helped streamline an EEG pipeline at one lab by proactively facilitating a move from on-site hardware to processing within the school's supercomputer, making slight adjustments to the hardware within.
-
-Additionally, I possess \textbf{demonstrated strengths} in communication, leadership, and problem solving. While I am early on my professional journey, I am confident that my background as a self-starter and my strong interest in the field will make me a valuable candidate. In gaining these skills in this \jobType{} as \empName{} implements them, I am confident I will become a stronger asset for the team. 
-
+%As briefly mentioned above, I also possess experience working with multiple labs performing research on various topics in neuroscience and psychology. I performed extensive \textbf{data cleanup} and maintained \textbf{data pipelines} in these roles, including extensive experience with feature detection \& extraction and machine learning as they pertained to these positions.
 
 Finally, I want to take this opportunity to express my gratitude to you at \empName{} for considering my application and taking the time to read through my information. For more information, please feel free to contact me. I happily welcome the opportunity to speak with you and the team at your earliest convenience and I \textbf{am very grateful} for your time and consideration. 
 
@@ -169,7 +149,7 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 \setlength{\columnsep}{1pt}
 \begin{center}
 \begin{paracol}{4}
-\cvedu{MS\ Computer Science}{SIU Edwardsville}{2020 -- 2022}{Edwardsville, IL}{Data Science Focus}{\faCode\faChartLine\faCloud\faGlobe}\par
+\cvedu{MS\ Computer Science}{SIU Edwardsville}{2020 -- 2022}{Edwardsville, IL}{Data Science}{\faCode\faChartLine\faCloud\faGlobe\faGithub}\par
 \switchcolumn
 \cvedu{MS\ Applied Psychology}{Southern Illinois University}{2019 -- 2020}{Carbondale, IL}{Statistics Focus}{\faPen\faChartLine\faCode}\par
 \switchcolumn
@@ -194,17 +174,22 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 \cvsection{Recent Work and Projects}
 \smallskip
 
-\cvevent{Graduate Assistant}{SIU Edwardsville Dept. of Computer Science}{Nov 2020 -- Jan 2021}{Edwardsville, IL}{\faCode\faDatabase\faGlobe\faCloud}
+\cvproject{net4nets Deep Learning Proj.}{SIU Integrative Neuro Lab}{Jan 2020 -- Now}{Online}{\faCode\faChartLine\faCloud\faGithub}
+
 \begin{itemize}
-\item For Illinois Department of Transportation stakeholders, rewrote C++ \& UNIX Shell code  for backend of \textbf{interactive traffic map} of St. Louis area.
-
+    \item Partnered with an EEG research lab to construct a \textbf{tensorflow-based convolutional classifier} \& processing pipeline for \textbf{electroencephalography}.
+    
 \end{itemize}
+\divider
 
+\cvevent{Graduate Assistant}{SIU Edwardsville Dept. of Computer Science}{Nov 2020 -- Jan 2021}{Edwardsville, IL}{\faCode\faDatabase\faGlobe\faCloud\faGithub}
+\begin{itemize}
+\item For Illinois Department of Transportation stakeholders, rewrote C++ \& UNIX Shell code  for backend of \textbf{interactive traffic map} of St. Louis area.\end{itemize}
 \divider
 
 \cvproject{energyillinois.org Presentation}{APEC Southern Illinois}{Oct 9, 2020}{Carbondale, IL}{\faGlobe\faPen\faCloud}
 \begin{itemize}
-\item Constructed \& presented a \textbf{website mockup}, \textbf{research}, \& plans for student led \textbf{consulting firm} to the Association of Professional Energy Consultants.%\item \textbf{Leading a team} of graduate and undergraduate students to \textbf{develop energy education tools} in coordination with \textbf{SIU and Leidos affiliates}.%\item Initiated and Maintained the development of a student-centered energy efficiency consulting firm using a hybrid vertical practicum structure.
+\item Constructed \& presented \textbf{website mockup}, \textbf{research}, \& plans for a student led \textbf{consulting firm} to the Association of Professional Energy Consultants.%\item \textbf{Leading a team} of graduate and undergraduate students to \textbf{develop energy education tools} in coordination with \textbf{SIU and Leidos affiliates}.%\item Initiated and Maintained the development of a student-centered energy efficiency consulting firm using a hybrid vertical practicum structure.
 \end{itemize}
 
 \divider
@@ -220,30 +205,32 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 
 \cvevent{Associate Consultant}{SIU Applied Research Consultants (ARC)}{May 2019 -- Aug 2020}{Carbondale, IL}{\faChartLine\faCode\faPen\faCamera}
 \begin{itemize}
-\item \textbf{Led and organized teams of consultants} performing \textbf{data-driven research projects} for over a dozen local small \& medium sized stakeholders.
-%\item Designed and built surveys and internal assessments.
-\item Built surveys, response coding guidelines, \& data processing pipelines.
-%\item Collected data as CSVs and JSONs from various sources, then cleaned and processed data using tools such as R, Python, Excel, and SPSS.
+    \item \textbf{Led and organized teams of consultants} performing \textbf{data-driven research projects} for over a dozen local small \& medium sized stakeholders.
+    %\item Designed and built surveys and internal assessments.
+    %\item Built surveys, response coding guidelines, \& data processing pipelines.
+    %\item Collected data as CSVs and JSONs from various sources, then cleaned and processed data using tools such as R, Python, Excel, and SPSS.
+    \item Led a project to construct \textbf{reports} for SIU admin based on \textbf{survey data}
+    %\item Built several \textbf{unsupervised machine learning models} in \textbf{R}
 \end{itemize}
 
 \divider
 
-\cvproject{Commencement Alternatives Report}{SIU ARC}{Presented Apr 28, 2020}{Carbondale, IL}{\faPen\faDatabase\faChartLine\faCode}
+%\cvproject{Commencement Alternatives Report}{SIU ARC}{Presented Apr 28, 2020}{Carbondale, IL}{\faPen\faDatabase\faChartLine\faCode}
 
-\begin{itemize}
-    \item Led a project to construct an \textbf{R-based analysis \& visualization pipeline} \& a \textbf{report} for SIU admin based on \textbf{survey data} collected from students.
+%\begin{itemize}
+
     %\item Constructed a simple data pipeline in R to build visualizations and calculate descriptive statistics from an arbitrarily updating online data file hosted on a Qualtrics account.
     
-\end{itemize}
+%\end{itemize}
 
-\divider
+%\divider
 
-\cvproject{MIDUS Data Factor Analysis}{SIU Dept. of Psychology}{Oct 2019 -- Nov 2019}{Carbondale, IL}{\faChartLine\faCode\faPen}
-\begin{itemize}
-    \item Built an \textbf{unsupervised machine learning model} in \textbf{R} to further evidence of specific personality-related \textbf{features} in a large phone survey dataset.
-\end{itemize}
+%\cvproject{MIDUS Data Factor Analysis}{SIU Dept. of Psychology}{Oct 2019 -- Nov 2019}{Carbondale, IL}{\faChartLine\faCode\faPen}
+%\begin{itemize}
 
-\divider
+%\end{itemize}
+
+%\divider
 
 %\cvevent{President}{SIU Photogenesis Student Organization}{May 2018 -- May 2019}{Carbondale, IL}{\faCamera\faGlobe\faPen}
 
@@ -257,13 +244,21 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 
 %\divider
 
-\cvevent{Data Analysis Intern}{SIU Admissions Office}{Jan 2016 -- May 2016}{Carbondale, IL}{\faChartLine\faDatabase}
-
+\cvevent{Research Assistant}{SIU Neurotrauma Rehabilitation Laboratory}{Mar 2018 -- May 2019}{Carbondale, IL}{\faChartLine\faCode\faDatabase\faGraduationCap}
 \begin{itemize}
-%\item Located and removed erroneous entries from \textbf{admissions database}.
-\item Performed \textbf{research} on \textbf{SIU student data} to improve admissions criteria.
-
+    \item Gathered animal physiology \textbf{data}; formulated \& tested \textbf{hypotheses}
+    %\item Analyzed and prepared biological samples using laboratory tools
 \end{itemize}
+\divider
+
+\cvevent{Data Analytics Intern}{SIU Admissions Office}{Jan 2016 -- May 2016}{Carbondale, IL}{\faChartLine\faDatabase}
+
+%\begin{itemize}
+%\item Located and removed erroneous entries from \textbf{admissions database}.
+%\item Performed \textbf{research} on \textbf{SIU student data} to improve admissions criteria.
+
+%\end{itemize}
+
 \divider
 
 %\cvproject{Supercomputer Interfacing}{SIU Integrative Neuro Lab}{Jan 2020 - Feb 2020}{Carbondale, IL}{\faBrain\faCode\faCloud}
@@ -273,11 +268,6 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 
 %\divider
 
-%\cvevent{Research Assistant}{SIU Neurotrauma Rehabilitation Laboratory}{Mar 2018 -- May 2019}{Carbondale, IL}{\faChartLine\faBrain\faGraduationCap}
-%\begin{itemize}
-    %\item Performed statistical tests on lab-gathered data
-    %\item Analyzed and prepared biological samples using laboratory tools
-%\end{itemize}
 
 %\cvsection{Achievements}
 
@@ -432,26 +422,30 @@ Finally, I want to take this opportunity to express my gratitude to you at \empN
 \cvsection{Abilities}
 \medskip
 
-\cvachievement{\faChartLine}{Data Analysis \& Research}{Experience w/ machine learning, linear modeling, \& feature detection}
+\cvachievement{\faChartLine}{Data Analysis \& Research}{Experience w/ machine learning, statistical modeling, \& data cleanup/processing}
 
 \divider
 
-\cvachievement{\faCode}{Computer Science}{Practiced skill in R, Python, SPSS, Java, JavaScript, C Family, and others.}
+\cvachievement{\faCode}{Computer Science}{Practiced in UNIX, Python, Java, JavaScript, C/C++, \& others.}
 
 \divider
 
-\cvachievement{\faDatabase}{Database Management}{Experience w/ database structures, plus query construction \& wrangling.}
+\cvachievement{\faDatabase}{Database Management}{Experience w/ database structures \& queries}
 
 \divider
 
 \cvachievement{\faCloud}{Full Stack Development}{Built physical \& virtual Apache \& Nginx servers, w/ PHP, mySQL, NodeJS, \& Python}
 \divider
 
-\cvachievement{\faPen}{Survey Methodology}{Constructed \& Released surveys w/ hundreds of participants; analyzed \& reported results.}
+\cvachievement{\faPen}{Survey Methodology}{Constructed \& analyzed surveys w/ thousands of respondents.}
 
 \divider
 
-\cvachievement{\faGlobe}{Web Design}{Designed \& built responsive, functional websites using HTML, CSS, \& JavaScript.}
+\cvachievement{\faGlobe}{Web Design}{Designed \& built websites in HTML, CSS, \& JavaScript.}
+
+\divider
+
+\cvachievement{\faGithub}{Git Software}{Experience with Git, plus portfolio of source code repos.}
 
 \divider
 
