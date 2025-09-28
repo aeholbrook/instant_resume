@@ -1,1 +1,0 @@
-Here's a template for my resume, which I built in LaTeX based on the wonderful AltaCV project. I'll probably add some more information here in the readme when I get a more comprehensive and edit-ready version of this doc finished. 
