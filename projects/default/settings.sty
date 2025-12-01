@@ -1,0 +1,382 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SETTINGS.STY - Comprehensive CV styling and package management
+%
+% This package provides all the styling, colors, fonts, and layout settings
+% needed for professional CV generation. It's designed to work with the
+% curve document class and provides extensive customization options.
+%
+% STRUCTURE OVERVIEW:
+% 1. Core LaTeX functionality and error suppression
+% 2. Document layout and geometry settings
+% 3. Graphics, colors, and visual elements
+% 4. URL and hyperlink management
+% 5. Bibliography support (currently disabled)
+% 6. Color definitions for CV branding
+% 7. Curve class customizations and styling
+%
+% Author: LaTeX Resume Template
+% Version: 2024/09/08
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{settings}[2024/09/08 Professional CV settings and styling package]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 1: CORE LATEX FUNCTIONALITY
+% This section handles package loading, error suppression, and basic LaTeX setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Silence package - suppresses annoying warnings that don't affect output
+% Particularly useful for automated builds and clean compilation logs
+\RequirePackage{silence}
+
+% Suppress specific warnings that commonly occur in CV compilation:
+\WarningsOff[longtable]  % Longtable warnings (not used in CVs but sometimes triggered)
+\WarningsOff[array]      % Array package warnings (from table formatting)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 2: DOCUMENT STRUCTURE & LAYOUT
+% Controls page geometry, text alignment, and overall document structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Geometry package - controls page margins and layout
+% a4paper: European standard paper size (210 × 297 mm)
+% nohead/nofoot: Removes default headers/footers (we'll create custom ones)
+% hmargin=2.25cm: Horizontal margins (left and right)
+% vmargin=2cm: Vertical margins (top and bottom)
+\RequirePackage[a4paper,nohead,nofoot,hmargin=2.25cm,vmargin=2cm]{geometry}
+
+% Babel - internationalization support for proper hyphenation
+% Uses language specified in document class (typically english)
+\RequirePackage{babel}
+
+% Set text alignment to ragged right for better readability in CVs
+% This prevents awkward spacing that can occur with full justification
+\raggedright
+
+% Relsize - provides relative font sizing commands (\relsize{-1}, etc.)
+% Useful for fine-tuning text sizes in different CV sections
+\RequirePackage{relsize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 3: GRAPHICS, COLORS, AND VISUAL ELEMENTS
+% Handles all visual aspects: images, colors, icons, and drawing capabilities
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Graphicx - essential for including images (headshots, logos, etc.)
+\RequirePackage{graphicx}
+
+% Xcolor - advanced color support with predefined color sets
+% dvipsnames: Standard color names (Blue, Red, etc.)
+% svgnames: SVG color names (DarkSlateGray, etc.)
+\RequirePackage[dvipsnames,svgnames]{xcolor}
+
+% TikZ - powerful drawing package for custom graphics and decorative elements
+\RequirePackage{tikz}
+% Load specific TikZ libraries for enhanced functionality:
+\usetikzlibrary{shapes,shadows}  % Custom shapes and shadow effects
+
+% FontAwesome5 - modern icon set for contact information and social media
+% [fixed] option ensures consistent icon sizing across different contexts
+\RequirePackage[fixed]{fontawesome5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4: URL AND HYPERLINK MANAGEMENT
+% Configures how URLs and hyperlinks appear in the document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% URL package - handles URL formatting and line breaking
+% [hyphens] option allows URLs to break at hyphens for better layout
+\RequirePackage[hyphens]{url}
+
+% Hyperref - creates clickable links in PDFs
+% colorlinks=true: Use colored text instead of boxes around links
+% allcolors=black: All link types use black color (professional appearance)
+% breaklinks=true: Allow links to break across lines
+\RequirePackage[colorlinks=true,allcolors=black,breaklinks=true]{hyperref}
+
+% Set URL style to typewriter font (monospace) for technical appearance
+\urlstyle{tt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5: BIBLIOGRAPHY SUPPORT (CURRENTLY DISABLED)
+% Academic CV support - can be enabled by uncommenting the relevant lines
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Comment package - allows conditional compilation of document sections
+\RequirePackage{comment}
+
+% Bibliography packages (currently commented out for compatibility)
+% Uncomment these lines if you need academic publication support:
+% \RequirePackage[bibstyle=apa6,sorting=ymdnt,uniquename=init,defernumbers=true]{biblatex}
+% \RequirePackage{csquotes}  % Provides context-sensitive quotation facilities
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 6: ADDITIONAL UTILITY PACKAGES
+% Miscellaneous packages that provide useful functionality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Xpatch - provides tools for patching and modifying LaTeX commands
+% Used later in this file to customize the curve class behavior
+\RequirePackage{xpatch}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 7: COLOR DEFINITIONS AND BRANDING
+% Custom colors that define the visual identity of the CV
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% SwishLineColour - Deep reddish-brown used for decorative line elements
+% HTML color #7a1d0a (122, 29, 10 in RGB)
+% Used in: Section headers, decorative lines, visual separators
+% This color conveys professionalism and authority
+\definecolor{SwishLineColour}{HTML}{7a1d0a}
+
+% MarkerColour - Bright red-pink used for accent elements and icons
+% HTML color #B6073F (182, 7, 63 in RGB)
+% Used in: Icons, bullets, emphasis elements, interactive elements
+% This color provides visual interest and draws attention to key information
+\definecolor{MarkerColour}{HTML}{B6073F}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 8: BIBLIOGRAPHY CUSTOMIZATION (CURRENTLY DISABLED)
+% Advanced academic CV features - uncomment when biblatex is available
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \DeclareSortingTemplate{ymdnt}{
+%   \sort{
+%     \field{presort}
+%   }
+%   \sort[final]{
+%     \field{sortkey}
+%   }
+%   \sort[direction=descending]{
+%     \field[strside=left,strwidth=4]{sortyear}
+%     \field[strside=left,strwidth=4]{year}
+%     \literal{9999}
+%   }
+%   \sort[direction=descending]{
+%     \field[padside=left,padwidth=2,padchar=0]{month}
+%     \literal{00}
+%   }
+%   \sort[direction=descending]{
+%     \field[padside=left,padwidth=2,padchar=0]{day}
+%     \literal{00}
+%   }
+%   \sort{
+%     \field{sortname}
+%     \field{author}
+%     \field{editor}
+%     \field{translator}
+%     \field{sorttitle}
+%     \field{title}
+%   }
+%   \sort{
+%     \field{sorttitle}
+%     \field{title}
+%   }
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 9: CUSTOM GRAPHICS COMMANDS
+% Specialized commands for creating custom visual elements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \circled command - creates numbered circles for bibliography entries
+% This command uses TikZ to create a professional circular marker with text
+% Parameters:
+%   #1 - Text to display inside the circle (usually a number)
+% Usage: \circled{1}, \circled{2}, etc.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+   % Create a TikZ node with circular shape
+   \node[
+     shape=circle,                              % Make it perfectly circular
+     text=white,                               % White text for contrast
+     fill=MarkerColour!80!black,               % Fill with slightly darkened MarkerColour
+     font=\sffamily\scriptsize\bfseries,       % Sans-serif, small, bold font
+     inner sep=1pt,                            % Small padding inside circle
+     text height=1.35ex,                       % Consistent text height
+     minimum width=1.5em,                      % Minimum circle width
+     text centered                             % Center the text
+   ] (char) {#1}; % 'char' is the node name, #1 is the content
+}}
+   
+% \newcounter{bibitem}  % Commented out temporarily
+% \AtBeginBibliography{\setcounter{bibitem}{1}}  % Commented out temporarily
+% \AtEveryBibitem{\makebox[2.5em][l]{\circled{\thebibitem}\stepcounter{bibitem}}}  % Commented out temporarily
+%
+% \setlength{\bibitemsep}{1.5ex}  % Commented out temporarily
+% \setlength{\bibhang}{2.5em}  % Commented out temporarily
+%
+% \xpretofieldformat{doi}  % Commented out temporarily
+%   {\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}
+%   {}{}
+% \xpretofieldformat{url}  % Commented out temporarily
+%   {\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}
+%   {}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 10: CURVE CLASS CUSTOMIZATION
+% Modifications to the curve document class for professional CV appearance
+% The curve class provides CV-specific commands like \rubric and \entry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Header scaling factor - controls size of the CV header
+% Value of 1 means no scaling (use original size)
+\headerscale{1}
+
+% Rubric font settings - defines the appearance of section headers (Experience, Education, etc.)
+% \Large: Larger font size for prominence
+% \bfseries: Bold weight for emphasis
+% \sffamily: Sans-serif font family for modern appearance
+\rubricfont{\Large\bfseries\sffamily}
+
+% Rubric spacing controls - fine-tune the vertical spacing around section headers
+\setlength{\rubricspace}{6pt}        % Space before section header
+\setlength{\rubricafterspace}{-18pt} % Space after section header (negative = tighter)
+\setlength{\subrubricspace}{2pt}     % Space before subsection headers
+\setlength{\subrubricbeforespace}{2pt} % Space after subsection headers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 11: CUSTOM RUBRIC STYLING WITH TIKZ
+% Advanced visual customization of section headers using TikZ graphics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \rubrichead command - creates a beautiful section header with gradient line
+% This replaces the default curve class section headers with custom TikZ graphics
+% Parameters:
+%   #1 - The section title text (e.g., "Experience", "Education")
+\newcommand{\rubrichead}[1]{%
+  \par\vspace{1em}%                              % Add space before header
+  \noindent%                                     % Don't indent the header
+  \begin{tikzpicture}[baseline]%                 % Start TikZ drawing
+    % Create gradient line from SwishLineColour to white
+    \shade[left color=SwishLineColour!60!white, right color=white] rectangle (12cm,2.5pt);
+    % Place the section title text over the line
+    \node[
+      font={\large\bfseries\sffamily},           % Large, bold, sans-serif
+      inner sep=0pt,                             % No internal padding
+      anchor=south west,                         % Position anchor point
+      text depth=.5ex,                           % Consistent text depth
+      text height=1.5ex                          % Consistent text height
+    ] at (1pt,2pt) {#1};                        % Position and content
+  \end{tikzpicture}%
+  \par\vspace{6pt}%                              % Add space after header
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 12: RUBRIC ENVIRONMENT REDEFINITION
+% Complete replacement of the curve class rubric environment for better control
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Save the original rubric commands before redefining them
+\let\oldrubric\rubric
+\let\endoldrubric\endrubric
+
+% Redefine the rubric environment to use our custom styling
+% This environment is used for major sections like Experience, Education, Skills
+\renewenvironment{rubric}[1]{%
+  \rubrichead{#1}                                % Use our custom header
+}{%
+  \par\vspace{1em}                              % Add space after section
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 13: ENTRY COMMAND CUSTOMIZATION
+% Handles individual entries within CV sections (jobs, degrees, etc.)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Advanced LaTeX programming to redefine the \entry command
+% This uses LaTeX's internal command structure for maximum flexibility
+\makeatletter
+
+% Redefine the main \entry command to dispatch to specialized versions
+\renewcommand\entry{\@entry}
+\renewcommand\@entry{\@ifstar\@sentry\@nentry}
+
+% Starred version of entry (\entry*) - for special formatting
+\renewcommand\@sentry[1][]{%
+  \par\noindent                                  % New paragraph, no indent
+  \hangindent=2.5cm                             % Hanging indent for continuation lines
+  {\small\textbf{#1}}\quad\ignorespaces         % Small bold label with space
+}
+
+% Normal version of entry (\entry) - standard formatting
+\providecommand\@nentry[1][]{%
+  \par\noindent                                  % New paragraph, no indent
+  \hangindent=2.5cm                             % Hanging indent for continuation lines
+  \textbf{#1}\quad\ignorespaces                 % Bold label with space
+}
+
+\makeatother % End of low-level LaTeX programming
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 14: SUBSECTION AND FIELD FORMATTING
+% Controls the appearance of subsections and contact information fields
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Subrubric font settings - for subsections within major sections
+\subrubricfont{\large\bfseries\sffamily}
+\subrubricalignment{l}                          % Left-align subsection headers
+
+% \makefield command - formats contact information with icons
+% Parameters:
+%   #1 - Icon (FontAwesome command like \faEmail)
+%   #2 - Text content (email address, phone number, etc.)
+% Usage: \makefield{\faEmail}{adam@example.com}
+\newcommand{\makefield}[2]{
+  \makebox[1.8em]{\color{MarkerColour!80!black}#1} % Colored icon in wider fixed-width box
+  \hspace{0.3em}#2\hspace{0.1em}                   % Extra space after icon, minimal trailing space
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 15: CURVE CLASS ALIGNMENT AND SPACING SETTINGS
+% Fine-tune the overall layout and alignment of CV elements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\keyalignment{r}                                % Right-align keys in key-value pairs
+\rubricalignment{l}                             % Left-align rubric headers
+\renewcommand{\arraystretch}{1.25}              % Increase row height in tables (25% more)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 16: PREFIX MARKER SYSTEM
+% Advanced customization system for entry prefixes (bullets, numbers, etc.)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Command to set a custom prefix marker
+\newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
+
+% Define how the prefix appears before each entry
+\prefix{%
+  \hspace*{-1ex}                                % Slight negative space
+  \color{MarkerColour!80!black}\@prefixmarker   % Colored prefix marker
+  \hspace*{1ex}%                                % Space after marker
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 17: ADDITIONAL HELPER COMMANDS
+% Utility commands for specific formatting needs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Create a rubric header with additional vertical space
+\newcommand{\makerubrichead}[1]{\vskip\baselineskip\@@rubrichead{#1}}
+
+% \defbibheading{subbibliography}{\vskip\subrubricbeforespace{\@subrubricfont\hspace{3pt}#1}\par}  % Commented out temporarily
+%
+% \defbibfilter{booksandchapters}{%  % Commented out temporarily
+% ( type=book or type=incollection )
+% }
+%
+% \renewcommand*{\mkbibnamefamily}[1]{%  % Commented out temporarily
+%   \ifboolexpr{ test {\ifdefstrequal{\namepartfamily}{\@mylastname}}
+%                and
+%                test {\ifdefstrequal{\namepartgiven}{\@myfirstname}}}
+%     {\textbf{#1}}%
+%     {#1}%
+% }
+%
+% \renewcommand*{\mkbibnamegiven}[1]{%  % Commented out temporarily
+%   \ifboolexpr{ test {\ifdefstrequal{\namepartfamily}{\@mylastname}}
+%                and
+%                test {\ifdefstrequal{\namepartgiven}{\@myfirstname}}}
+%     {\textbf{#1}}%
+%     {#1}%
+% }

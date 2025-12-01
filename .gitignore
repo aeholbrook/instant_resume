@@ -1,0 +1,68 @@
+# Build directory (all LaTeX artifacts go here)
+build/
+
+# Personal resumes (kept private)
+adam-resume-simplified/
+projects/shelter-sre/
+projects/tech-resume/
+projects/default-old/
+resume_old_backup/
+
+# AI session data
+.claude/
+
+# Session notes and documentation
+*.md
+!README.md
+
+# Node modules
+node_modules/
+
+# LaTeX build files (backup patterns if files escape build dir)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.cut
+*.nav
+*.snm
+*.vrb
+
+# PDF outputs (uncomment if you don't want to track PDFs)
+# *.pdf
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temp directories
+temp/
+tmp/
+
+# Local dev container overrides
+.devcontainer/*.local
+.devcontainer/Dockerfile.local
+.devcontainer/devcontainer.local.json

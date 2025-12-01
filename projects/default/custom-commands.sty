@@ -1,0 +1,341 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUSTOM-COMMANDS.STY - Semantic Markup System for Professional Resume Consistency
+%
+% This package provides a comprehensive semantic markup system that separates
+% content from presentation, making it easy to maintain consistent formatting
+% across your entire CV while allowing for easy style changes.
+%
+% PHILOSOPHY:
+% Instead of using raw LaTeX formatting commands throughout your CV content,
+% this package provides meaningful, semantic commands that describe WHAT
+% something is, not HOW it should look. This makes your CV:
+% - More maintainable (change styles in one place)
+% - More consistent (impossible to accidentally use different formatting)
+% - More adaptable (easily create different versions for different industries)
+%
+% STRUCTURE OVERVIEW:
+% 1. Core semantic markup commands (technologies, roles, companies, etc.)
+% 2. Content structure helpers (achievements, tech stacks)
+% 3. Domain-specific terminology (payment industry terms)
+% 4. Conditional formatting system (technical vs. business focus)
+% 5. Draft and debugging helpers
+% 6. Measurement and metrics formatting
+% 7. Common abbreviations and acronyms
+%
+% Author: LaTeX Resume Template
+% Version: 2025/01/01
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{custom-commands}[2024/09/08 Semantic resume markup system]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 1: CORE SEMANTIC MARKUP COMMANDS
+% These commands provide semantic meaning to different types of content in your CV
+% They answer the question "WHAT is this content?" not "HOW should it look?"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% TECHNOLOGY AND SKILLS MARKUP
+%-------------------------------------------------------------------------------
+
+% \tech{} - Mark up technology names and technical terms
+% Philosophy: Technologies should be readable but not overly emphasized
+% Usage: \tech{Python}, \tech{AWS}, \tech{Kubernetes}
+% Current styling: No special formatting (normal text)
+% Can easily be changed to italic, bold, or colored text
+\newcommand{\tech}[1]{#1}
+
+%-------------------------------------------------------------------------------
+% JOB AND ROLE MARKUP
+%-------------------------------------------------------------------------------
+
+% \role{} - Mark up job titles and professional roles
+% Philosophy: Job titles are the most important part of work experience entries
+% Usage: \role{Senior Software Engineer}, \role{Technical Lead}
+% Current styling: Large, bold text with em-dash separator
+% The em-dash (--) provides visual separation between role and company
+\newcommand{\role}[1]{\large\textbf{#1} --}
+
+%-------------------------------------------------------------------------------
+% ORGANIZATION MARKUP
+%-------------------------------------------------------------------------------
+
+% \company{} - Mark up company and organization names
+% Philosophy: Company names should be visible but secondary to job roles
+% Usage: \company{Google}, \company{Microsoft}, \company{Startup Inc.}
+% Current styling: Small text, grouped to contain the size change
+% The grouping {{ }} ensures the size change doesn't affect surrounding text
+\newcommand{\company}[1]{{\small #1}}
+
+%-------------------------------------------------------------------------------
+% PROJECT AND ACHIEVEMENT MARKUP
+%-------------------------------------------------------------------------------
+
+% \project{} - Mark up project names and initiatives
+% Philosophy: Project names should be distinguished from regular text
+% Usage: \project{Customer Data Platform}, \project{Payment Gateway Redesign}
+% Current styling: Italic text for subtle emphasis
+\newcommand{\project}[1]{\textit{#1}}
+
+% \metric{} - Mark up quantifiable results and metrics
+% Philosophy: Numbers and measurable achievements should stand out
+% Usage: \metric{99.9\%}, \metric{$2.5B}, \metric{300ms}
+% Current styling: Bold text to draw attention to achievements
+\newcommand{\metric}[1]{\textbf{#1}}
+
+%-------------------------------------------------------------------------------
+% CONTENT STRUCTURE HELPERS
+%-------------------------------------------------------------------------------
+
+% Kerning improvement command for better character spacing
+% This adds subtle letter spacing using microtype package features for pdfLaTeX
+\newcommand{\kerneddot}{\textls[25]}
+
+% \achievement{} - Format achievement and accomplishment descriptions
+% Philosophy: Achievements need consistent formatting and spacing
+% Usage: \achievement{Built monitoring system that reduced downtime by 50\%}
+% Current styling: Smaller italic text with themed caret icon and tighter spacing
+% The \relsize{-1.0} makes text slightly smaller, themed caret provides visual emphasis
+% Added hanging indent so wrapped lines don't go back to left margin
+\newcommand{\achievement}[1]{%
+  \vspace{0.25\baselineskip}% Reduced vertical spacing (was \smallskip)
+  \hangindent=1.5em% Indent wrapped lines
+  \hangafter=1% Start hanging indent after first line
+  {\color{MarkerColour!80!black}\small\faCaretRight}\space\emph{\relsize{-1.0}\kerneddot #1}% Themed caret with slightly smaller font
+  \vspace{0.1\baselineskip}% Minimal space after
+}
+
+% \techstack{} - Format technology stack listings with labels
+% Philosophy: Tech stacks need clear labeling and consistent formatting
+% Usage: \techstack{Backend}{Python, Django, PostgreSQL}
+% Usage: \techstack{Frontend}{React, TypeScript, CSS}
+% Parameters:
+%   #1 - Category label (e.g., "Backend", "Frontend", "Tools")
+%   #2 - Technology list (comma-separated)
+% Current styling: Slightly smaller italic text with bold category labels
+\newcommand{\techstack}[2]{\emph{\relsize{-0.8}\textbf{#1:} #2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 2: DOMAIN-SPECIFIC TERMINOLOGY
+% Specialized terms and acronyms relevant to the payment industry and fintech
+% These commands ensure consistent formatting and spelling of technical terms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% GENERAL TECHNICAL TERMS (NORMAL FORMATTING)
+%-------------------------------------------------------------------------------
+
+% Common technical terms that should be consistently formatted
+% These use normal text styling since they're standard industry terms
+
+% \billions - Consistent way to reference large scale
+% Usage: "processing \billions{} of transactions"
+\newcommand{\billions}{billions}
+
+% \production - Production environment reference
+% Usage: "deployed to \production{} systems"
+\newcommand{\production}{Production}
+
+% \monitoring - Monitoring and observability terms
+% Usage: "\monitoring{} systems detected the issue"
+\newcommand{\monitoring}{Monitoring}
+
+% \compliance - Regulatory compliance references
+% Usage: "\compliance{} requirements were met"
+\newcommand{\compliance}{Compliance}
+
+% \realtime - Real-time processing (with proper hyphenation)
+% Usage: "\realtime{} fraud detection system"
+\newcommand{\realtime}{Real-Time}
+
+%-------------------------------------------------------------------------------
+% PAYMENT INDUSTRY DIFFERENTIATORS (BOLD FORMATTING)
+%-------------------------------------------------------------------------------
+% These are specialized payment industry terms that represent competitive advantages
+% They use bold formatting because they're YOUR unique differentiators
+
+% MDES (Example: Mastercard Digital Enablement Service)
+% This is specialized knowledge that few developers have
+\newcommand{\mdes}{MDES}                    % Normal version
+\newcommand{\mdesbold}{\textbf{MDES}}       % Bold version for emphasis
+
+% Vocalink (UK payment infrastructure)
+% Specialized knowledge of UK payment systems
+\newcommand{\vocalinkbold}{\textbf{Vocalink}}
+\newcommand{\vocalinkips}{\textbf{Vocalink}} % Alternative name
+
+% ISO 20022 (International payment messaging standard)
+% Advanced knowledge of financial messaging standards
+\newcommand{\iso}{ISO 20022}
+
+% PCI DSS (Payment Card Industry Data Security Standard)
+% Critical compliance knowledge for payment systems
+\newcommand{\pcidss}{PCI DSS}
+
+% Immediate Payment Service (UK instant payments)
+% Specialized knowledge of modern payment rails
+\newcommand{\ips}{\textbf{Immediate Payment Service}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 3: CONDITIONAL FORMATTING SYSTEM
+% Advanced system for creating different CV versions for different audiences
+% This allows one source document to generate multiple targeted CVs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% TECHNICAL VS. BUSINESS FOCUS TOGGLE
+%-------------------------------------------------------------------------------
+
+% Boolean flag to switch between technical and business-focused formatting
+% This is a powerful feature that allows the same content to be presented
+% differently depending on the target audience
+\newif\iftechnical
+\technicalfalse  % Default: business-focused formatting
+                 % Change to \technicaltrue for technical positions
+
+%-------------------------------------------------------------------------------
+% CONDITIONAL EMPHASIS COMMAND
+%-------------------------------------------------------------------------------
+
+% \emphasize{} - Context-sensitive emphasis based on CV version
+% This command automatically adjusts formatting based on the target audience
+% Usage: \emphasize{machine learning} or \emphasize{team leadership}
+%
+% Technical version (when \technicaltrue):
+%   - Uses bold formatting to emphasize technical skills and achievements
+%   - Appropriate for engineering, architect, and technical lead positions
+%
+% Business version (when \technicalfalse):
+%   - Uses italic formatting for subtle emphasis
+%   - Appropriate for management, consulting, and business-focused positions
+\newcommand{\emphasize}[1]{%
+    \iftechnical
+        \textbf{#1}%    % Bold for technical resumes
+    \else
+        \textit{#1}%    % Italic for business-focused resumes
+    \fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4: DEBUGGING AND DRAFT HELPERS
+% Development tools for CV creation and revision process
+% These tools help during CV development but don't appear in final documents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% DRAFT MODE TOGGLE
+%-------------------------------------------------------------------------------
+
+% Boolean flag to enable/disable draft elements throughout the document
+% When enabled, shows helpful development information
+% When disabled, produces clean final output
+\newif\ifdraft
+\draftfalse  % Default: production mode (no draft elements)
+             % Change to \drafttrue during CV development
+
+%-------------------------------------------------------------------------------
+% DRAFT ANNOTATION COMMANDS
+%-------------------------------------------------------------------------------
+
+% \draftnote{} - Add development notes that only appear in draft mode
+% Usage: \draftnote{Need to verify this metric with HR}
+% These appear as red text to draw attention during development
+% Automatically hidden in final version (when \draftfalse)
+\newcommand{\draftnote}[1]{%
+    \ifdraft
+        \textcolor{red}{\small [DRAFT: #1]}%
+    \fi
+}
+
+% \todo{} - Mark items that need completion or revision
+% Usage: \todo{Update salary history}, \todo{Get reference contact info}
+% These appear as blue text to distinguish from draft notes
+% Automatically hidden in final version (when \draftfalse)
+\newcommand{\todo}[1]{%
+    \ifdraft
+        \textcolor{blue}{\small [TODO: #1]}%
+    \fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5: MEASUREMENT AND METRICS HELPERS
+% Specialized commands for formatting quantifiable achievements
+% These ensure consistent presentation of performance metrics and measurements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% COMMON METRIC PATTERNS
+%-------------------------------------------------------------------------------
+
+% \percent{} - Format percentage values consistently
+% Usage: \percent{99.9}, \percent{25}
+% Output: "99.9%", "25%" (bold formatting for emphasis)
+\newcommand{\percent}[1]{\metric{#1\%}}
+
+% \uptime{} - Format uptime/availability metrics
+% Usage: \uptime{99.99}
+% Output: "99.99% uptime" (bold percentage, normal text for "uptime")
+\newcommand{\uptime}[1]{\metric{#1\% uptime}}
+
+% \reduction{} - Format improvement/reduction achievements
+% Usage: \reduction{deployment time}{80\%}
+% Output: "reducing deployment time by 80%" (bold percentage)
+% Parameters:
+%   #1 - What was reduced (e.g., "deployment time", "error rate")
+%   #2 - Amount of reduction (e.g., "80\%", "50ms")
+\newcommand{\reduction}[2]{reducing #1 by \metric{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 6: ABBREVIATION AND ACRONYM HELPERS
+% Ensures consistent formatting and spelling of common technical abbreviations
+% These use normal text formatting since they're standard industry terms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+% TECHNICAL ABBREVIATIONS
+%-------------------------------------------------------------------------------
+
+% \api - Application Programming Interface
+% Usage: Built REST \api{} with 99.9\% uptime
+\newcommand{\api}{API}
+
+% \cicd - Continuous Integration/Continuous Deployment
+% Usage: Implemented \cicd{} pipeline reducing deployment time
+\newcommand{\cicd}{CI/CD}
+
+% \itsm - IT Service Management
+% Usage: Streamlined \itsm{} processes across organization
+\newcommand{\itsm}{IT Service Management}
+
+% \devops - Development Operations
+% Usage: Led \devops{} transformation initiative
+\newcommand{\devops}{DevOps}
+
+% \soa - Service-Oriented Architecture
+% Usage: Designed \soa{} solution for legacy system integration
+\newcommand{\soa}{SOA}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF PACKAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% USAGE EXAMPLES:
+%
+% In your CV content files (employment.tex, etc.), use these commands like:
+%
+% \role{Senior Software Engineer} \company{TechCorp Inc.}
+% \achievement{Built \tech{Python} microservices processing \billions{} of transactions}
+% \achievement{Achieved \uptime{99.99} through improved \monitoring{} systems}
+% \achievement{Led \devops{} transformation, \reduction{deployment time}{75\%}}
+% \techstack{Backend}{\tech{Python}, \tech{Django}, \tech{PostgreSQL}}
+%
+% For different CV versions:
+% - Set \technicaltrue for technical positions (emphasizes technical skills)
+% - Set \technicalfalse for business positions (emphasizes leadership/impact)
+%
+% For development workflow:
+% - Set \drafttrue to see \todo{} and \draftnote{} annotations
+% - Set \draftfalse for final PDF generation
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

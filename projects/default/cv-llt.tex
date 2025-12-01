@@ -1,0 +1,87 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN CV DOCUMENT - Professional Resume Template
+%
+% This is an example/template resume. Replace with your own information.
+%
+% Based on: LianTze Lim's curve template
+% Customized for: Professional Software Engineers & SREs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,skipsamekey,11pt,english]{curve}
+
+% Load our custom settings and commands
+\usepackage{settings}
+\usepackage{custom-commands}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FONT SELECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex%
+\ifxetex%
+  \xetexorluatextrue%
+\else%
+  \ifluatex%
+    \xetexorluatextrue%
+  \else%
+    \xetexorluatexfalse%
+  \fi%
+\fi%
+
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \setmainfont{Fira Sans}[
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
+  ]
+  \setsansfont{Fira Sans}
+  \setmonofont[Scale=0.85,Contextuals=Alternate]{Fira Code}
+  \defaultfontfeatures{Ligatures=TeX,Kerning=On}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{FiraSans}
+  \usepackage{FiraMono}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10,expansion=false]{microtype}
+
+\includecomment{fullonly}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\leftheader{%
+  {\huge\bfseries John Doe}
+
+  \vspace{0.5\baselineskip}
+
+  \makefield{\faEnvelope[regular]}{\href{mailto:john.doe@example.com}{john.doe@example.com}}
+
+  \vspace{0.2\baselineskip}
+  \makefield{\faGithub}{\href{http://www.github.com/johndoe}{github.com/johndoe}}
+
+  \vspace{0.2\baselineskip}
+  \makefield{\faLinkedin}{\href{http://www.linkedin.com/in/johndoe/}{linkedin.com/in/johndoe}}
+}
+
+\rightheader{~}
+
+\title{Curriculum Vitae}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\makeheaders[c]
+
+{\small \textbf{Site Reliability Engineer} with expertise in building reliable, observable infrastructure for mission-critical systems. Expert in CI/CD automation, Infrastructure-as-Code, and observability platforms.}
+
+\par\noindent
+
+\input{employment}
+\input{education}
+\input{skills}
+
+\end{document}

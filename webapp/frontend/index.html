@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Resume Editor</title>
+
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #f9fafb;
+            --border-color: #e5e7eb;
+            --text-primary: #374151;
+            --text-secondary: #6b7280;
+            --toolbar-bg: #1f2937;
+            --toolbar-text: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1f2937;
+            --bg-secondary: #374151;
+            --bg-tertiary: #111827;
+            --border-color: #4b5563;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --toolbar-bg: #111827;
+            --toolbar-text: #f9fafb;
+        }
+
+        body {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .app-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 1fr;
+            flex: 1;
+            min-height: 0;
+            gap: 1px;
+            background-color: var(--border-color);
+            transition: grid-template-columns 0.3s ease;
+        }
+
+        .main-container.sidebar-collapsed {
+            grid-template-columns: 0 1fr 1fr;
+        }
+
+        .sidebar {
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+            max-width: 400px;
+            width: 250px;
+            resize: horizontal;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            min-width: 0 !important;
+            width: 0 !important;
+            max-width: 0 !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            border-right: none !important;
+        }
+
+        .sidebar-header {
+            background: var(--bg-secondary);
+            padding: 0.375rem 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 500;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            min-height: 2rem;
+        }
+
+        .file-explorer {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem 0;
+        }
+
+        .editor-panel, .preview-panel {
+            background: var(--bg-primary);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            background: var(--bg-secondary);
+            padding: 0.375rem 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 2rem;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .toolbar {
+            background: var(--toolbar-bg);
+            color: var(--toolbar-text);
+            padding: 0.375rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-height: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.875rem;
+        }
+
+        #editor {
+            flex: 1;
+            min-height: 0;
+        }
+
+        #pdf-container {
+            flex: 1;
+            overflow: auto;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        #pdf-viewer {
+            position: relative;
+            display: inline-block;
+        }
+
+        #pdf-canvas {
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: white;
+            display: block;
+        }
+
+        #pdf-text-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: auto;
+            opacity: 0;
+            line-height: 1;
+        }
+
+        #pdf-text-layer .textLayer {
+            position: absolute;
+            text-align: initial;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0.25;
+            line-height: 1;
+            -webkit-text-size-adjust: none;
+            -moz-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        #pdf-text-layer .textLayer span {
+            color: transparent;
+            position: absolute;
+            white-space: pre;
+            cursor: text;
+            transform-origin: 0% 0%;
+        }
+
+        #pdf-text-layer .textLayer span.highlight {
+            background-color: rgba(255, 255, 0, 0.4);
+            color: transparent;
+        }
+
+        #pdf-text-layer .textLayer span.source-highlight {
+            background-color: rgba(59, 130, 246, 0.3);
+            color: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.6);
+        }
+
+        .pdf-selection-tooltip {
+            position: absolute;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.375rem;
+            padding: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-size: 0.75rem;
+            max-width: 200px;
+            color: var(--text-primary);
+        }
+
+        .pdf-source-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .pdf-source-file {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .pdf-source-context {
+            font-family: monospace;
+            background: var(--bg-tertiary);
+            padding: 0.25rem;
+            border-radius: 0.2rem;
+            font-size: 0.7rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-success { background: #d1fae5; color: #065f46; }
+        .status-error { background: #fee2e2; color: #991b1b; }
+        .status-compiling { background: #fef3c7; color: #92400e; }
+        .status-idle { background: #f3f4f6; color: #374151; }
+
+        .btn {
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 0.2rem;
+        }
+
+        .btn-icon {
+            padding: 0.25rem;
+            min-width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+
+        select {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .tree-item {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: background-color 0.2s;
+            user-select: none;
+        }
+
+        .tree-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .tree-item.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .tree-item.viewing {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: white;
+            border-left: 3px solid #047857;
+            position: relative;
+        }
+
+        .tree-item.viewing::after {
+            content: "PDF";
+            position: absolute;
+            right: 0.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.2rem;
+            font-weight: 600;
+        }
+
+        .tree-item.viewing .tree-icon::before {
+            content: "👁 ";
+            font-size: 0.7rem;
+        }
+
+        .tree-item.folder {
+            font-weight: 500;
+        }
+
+        .tree-icon {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .tree-children {
+            padding-left: 1rem;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .tree-children.collapsed {
+            max-height: 0;
+        }
+
+        .tree-children.expanded {
+            max-height: 500px;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            left: 10px;
+            top: 60px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .sidebar.collapsed ~ * .sidebar-toggle,
+        body:has(.sidebar.collapsed) .sidebar-toggle {
+            left: 10px;
+        }
+
+        .pdf-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.7rem;
+        }
+
+        .pdf-toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            padding: 0.125rem;
+        }
+
+        .pdf-toolbar-group .btn-icon {
+            border: none;
+            background: transparent;
+        }
+
+        .pdf-toolbar-group .btn-icon:hover {
+            background: var(--bg-secondary);
+        }
+
+        .pdf-toolbar-group .btn-icon.active {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        #pdf-text-layer.select-mode {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #pdf-text-layer.compare-mode {
+            opacity: 0;
+            pointer-events: auto;
+        }
+
+        #pdf-text-layer.select-mode .textLayer {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+        }
+
+        #pdf-text-layer.select-mode .textLayer span {
+            color: rgba(0, 0, 0, 0.01);
+            cursor: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+            pointer-events: auto;
+        }
+
+        #pdf-text-layer.select-mode .textLayer span::selection {
+            background: rgba(0, 123, 255, 0.4);
+            color: rgba(0, 123, 255, 0.4);
+        }
+
+        #pdf-text-layer.compare-mode .textLayer span {
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .pdf-mode-indicator {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .pdf-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        #page-input {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            width: 2.5rem;
+            text-align: center;
+            padding: 0.125rem 0.25rem;
+            font-size: 0.7rem;
+            border-radius: 0.2rem;
+        }
+
+        #zoom-select {
+            font-size: 0.7rem;
+            min-width: 70px;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.2rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .pdf-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-fullscreen #pdf-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pdf-fullscreen-header {
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr 1fr;
+            }
+
+            .sidebar {
+                max-height: 200px;
+                resize: none;
+            }
+
+            .pdf-toolbar {
+                gap: 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .toolbar {
+                padding: 0.4rem 0.75rem;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <div class="toolbar">
+            <h1 class="font-semibold">LaTeX Resume Editor</h1>
+            <div class="flex items-center gap-3 ml-auto">
+                <div id="status-indicator" class="status-indicator status-idle">
+                    <span id="status-dot">●</span>
+                    <span id="status-text">Ready</span>
+                </div>
+                <button id="compile-btn" class="btn btn-primary">Compile</button>
+                <button id="auto-compile-btn" class="btn btn-secondary btn-sm">Auto: OFF</button>
+                <button id="download-btn" class="btn btn-secondary btn-sm">Download</button>
+                <button id="theme-toggle" class="btn btn-secondary btn-icon">🌙</button>
+            </div>
+        </div>
+
+        <!-- Floating Sidebar Toggle -->
+        <button class="sidebar-toggle" id="sidebar-toggle">←</button>
+
+        <!-- Main Content -->
+        <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span>📁 Project Files</span>
+            </div>
+            <div class="file-explorer" id="file-explorer">
+                <!-- File tree will be populated here -->
+            </div>
+        </div>
+
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <div class="panel-header">
+                <h2 class="font-semibold">LaTeX Editor</h2>
+                <span id="current-file-name" class="text-sm text-gray-500">No file selected</span>
+            </div>
+            <div id="editor"></div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <div class="panel-header">
+                <h2 class="font-semibold">PDF Preview</h2>
+                <div class="pdf-toolbar">
+                    <!-- Page Navigation Group -->
+                    <div class="pdf-toolbar-group">
+                        <button id="first-page" class="btn-icon btn-secondary" title="First Page">⏪</button>
+                        <button id="prev-page" class="btn-icon btn-secondary" title="Previous Page">◀</button>
+                        <div class="page-info">
+                            <input id="page-input" type="number" min="1" value="1">
+                            <span>/</span>
+                            <span id="page-count">1</span>
+                        </div>
+                        <button id="next-page" class="btn-icon btn-secondary" title="Next Page">▶</button>
+                        <button id="last-page" class="btn-icon btn-secondary" title="Last Page">⏩</button>
+                    </div>
+
+                    <!-- Zoom Group -->
+                    <div class="pdf-toolbar-group">
+                        <button id="zoom-out" class="btn-icon btn-secondary" title="Zoom Out">−</button>
+                        <select id="zoom-select">
+                            <option value="auto">Auto</option>
+                            <option value="page-fit">Fit</option>
+                            <option value="page-width">Width</option>
+                            <option value="0.5">50%</option>
+                            <option value="0.75">75%</option>
+                            <option value="1" selected>100%</option>
+                            <option value="1.25">125%</option>
+                            <option value="1.5">150%</option>
+                            <option value="2">200%</option>
+                        </select>
+                        <button id="zoom-in" class="btn-icon btn-secondary" title="Zoom In">+</button>
+                    </div>
+
+                    <!-- Mode Toggle Group -->
+                    <div class="pdf-toolbar-group">
+                        <button id="compare-mode" class="btn-icon btn-secondary active" title="Compare Mode - Click text to jump to source">🔗</button>
+                        <button id="select-mode" class="btn-icon btn-secondary" title="Select Mode - Traditional PDF text selection">📝</button>
+                    </div>
+
+                    <!-- Tools Group -->
+                    <div class="pdf-toolbar-group">
+                        <button id="rotate-left" class="btn-icon btn-secondary" title="Rotate Left">↺</button>
+                        <button id="rotate-right" class="btn-icon btn-secondary" title="Rotate Right">↻</button>
+                        <button id="fullscreen-pdf" class="btn-icon btn-secondary" title="Fullscreen">⤢</button>
+                        <button id="print-pdf" class="btn-icon btn-secondary" title="Print">⎙</button>
+                    </div>
+                </div>
+            </div>
+            <div id="pdf-container">
+                <div id="pdf-loading" class="pdf-loading">Loading PDF...</div>
+                <div id="pdf-viewer">
+                    <canvas id="pdf-canvas"></canvas>
+                    <div id="pdf-text-layer" class="compare-mode"></div>
+                    <div id="pdf-mode-indicator" class="pdf-mode-indicator">Compare Mode</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="app.js?v=20251126-2010"></script>
+    <script src="project-manager-addon.js?v=20251126-2010"></script>
+</body>
+</html>
