@@ -52,3 +52,6 @@ ref_images/
 amplify/
 .amplifyrc
 amplify-build-config.json
+
+# Archive (disabled features for potential re-enablement)
+_archive/
