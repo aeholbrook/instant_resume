@@ -15,7 +15,7 @@ const links = [
   // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
   { href: "/blog/", label: "Blog" },
   { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Contact" },
+  // { href: "/contact/", label: "Contact" }, // Removed - contact links on homepage
 ];
 
 export default function MobileNav() {
