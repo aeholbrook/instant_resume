@@ -14,7 +14,7 @@ const galleryLinks = [
 ];
 
 const otherLinks = [
-  { href: "/projects/", label: "Projects" },
+  // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
   { href: "/blog/", label: "Blog" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
