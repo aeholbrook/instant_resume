@@ -25,12 +25,13 @@ export default function HeroSection() {
       {/* Mobile/Tablet Layout - No absolute positioning */}
       <div className="lg:hidden w-full min-h-screen flex flex-col bg-white">
         {/* Portrait Image */}
-        <div className="relative w-full aspect-[2/3] flex-shrink-0">
+        <div className="relative w-full max-h-[50vh] flex-shrink-0">
           <Image
             src="/images/quarantine-self-portrait.webp"
             alt="Adam E Holbrook Portrait"
-            fill
-            className="object-cover"
+            width={800}
+            height={1200}
+            className="w-full h-auto object-contain"
             priority
           />
         </div>
@@ -49,7 +50,7 @@ export default function HeroSection() {
             </p>
             <Link
               href="/galleries/portraits/"
-              className="inline-flex items-center gap-2 text-sm text-black hover:text-black/60 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-black text-sm text-black hover:bg-black hover:text-white transition-colors"
             >
               <svg
                 className="w-5 h-5"
