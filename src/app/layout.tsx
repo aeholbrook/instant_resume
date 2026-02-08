@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white" style={{ fontFamily: "'EB Garamond', serif" }}>
         <Sidebar />
         <MobileNav />
-        <div className="lg:mr-52 min-h-screen">
+        <div className="lg:ml-52 min-h-screen">
           {children}
         </div>
       </body>

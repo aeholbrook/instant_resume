@@ -24,7 +24,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-0 right-0 h-screen w-52 bg-white border-l border-neutral-100 flex flex-col px-6 py-8 z-40 max-lg:hidden">
+    <aside className="fixed top-0 left-0 h-screen w-52 bg-white border-r border-neutral-100 flex flex-col pl-6 pr-10 py-8 z-40 max-lg:hidden">
       <Link href="/" className="block mb-8">
         <Image
           src="/images/logo.webp"
