@@ -24,7 +24,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-52 bg-white border-r border-neutral-100 flex flex-col pl-6 pr-10 py-8 z-40 max-lg:hidden">
+    <aside className="fixed top-0 left-0 h-screen w-52 bg-white border-r border-neutral-100 flex flex-col pl-6 pr-14 py-8 z-40 max-lg:hidden">
       <Link href="/" className="block mb-8">
         <Image
           src="/images/logo.webp"
@@ -36,12 +36,12 @@ export default function Sidebar() {
         />
       </Link>
 
-      <nav className="flex flex-col gap-1 text-right">
+      <nav className="flex flex-col gap-2 text-right">
         {galleryLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`text-sm py-1 transition-colors ${
+            className={`text-base py-1.5 transition-colors ${
               pathname === link.href || pathname === link.href.slice(0, -1)
                 ? "text-neutral-900 font-medium"
                 : "text-neutral-500 hover:text-neutral-900"
@@ -51,13 +51,13 @@ export default function Sidebar() {
           </Link>
         ))}
 
-        <div className="border-t border-neutral-100 my-3" />
+        <div className="border-t border-neutral-100 my-4" />
 
         {otherLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`text-sm py-1 transition-colors ${
+            className={`text-base py-1.5 transition-colors ${
               pathname?.startsWith(link.href)
                 ? "text-neutral-900 font-medium"
                 : "text-neutral-500 hover:text-neutral-900"
