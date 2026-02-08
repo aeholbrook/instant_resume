@@ -12,7 +12,7 @@ const links = [
   { href: "/galleries/weddings/", label: "Weddings" },
   { href: "/galleries/crab-orchard/", label: "Crab Orchard" },
   { href: "/galleries/scotland/", label: "Scotland" },
-  { href: "/projects/", label: "Projects" },
+  // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
   { href: "/blog/", label: "Blog" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
