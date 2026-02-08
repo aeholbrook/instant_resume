@@ -22,10 +22,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans min-h-screen bg-white">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      <body className="min-h-screen bg-white" style={{ fontFamily: "'EB Garamond', serif" }}>
         <Sidebar />
         <MobileNav />
-        <div className="lg:ml-52 min-h-screen">
+        <div className="lg:mr-52 min-h-screen">
           {children}
         </div>
       </body>
