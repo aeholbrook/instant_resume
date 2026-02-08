@@ -25,13 +25,13 @@ export default function HeroSection() {
       {/* Mobile/Tablet Layout - No absolute positioning */}
       <div className="lg:hidden w-full min-h-screen flex flex-col bg-white">
         {/* Portrait Image */}
-        <div className="relative w-full max-h-[50vh] flex-shrink-0">
+        <div className="relative w-full flex-shrink-0">
           <Image
             src="/images/quarantine-self-portrait.webp"
             alt="Adam E Holbrook Portrait"
             width={800}
             height={1200}
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-cover"
             priority
           />
         </div>
