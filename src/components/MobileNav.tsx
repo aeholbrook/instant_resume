@@ -12,8 +12,8 @@ const links = [
   { href: "/galleries/weddings/", label: "Weddings" },
   { href: "/galleries/crab-orchard/", label: "Crab Orchard" },
   { href: "/galleries/scotland/", label: "Scotland" },
+  { href: "/galleries/objects/", label: "Objects" },
   // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
-  { href: "/blog/", label: "Blog" },
   { href: "/about/", label: "About" },
   // { href: "/contact/", label: "Contact" }, // Removed - contact links on homepage
 ];

@@ -95,6 +95,7 @@ const galleryMeta: Record<string, string> = {
   weddings: "Weddings",
   "crab-orchard": "Crab Orchard",
   scotland: "Scotland",
+  objects: "Objects",
 };
 
 export function getGallerySlugs(): string[] {
