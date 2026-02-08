@@ -15,7 +15,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Content positioned on the left */}
+      {/* Name on the left */}
       <div className="absolute top-8 left-8 z-10">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-black mb-1">
           Adam
@@ -32,6 +32,32 @@ export default function HeroSection() {
         >
           View Galleries
         </Link>
+      </div>
+
+      {/* Social links on the right */}
+      <div className="absolute top-8 right-8 z-10 flex flex-col gap-4 items-end">
+        <a
+          href="https://github.com/aeholbrook"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-black/80 hover:text-black transition-colors"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/aeholbrook"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-black/80 hover:text-black transition-colors"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="mailto:adam@aeholbrook.com"
+          className="text-sm text-black/80 hover:text-black transition-colors"
+        >
+          Email
+        </a>
       </div>
     </section>
   );
