@@ -47,3 +47,8 @@ yarn-error.log*
 # Large source files
 tiffs_for_conversion/
 ref_images/
+
+# AWS Amplify
+amplify/
+.amplifyrc
+amplify-build-config.json
