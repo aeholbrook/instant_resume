@@ -23,11 +23,11 @@ export default function FilmCarousel({ images, interval = 4000 }: FilmCarouselPr
 
   if (images.length === 0) return null;
 
-  const radius = 300; // Radius of the carousel circle (reduced from 400)
+  const radius = 260; // Radius of the carousel circle (reduced from 400)
   const angleStep = 360 / images.length;
 
   return (
-    <div className="absolute inset-0 z-20 flex items-end justify-center pb-40 sm:pb-48 md:pb-56 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 z-20 flex items-end justify-center pb-32 sm:pb-40 md:pb-48 pointer-events-none overflow-hidden">
       <div className="relative w-full max-w-2xl flex items-center justify-center -translate-x-12 sm:-translate-x-16 md:-translate-x-20" style={{ perspective: "1200px" }}>
         <div className="relative" style={{ transformStyle: "preserve-3d" }}>
           {images.map((src, index) => {
@@ -74,18 +74,18 @@ export default function FilmCarousel({ images, interval = 4000 }: FilmCarouselPr
                   transformStyle: "preserve-3d",
                   left: "50%",
                   top: "50%",
-                  marginLeft: "-80px",
-                  marginTop: "-80px",
+                  marginLeft: "-72px",
+                  marginTop: "-72px",
                   zIndex: Math.round(100 + z),
                 }}
               >
-                <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72">
+                <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64">
                   <Image
                     src={src}
                     alt={`Film photo ${index + 1}`}
                     fill
                     className="object-contain drop-shadow-2xl"
-                    sizes="(max-width: 640px) 192px, (max-width: 768px) 256px, 320px"
+                    sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, 256px"
                   />
                 </div>
               </div>
