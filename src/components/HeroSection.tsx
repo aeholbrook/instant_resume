@@ -1,24 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import FilmCarousel from "./FilmCarousel";
-import { readdirSync } from "fs";
-import { join } from "path";
+import { getHeroContent } from "@/lib/content";
 
-// Get film carousel images from the public directory
-function getFilmImages() {
-  try {
-    const filmDir = join(process.cwd(), "public/images/film-carousel");
-    const files = readdirSync(filmDir);
-    return files
-      .filter((file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file))
-      .map((file) => `/images/film-carousel/${file}`);
-  } catch {
-    return [];
-  }
-}
-
-export default function HeroSection() {
-  const filmImages = getFilmImages();
+export default async function HeroSection() {
+  const heroContent = await getHeroContent();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
@@ -27,7 +13,7 @@ export default function HeroSection() {
         {/* Portrait Image */}
         <div className="relative w-full flex-shrink-0">
           <Image
-            src="/images/quarantine-self-portrait.webp"
+            src={heroContent.portraitImageUrl}
             alt="Adam E Holbrook Portrait"
             width={800}
             height={1200}
@@ -49,7 +35,7 @@ export default function HeroSection() {
               Photographer & Visual Storyteller
             </p>
             <Link
-              href="/galleries/portraits/"
+              href={heroContent.galleryHref}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-black text-sm text-black hover:bg-black hover:text-white transition-colors"
             >
               <svg
@@ -119,7 +105,7 @@ export default function HeroSection() {
         {/* Background Portrait Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/quarantine-self-portrait.webp"
+            src={heroContent.portraitImageUrl}
             alt="Adam E Holbrook Portrait"
             fill
             className="object-contain"
@@ -128,7 +114,9 @@ export default function HeroSection() {
         </div>
 
         {/* Film Carousel */}
-        {filmImages.length > 0 && <FilmCarousel images={filmImages} interval={4000} />}
+        {heroContent.filmImages.length > 0 && (
+          <FilmCarousel images={heroContent.filmImages} interval={4000} />
+        )}
 
         {/* Name on the left */}
         <div className="absolute top-8 left-8 z-10">
@@ -142,7 +130,7 @@ export default function HeroSection() {
             Photographer & Visual Storyteller
           </p>
           <Link
-            href="/galleries/portraits/"
+            href={heroContent.galleryHref}
             className="inline-flex items-center gap-2 text-sm text-black hover:text-black/60 transition-colors"
           >
             <svg

@@ -4,30 +4,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { GalleryLink } from "@/lib/types";
 
-const links = [
-  { href: "/galleries/portraits/", label: "Portraits" },
-  { href: "/galleries/landscapes/", label: "Landscapes" },
-  { href: "/galleries/events/", label: "Events" },
-  { href: "/galleries/weddings/", label: "Weddings" },
-  { href: "/galleries/crab-orchard/", label: "Crab Orchard" },
-  { href: "/galleries/scotland/", label: "Scotland" },
-  { href: "/galleries/objects/", label: "Objects" },
-  // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
-  { href: "/about/", label: "About" },
-  // { href: "/contact/", label: "Contact" }, // Removed - contact links on homepage
-];
-
-export default function MobileNav() {
+export default function MobileNav({
+  galleryLinks,
+  logoUrl,
+}: {
+  galleryLinks: GalleryLink[];
+  logoUrl: string;
+}) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const links = [
+    ...galleryLinks.map((link) => ({ href: link.href, label: link.title })),
+    { href: "/about/", label: "About" },
+  ];
 
   return (
     <div className="lg:hidden">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-100 flex items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/images/logo.webp"
+            src={logoUrl}
             alt="Adam E Holbrook"
             width={36}
             height={36}

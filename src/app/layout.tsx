@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
+import { getGalleryLinks, getSiteAssets } from "@/lib/content";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,11 +16,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export const revalidate = 60;
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [galleryLinks, siteAssets] = await Promise.all([
+    getGalleryLinks(),
+    getSiteAssets(),
+  ]);
+
   return (
     <html lang="en">
       <head>
@@ -28,8 +36,8 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen bg-white" style={{ fontFamily: "'EB Garamond', serif" }}>
-        <Sidebar />
-        <MobileNav />
+        <Sidebar galleryLinks={galleryLinks} logoUrl={siteAssets.logoUrl} />
+        <MobileNav galleryLinks={galleryLinks} logoUrl={siteAssets.logoUrl} />
         <div className="lg:ml-52 min-h-screen">
           {children}
         </div>

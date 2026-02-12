@@ -30,3 +30,27 @@ export interface Gallery {
   title: string;
   images: string[];
 }
+
+export interface GalleryLink {
+  slug: string;
+  title: string;
+  href: string;
+}
+
+export interface SiteAssets {
+  logoUrl: string;
+  homePortraitUrl: string;
+  aboutPortraitUrl: string;
+}
+
+export interface AboutPage {
+  title: string;
+  content: string;
+  imageUrl: string;
+}
+
+export interface HeroContent {
+  portraitImageUrl: string;
+  filmImages: string[];
+  galleryHref: string;
+}
