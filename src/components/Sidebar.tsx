@@ -3,16 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const galleryLinks = [
-  { href: "/galleries/portraits/", label: "Portraits" },
-  { href: "/galleries/landscapes/", label: "Landscapes" },
-  { href: "/galleries/events/", label: "Events" },
-  { href: "/galleries/weddings/", label: "Weddings" },
-  { href: "/galleries/crab-orchard/", label: "Crab Orchard" },
-  { href: "/galleries/scotland/", label: "Scotland" },
-  { href: "/galleries/objects/", label: "Objects" },
-];
+import { GalleryLink } from "@/lib/types";
 
 const otherLinks = [
   // { href: "/projects/", label: "Projects" }, // TODO: Re-enable projects section later
@@ -20,14 +11,20 @@ const otherLinks = [
   // { href: "/contact/", label: "Contact" }, // Removed - contact links on homepage
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+  galleryLinks,
+  logoUrl,
+}: {
+  galleryLinks: GalleryLink[];
+  logoUrl: string;
+}) {
   const pathname = usePathname();
 
   return (
     <aside className="fixed top-0 left-0 h-screen w-52 bg-white border-r border-neutral-100 flex flex-col pl-6 pr-14 py-8 z-40 max-lg:hidden">
       <Link href="/" className="block mb-8">
         <Image
-          src="/images/logo.webp"
+          src={logoUrl}
           alt="Adam E Holbrook"
           width={140}
           height={140}
@@ -47,7 +44,7 @@ export default function Sidebar() {
                 : "text-neutral-500 hover:text-neutral-900"
             }`}
           >
-            {link.label}
+            {link.title}
           </Link>
         ))}
 

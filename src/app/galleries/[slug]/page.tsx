@@ -1,10 +1,9 @@
-import { getGallery, getGallerySlugs } from "@/lib/content";
+import { getGallery } from "@/lib/content";
 import ImageGallery from "@/components/ImageGallery";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export function generateStaticParams() {
-  return getGallerySlugs().map((slug) => ({ slug }));
-}
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -12,7 +11,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const gallery = getGallery(slug);
+  const gallery = await getGallery(slug);
+
+  if (!gallery) {
+    return { title: "Gallery" };
+  }
+
   return { title: gallery.title };
 }
 
@@ -22,7 +26,11 @@ export default async function GalleryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const gallery = getGallery(slug);
+  const gallery = await getGallery(slug);
+
+  if (!gallery) {
+    notFound();
+  }
 
   return (
     <div className="p-3">
@@ -31,8 +39,9 @@ export default async function GalleryPage({
       ) : (
         <div className="flex items-center justify-center min-h-[60vh]">
           <p className="text-neutral-400 text-center">
-            No photos yet. Add <code className="text-sm bg-neutral-100 px-2 py-1">.webp</code> files to{" "}
-            <code className="text-sm bg-neutral-100 px-2 py-1">public/images/galleries/{slug}/</code>
+            No photos yet. Add rows to{" "}
+            <code className="text-sm bg-neutral-100 px-2 py-1">gallery_images</code> for{" "}
+            <code className="text-sm bg-neutral-100 px-2 py-1">gallery_slug = '{slug}'</code>.
           </p>
         </div>
       )}

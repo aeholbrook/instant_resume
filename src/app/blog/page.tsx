@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "Blog",
 };
 
+export const revalidate = 60;
+
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
@@ -21,7 +23,7 @@ export default async function BlogPage() {
         </div>
       ) : (
         <p className="text-neutral-400 text-center py-12">
-          No posts yet. Add markdown files to <code className="text-sm bg-neutral-100 px-2 py-1">content/blog/</code> to get started.
+          No posts yet. Add published rows to <code className="text-sm bg-neutral-100 px-2 py-1">blog_posts</code>.
         </p>
       )}
     </section>
