@@ -1,0 +1,1390 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --paper: #ffffff;
+  --ink: #000;
+  --ink-soft: #3a3a3a;
+  --ink-muted: #555;
+  --accent: #a8232a;
+  --line: #888;
+  --line-light: #ccc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  background: #e8e4df;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- page shell ---------- */
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.sheet {
+  width: min(8.5in, 100%);
+  background: var(--paper);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  padding: 0.55in 0.6in 0.5in;
+  position: relative;
+}
+
+/* ---------- header ---------- */
+
+.header-module {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* When no photo, identity column spans full width */
+.header-module:not(:has(.header-aside)) {
+  grid-template-columns: 1fr;
+}
+
+/* Controls (print/profile buttons) go in their own row */
+.header-controls {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.identity-column {
+  min-width: 0;
+}
+
+.name {
+  font-size: 22pt;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 9.5pt;
+  color: var(--ink);
+}
+
+.contact-icon {
+  width: 14px;
+  display: inline-flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.contact-icon.icon-mail svg {
+  fill: var(--accent);
+}
+
+.contact-icon.icon-github svg {
+  fill: #333;
+}
+
+.contact-icon.icon-linkedin svg {
+  fill: #0077b5;
+}
+
+.contact-value,
+a.contact-value {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.contact-value:hover {
+  text-decoration: underline;
+}
+
+.summary {
+  margin: 0.55rem 0 0;
+  font-size: 10pt;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink);
+  grid-column: 1 / -1;
+}
+
+.header-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.headshot-frame {
+  width: 150px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* Photo on right: swap grid column order */
+.header-module.photo-right {
+  grid-template-columns: 1fr auto;
+}
+
+.headshot {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.button {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.button.secondary {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line-light);
+}
+
+/* ---------- profile selector ---------- */
+
+.profile-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.profile-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.profile-dropdown {
+  border: 1px solid var(--line-light);
+  background: #fff;
+  color: var(--ink);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- sections ---------- */
+
+.resume-section {
+  margin-top: 0.7rem;
+}
+
+.section-title {
+  font-size: 13pt;
+  font-weight: 800;
+  color: var(--ink);
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- entries (employment, education) ---------- */
+
+.entry {
+  margin-top: 0.35rem;
+  padding: 0;
+}
+
+.entry + .entry {
+  margin-top: 0.5rem;
+}
+
+.entry-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.entry-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.entry-title {
+  font-size: 11pt;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+}
+
+.entry-right {
+  font-size: 10pt;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.entry-company {
+  font-size: 10pt;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.entry-subtitle {
+  margin: 0.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 10pt;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.entry-details {
+  margin: 0.2rem 0 0;
+}
+
+.stack-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.stack-bullets li {
+  position: relative;
+  padding-left: 0;
+  font-size: 10pt;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.stack-bullets li::before {
+  content: '\25B8';
+  position: absolute;
+  left: -1.2rem;
+  color: var(--accent);
+  font-style: normal;
+  font-size: 9pt;
+}
+
+/* ---------- projects ---------- */
+
+.projects-list {
+  list-style: none;
+  padding: 0 0 0 1.4rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.projects-list li {
+  position: relative;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.projects-list li::before {
+  content: '\25B8';
+  position: absolute;
+  left: -1.2rem;
+  color: var(--accent);
+  font-style: normal;
+  font-size: 9pt;
+}
+
+.project-name {
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.project-name a {
+  color: var(--accent);
+}
+
+/* ---------- skills ---------- */
+
+.skills-block {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.skill-row {
+  font-size: 9pt;
+  line-height: 1.45;
+}
+
+.skill-category {
+  font-weight: 800;
+  margin-right: 0.4em;
+}
+
+.skill-items {
+  color: var(--ink-soft);
+}
+
+/* ---------- education specific ---------- */
+
+.edu-detail {
+  font-size: 10pt;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* ---------- landing screen ---------- */
+
+.landing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e8e4df;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+}
+
+.landing-card {
+  background: #fff;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+}
+
+.landing-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 0.25rem;
+}
+
+.landing-subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0 0 2rem;
+  letter-spacing: 0.02em;
+}
+
+.landing-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.landing-input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 150ms;
+}
+
+.landing-input:focus {
+  border-color: var(--accent);
+}
+
+.landing-input::placeholder {
+  color: #aaa;
+}
+
+.landing-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 150ms;
+}
+
+.landing-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.landing-btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.landing-btn--primary:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.landing-btn--ghost {
+  background: transparent;
+  color: #888;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.landing-btn--ghost:hover {
+  color: var(--ink);
+}
+
+/* ---------- hamburger menu ---------- */
+
+.hamburger-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 150ms;
+}
+
+.hamburger-btn:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 20px;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 1px;
+}
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: #f9f9f9;
+  z-index: 1000;
+  padding: 3.5rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transition: right 250ms ease;
+}
+
+.menu-panel--open {
+  right: 0;
+}
+
+.menu-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.menu-close:hover {
+  color: var(--ink);
+}
+
+.menu-panel .toolbar {
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.menu-panel .toolbar .button {
+  width: 100%;
+  text-align: center;
+}
+
+/* ---------- viewer layout ---------- */
+
+.viewer-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  min-height: 100vh;
+  background: #e8e4df;
+}
+
+.viewer-layout--full {
+  grid-template-columns: 1fr;
+}
+
+.viewer-sidebar {
+  background: #f5f5f5;
+  border-color: #ddd;
+  padding: 1.25rem 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  font-size: 0.8rem;
+}
+
+.viewer-sidebar-left {
+  border-right: 1px solid #ddd;
+}
+
+.viewer-sidebar-right {
+  border-left: 1px solid #ddd;
+}
+
+.viewer-center {
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+/* When inside viewer, .main should not add extra centering chrome */
+.viewer-center .main {
+  min-height: auto;
+}
+
+.sidebar-section {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ---- theme cards ---- */
+
+.theme-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.theme-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 150ms, box-shadow 150ms;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+.theme-card:hover:not(:disabled) {
+  border-color: #999;
+}
+
+.theme-card--active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(168, 35, 42, 0.15);
+}
+
+.theme-card:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.theme-card-preview {
+  width: 32px;
+  height: 40px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.theme-card-preview--classic {
+  background: linear-gradient(135deg, #fff 60%, #f0e8e4);
+  border-color: #bbb;
+}
+
+.theme-card-preview--modern {
+  background: linear-gradient(135deg, #e8edf5 30%, #d0dae8);
+  border-color: #b0bec5;
+}
+
+.theme-card-preview--minimal {
+  background: #fafafa;
+  border-color: #ccc;
+}
+
+.theme-card-label {
+  font-weight: 600;
+}
+
+/* ---- profile radios ---- */
+
+.profile-radios {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.profile-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--ink);
+  padding: 0.2rem 0;
+}
+
+.profile-radio input[type="radio"] {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+/* ---- custom role input ---- */
+
+.role-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.role-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  transition: border-color 150ms;
+}
+
+.role-input:focus {
+  border-color: var(--accent);
+}
+
+.role-input::placeholder {
+  color: #999;
+}
+
+.role-match-btn {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 150ms;
+}
+
+.role-match-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.role-match-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.matched-tags-info {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* ---- download button ---- */
+
+.download-btn {
+  width: 100%;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 150ms;
+}
+
+.download-btn:hover {
+  opacity: 0.85;
+}
+
+/* ---------- compact mode ---------- */
+
+.compact .entry-details,
+.compact .entry-subtitle,
+.compact .summary {
+  display: none;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .viewer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .viewer-sidebar {
+    position: static;
+    height: auto;
+    border: none;
+  }
+
+  .viewer-sidebar-left {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .viewer-sidebar-right {
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+
+  .viewer-sidebar-left .theme-cards {
+    flex-direction: row;
+  }
+
+  .viewer-sidebar-right .sidebar-section {
+    margin-bottom: 1rem;
+  }
+
+  .profile-radios {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .main {
+    padding: 0.5rem;
+  }
+
+  .sheet {
+    padding: 1.2rem 1rem;
+  }
+
+  .header-module {
+    grid-template-columns: 1fr;
+  }
+
+  .header-aside {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .headshot-frame {
+    width: 100px;
+  }
+
+  .entry-topline {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .entry-right {
+    text-align: left;
+  }
+}
+
+/* ---------- print & print-preview ---------- */
+/* Matched to LaTeX output: Fira Sans, letter paper, 2cm/1.6cm margins,
+   gradient section lines (#7a1d0a), accent markers (#B6073F)
+
+   @media print: applies when actually printing / saving to PDF
+   body.print-preview: applies on screen in the editor's PDF preview iframe
+   Both share the same typography — kept as two blocks to avoid CSS hacks. */
+
+@page {
+  size: letter;
+  margin: 0.5in 0.787in;      /* Match MARGIN_Y / MARGIN_X from PaginatedPreview */
+}
+
+@media print {
+  body {
+    background: #fff;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 10pt;          /* LaTeX base: 10pt */
+    line-height: 1.25;        /* LaTeX arraystretch */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .main {
+    padding: 0;
+    min-height: auto;
+  }
+
+  .sheet {
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* Hide UI elements */
+  .toolbar,
+  .profile-selector,
+  .header-aside .button,
+  .header-controls,
+  .profile-dropdown,
+  .profile-label,
+  .viewer-sidebar {
+    display: none !important;
+  }
+
+  .viewer-layout {
+    display: block;
+    background: #fff;
+    min-height: auto;
+  }
+
+  .viewer-center {
+    overflow: visible;
+    min-height: auto;
+  }
+
+  /* ---- header ---- */
+
+  .header-module {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.8rem;
+  }
+
+  .header-module:not(:has(.header-aside)) {
+    grid-template-columns: 1fr;
+  }
+
+  .header-aside {
+    align-items: flex-start;  /* Keep photo at top */
+  }
+
+  .name {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 25pt;          /* LaTeX \huge in 10pt doc ≈ 24.88pt */
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .contact-list {
+    margin-top: 0.5em;        /* LaTeX: 0.5\baselineskip */
+    gap: 0.2em;               /* LaTeX: 0.2\baselineskip between lines */
+  }
+
+  .contact-line {
+    font-size: 9pt;
+    gap: 0.4rem;
+  }
+
+  .contact-icon {
+    width: 1.8em;             /* LaTeX icon box width */
+  }
+
+  .contact-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .contact-icon.icon-mail svg { fill: #B6073F; }
+  .contact-icon.icon-github svg { fill: #B6073F; }
+  .contact-icon.icon-linkedin svg { fill: #B6073F; }
+
+  .contact-value,
+  a.contact-value {
+    color: var(--ink);
+  }
+
+  .summary {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;           /* LaTeX \small in 10pt doc ≈ 9pt */
+    font-weight: 700;
+    font-style: normal;       /* LaTeX: bold, NOT italic */
+    margin-top: 0.5em;
+    line-height: 1.3;
+  }
+
+  /* headshot-frame width controlled by inline style from YAML photo_size */
+
+  /* ---- sections ---- */
+
+  .resume-section {
+    margin-top: 1em;          /* LaTeX: \vspace{1em} */
+  }
+
+  .section-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14.4pt;        /* LaTeX \large in 10pt doc */
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: none;      /* Remove solid border */
+    padding-bottom: 6pt;      /* LaTeX: \vspace{6pt} after */
+    margin-bottom: 6pt;
+    position: relative;
+  }
+
+  /* Gradient line matching LaTeX: SwishLineColour (#7a1d0a) fading to white */
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 12cm;              /* LaTeX: 12cm gradient width */
+    height: 2.5pt;            /* LaTeX: 2.5pt gradient height */
+    background: linear-gradient(to right, rgba(122, 29, 10, 0.6), transparent);
+  }
+
+  /* ---- entries ---- */
+
+  .entry {
+    break-inside: avoid;
+    margin-top: 0.3em;
+  }
+
+  .entry + .entry {
+    margin-top: 0.5em;
+  }
+
+  .entry-topline {
+    gap: 0.3rem;
+  }
+
+  .entry-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 12pt;          /* LaTeX \large\textbf ≈ 14.4pt, but \role uses \large */
+    font-weight: 700;
+  }
+
+  .entry-right {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;           /* LaTeX \small */
+    color: var(--ink);
+  }
+
+  .entry-subtitle {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;           /* LaTeX \relsize{-1} */
+    font-style: italic;
+    margin-top: 0.1em;
+    line-height: 1.25;
+    color: var(--ink-soft);
+  }
+
+  .entry-details {
+    margin-top: 0.15em;
+  }
+
+  /* ---- bullets ---- */
+
+  .stack-bullets {
+    gap: 0;
+    padding-left: 1.5em;     /* LaTeX hanging indent: 1.5em */
+  }
+
+  .stack-bullets li {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;           /* LaTeX \relsize{-1.0} from 10pt ≈ 9pt */
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 0.25em;       /* LaTeX: 0.25\baselineskip before */
+  }
+
+  .stack-bullets li:first-child {
+    margin-top: 0;
+  }
+
+  .stack-bullets li::before {
+    content: '\f0da';         /* FontAwesome caret-right equivalent */
+    font-family: 'Fira Sans', sans-serif;
+    content: '\25B8';         /* Fallback: right-pointing triangle */
+    font-size: 8pt;
+    left: -1.1rem;
+    color: #922D3E;           /* MarkerColour!80!black ≈ #B6073F mixed 80% with black */
+    font-style: normal;
+  }
+
+  /* ---- projects ---- */
+
+  .projects-list {
+    padding-left: 1.5em;
+    gap: 0;
+  }
+
+  .projects-list li {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 0.25em;
+  }
+
+  .projects-list li:first-child {
+    margin-top: 0;
+  }
+
+  .projects-list li::before {
+    font-size: 8pt;
+    left: -1.1rem;
+    color: #922D3E;
+    font-style: normal;
+  }
+
+  .project-name {
+    font-weight: 700;
+    color: #922D3E;           /* LaTeX: MarkerColour!70!black for project links */
+  }
+
+  .project-name a {
+    color: #922D3E;
+  }
+
+  /* ---- skills ---- */
+
+  .skills-block {
+    margin-top: 0.3em;
+    gap: 0.3em;               /* LaTeX: 0.3\baselineskip */
+  }
+
+  .skill-row {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.25;
+  }
+
+  .skill-category {
+    font-weight: 700;
+  }
+
+  .skill-items {
+    color: var(--ink-soft);
+  }
+
+  /* ---- education ---- */
+
+  .edu-detail {
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--ink-muted);
+  }
+
+  /* ---- page break control ---- */
+  /* Employment is too large for break-inside:avoid (would leave page 1 blank).
+     Smaller sections (education, projects, skills) should stay together. */
+
+  .section-title {
+    break-after: avoid;
+  }
+
+  .resume-section[data-module="education"],
+  .resume-section[data-module="projects"],
+  .resume-section[data-module="skills"] {
+    break-inside: avoid;
+  }
+}
+
+/* ---- Print-preview on screen (editor preview & PDF iframe) ---- */
+/* Mirrors @media print rules above. Works on body or any container. */
+
+.print-preview {
+  background: #fff;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 10pt;
+  line-height: 1.25;
+
+  & a { color: inherit; text-decoration: none; }
+
+  & .main { padding: 0; min-height: auto; }
+
+  & .sheet { width: 100%; box-shadow: none; padding: 0; }
+
+  & .toolbar,
+  & .profile-selector,
+  & .header-aside .button,
+  & .profile-dropdown,
+  & .profile-label,
+  & .viewer-sidebar { display: none !important; }
+
+  & .viewer-layout { display: block; background: #fff; min-height: auto; }
+  & .viewer-center { overflow: visible; min-height: auto; }
+
+  & .header-module {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.8rem;
+  }
+
+  & .header-module:not(:has(.header-aside)) {
+    grid-template-columns: 1fr;
+  }
+
+  & .header-aside { align-items: flex-start; }
+
+  & .header-controls { display: none !important; }
+
+  & .name {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 25pt;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  & .contact-list { margin-top: 0.5em; gap: 0.2em; }
+  & .contact-line { font-size: 9pt; gap: 0.4rem; }
+  & .contact-icon { width: 1.8em; }
+  & .contact-icon svg { width: 12px; height: 12px; }
+  & .contact-icon.icon-mail svg { fill: #B6073F; }
+  & .contact-icon.icon-github svg { fill: #B6073F; }
+  & .contact-icon.icon-linkedin svg { fill: #B6073F; }
+  & .contact-value, & a.contact-value { color: var(--ink); }
+
+  & .summary {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    font-style: normal;
+    margin-top: 0.5em;
+    line-height: 1.3;
+  }
+
+  /* headshot-frame width controlled by inline style from YAML photo_size */
+
+  & .resume-section { margin-top: 1em; }
+
+  & .section-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14.4pt;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: none;
+    padding-bottom: 6pt;
+    margin-bottom: 6pt;
+    position: relative;
+  }
+
+  & .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 12cm;
+    height: 2.5pt;
+    background: linear-gradient(to right, rgba(122, 29, 10, 0.6), transparent);
+  }
+
+  & .entry { margin-top: 0.3em; }
+  & .entry + .entry { margin-top: 0.5em; }
+  & .entry-topline { gap: 0.3rem; }
+
+  & .entry-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 12pt;
+    font-weight: 700;
+  }
+
+  & .entry-right {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    color: var(--ink);
+  }
+
+  & .entry-subtitle {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    font-style: italic;
+    margin-top: 0.1em;
+    line-height: 1.25;
+    color: var(--ink-soft);
+  }
+
+  & .entry-details { margin-top: 0.15em; }
+
+  & .stack-bullets { gap: 0; padding-left: 1.5em; }
+
+  & .stack-bullets li {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 0.25em;
+  }
+
+  & .stack-bullets li:first-child { margin-top: 0; }
+
+  & .stack-bullets li::before {
+    font-family: 'Fira Sans', sans-serif;
+    content: '\25B8';
+    font-size: 8pt;
+    left: -1.1rem;
+    color: #922D3E;
+    font-style: normal;
+  }
+
+  & .projects-list { padding-left: 1.5em; gap: 0; }
+
+  & .projects-list li {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 0.25em;
+  }
+
+  & .projects-list li:first-child { margin-top: 0; }
+
+  & .projects-list li::before {
+    font-size: 8pt;
+    left: -1.1rem;
+    color: #922D3E;
+    font-style: normal;
+  }
+
+  & .project-name { font-weight: 700; color: #922D3E; }
+  & .project-name a { color: #922D3E; }
+
+  & .skills-block { margin-top: 0.3em; gap: 0.3em; }
+
+  & .skill-row {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.25;
+  }
+
+  & .skill-category { font-weight: 700; }
+  & .skill-items { color: var(--ink-soft); }
+
+  & .edu-detail {
+    font-size: 9pt;
+    font-style: italic;
+    color: var(--ink-muted);
+  }
+
+  /* Keep smaller sections together on one page */
+  & .resume-section[data-module="education"],
+  & .resume-section[data-module="projects"],
+  & .resume-section[data-module="skills"] {
+    break-inside: avoid;
+  }
+}

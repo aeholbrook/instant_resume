@@ -1,0 +1,8 @@
+{
+  "name": "default",
+  "displayName": "Example Resume Template",
+  "description": "A template resume for Site Reliability Engineers",
+  "mainFile": "cv-llt.tex",
+  "outputFile": "cv-llt.pdf",
+  "lastModified": "2026-01-22T20:11:23.880339"
+}

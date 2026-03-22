@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN CV DOCUMENT - Professional Resume Template
+%
+% Generated from content.yaml - DO NOT EDIT MANUALLY
+% Edit content.yaml and regenerate this file instead
+%
+% Optimized with tech-focused fonts and improved typography:
+% - Fira Sans as main font (designed by Mozilla, tech-focused)
+% - Fira Code for monospace (programming ligatures)
+% - Perfect for software development positions
+% - Modern, clean, designed for digital reading
+% - Great for tech startups and software companies
+% - Improved kerning and spacing throughout
+%
+% Based on: LianTze Lim's curve template
+% Customized for: Professional Software Engineers
+% Version: 2024/09/28
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,skipsamekey,11pt,english]{curve}
+
+% Load our custom settings and commands
+\usepackage{settings}
+\usepackage{custom-commands}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FONT SELECTION: TECH STACK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex%
+\ifxetex%
+  \xetexorluatextrue%
+\else%
+  \ifluatex%
+    \xetexorluatextrue%
+  \else%
+    \xetexorluatexfalse%
+  \fi%
+\fi%
+
+\ifxetexorluatex
+  % XeLaTeX/LuaLaTeX: Use system fonts for maximum quality
+  \usepackage{fontspec}
+  \setmainfont{Fira Sans}[
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
+  ]
+  \setsansfont{Fira Sans}  % Keep consistent
+  \setmonofont[
+    Scale=0.85,
+    Contextuals=Alternate  % Enable programming ligatures
+  ]{Fira Code}
+  \defaultfontfeatures{Ligatures=TeX,Kerning=On}
+\else
+  % pdfLaTeX: Fallback to similar fonts
+  \usepackage[T1]{fontenc}
+  \usepackage{FiraSans}     % Fira Sans package
+  \usepackage{FiraMono}     % Fira Mono package
+  \renewcommand{\familydefault}{\sfdefault}  % Use sans serif as default
+\fi
+
+% Microtypography for professional appearance
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10,expansion=false]{microtype}
+
+% Photo settings
+\includecomment{fullonly}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\leftheader{%
+  {\huge\bfseries Adam E. Holbrook}
+
+  \vspace{0.5\baselineskip}
+
+  \makefield{\faEnvelope[regular]}{\href{mailto:adam@aeholbrook.com}{adam@aeholbrook.com}}
+
+  \vspace{0.2\baselineskip}
+  \makefield{\faGithub}{\href{http://github.com/aeholbrook}{http://github.com/aeholbrook}}
+
+  \vspace{0.2\baselineskip}
+  \makefield{\faLinkedin}{\href{http://linkedin.com/in/aeholbrook}{http://linkedin.com/in/aeholbrook}}
+}
+
+\rightheader{~}
+\begin{fullonly}
+\photo[r]{adam_headshot}
+\photoscale{0.23}
+\end{fullonly}
+
+\title{Curriculum Vitae}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\makeheaders[c]
+
+{\small \textbf{Data and community engagement professional specializing in program operations, reporting, and stakeholder-ready insights. Build dashboards, operational reporting, and analytics tooling in complex environments. Community organizer leading recurring public events and mutual aid food distributions serving hundreds weekly, strengthening participation, trust, and follow-through in high-touch community contexts.}}
+
+\par\noindent
+
+\input{employment}
+\input{education}
+\input{projects}
+\input{skills}
+
+\end{document}
