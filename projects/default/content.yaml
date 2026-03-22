@@ -1,0 +1,454 @@
+# SECTION TITLES:
+# Customize how section headers appear in your resume
+section_titles:
+  employment: "Professional Experience"
+  education: "Education"
+  projects: "Projects"
+  skills: "Curated Skills"
+
+contact:
+  name: "Adam E. Holbrook"
+  email: "adam@aeholbrook.com"
+  phone: "(618) 520-5434"
+  location: "St. Louis, MO"
+  linkedin: "linkedin.com/in/aeholbrook"
+  github: "github.com/aeholbrook"
+  photo: "adam_headshot"
+  photo_size: 150
+  photo_position: left
+
+summary: |
+  Data, evaluation, & community engagement professional specializing in program evaluation, needs assessment, & operational reporting. Community organizer leading recurring public events & mutual aid food distributions, strengthening trust, participation, & follow-through in high-touch community contexts.
+
+# PROFILES:
+# Role-targeted views of this resume. Each profile selects content by tag,
+# provides a custom summary, and sets section order and content limits.
+profiles:
+  sre:
+    label: "Site Reliability Engineering"
+    tags: [sre, devops, infrastructure, automation, operations]
+    summary: |
+      Senior SRE with 5+ years building reliable, observable infrastructure for mission-critical payment systems. Expert in CI/CD, IaC, & observability platforms (Splunk, Dynatrace, Domo). Multiplies team effectiveness through scalable tooling & operational excellence.
+    section_order: [employment, skills, projects, education]
+    limits:
+      max_jobs: 5
+      max_achievements: 6
+      max_projects: 4
+
+  data-operations:
+    label: "Data & Operations"
+    tags: [data, operations, reporting, automation]
+    summary: |
+      Operations engineer with 4+ years building dashboards, reporting pipelines, & automation for global payment infrastructure at Mastercard. Translates complex data into stakeholder-ready KPIs & self-service tooling.
+    section_order: [employment, skills, projects, education]
+    limits:
+      max_jobs: 6
+      max_achievements: 5
+      max_projects: 3
+
+  community-nonprofit:
+    label: "Community & Nonprofit"
+    tags: [community, nonprofit, organizing, leadership, evaluation, data, reporting]
+    summary: |
+      Program operations & evaluation professional with hands-on experience in survey research, needs assessment, & stakeholder reporting. Community organizer leading mutual aid networks & public events.
+    section_order: [employment, education, projects, skills]
+    limits:
+      max_jobs: 8
+      max_achievements: 4
+      max_projects: 3
+
+  evaluation-research:
+    label: "Program Evaluation & Research"
+    tags: [evaluation, data, reporting, research, community]
+    summary: |
+      Program evaluation & applied research professional specializing in survey design, needs assessment, & end-to-end research consulting. Experienced in R & Python analysis pipelines, actionable reporting, & community-engaged evaluation.
+    section_order: [employment, education, projects, skills]
+    limits:
+      max_jobs: 7
+      max_achievements: 5
+      max_projects: 4
+
+  creative:
+    label: "Photography & Design"
+    tags: [creative, photography, design, community]
+    summary: |
+      Photographer & visual storyteller with experience in documentary photography, fine art publication, & analog film. Builds community through arts organizations, visual identity design, & interactive web platforms.
+    section_order: [employment, projects, education, skills]
+    limits:
+      max_jobs: 6
+      max_achievements: 4
+      max_projects: 5
+
+# SKILLS TAGS:
+# Maps skills categories to profile tags for filtering.
+# Categories without an entry here are always included.
+skills_tags:
+  "Community & Program Operations": [community, nonprofit, organizing]
+  "Program Evaluation & Research": [evaluation, data, community, nonprofit, research]
+  "Data, Reporting & Analysis": [data, operations, reporting, automation]
+  "Systems & Automation": [operations, automation, data, sre, devops]
+  "Infrastructure": [sre, devops, infrastructure]
+  "Observability": [sre, devops, operations, data]
+  "CI/CD & Automation": [sre, devops, automation, infrastructure]
+  "Development": [sre, devops, data, automation]
+  "Security & Compliance": [sre, devops, infrastructure]
+  "Incident Management": [sre, devops, operations]
+  "Photography & Visual Media": [creative, photography, design]
+  "Design & Web": [creative, design, data]
+  "Documentation": [sre, devops, operations, data, leadership]
+  "Databases": [sre, devops, data, infrastructure]
+
+employment:
+  - title: "Volunteer Community Organizer"
+    company: "Local LGBTQ+ Mutual Aid Network"
+    location: "St. Louis, MO"
+    dates: "2024 -- Present"
+    tags: [community, nonprofit, organizing, leadership]
+    summary: "Community-building effort centered on recurring public events, community spaces, & mutual support."
+    achievements:
+      - "Built & sustained a 100+ member community network through recurring public events & community spaces, strengthening participation, trust, & mutual support."
+      - "Primary organizer for ~4 large-scale events per year: manage outreach, band booking, vendor tabling, volunteer wrangling, & day-of logistics end-to-end."
+
+  - title: "Founder & Facilitator"
+    company: "Yes, Chef Mutual Aid Network"
+    location: "St. Louis, MO"
+    dates: "2025 -- Present"
+    tags: [community, nonprofit, organizing, leadership]
+    summary: "Coordinate weekly surplus community food distributions & volunteer operations."
+    achievements:
+      - "Coordinate weekly surplus food prep & distribution for community members; manage donation logistics, volunteer scheduling, setup/teardown, & on-site operations."
+      - "Maintain consistent community communications supporting volunteer turnout & participation."
+
+  - title: "Senior Business Operations Engineer"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2023 -- 2025"
+    tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation]
+    summary: "Senior engineer for global payment infrastructure processing billions in transactions annually across 40+ countries."
+    achievements:
+      - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime with monitoring-as-code framework enabling developers to validate alerts before production. #sre #devops #operations #automation #infrastructure"
+      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; rebuilt data pipelines reducing report generation from 2+ hours to seconds with SLO/SLI metrics & BI dashboards. #data #reporting #operations #sre #automation #design"
+      - "Led incident response as primary on-call engineer with <5min response SLA; conducted postmortems & drove reliability improvements through SLO/SLI metric adoption. #sre #devops #operations"
+      - "Built monitoring documentation for Vocalink (account-to-account payments) with catalog of 200+ monitors & self-updating tables; coached teams on observability, security-first engineering, & infrastructure architecture. #sre #devops #operations #leadership #community"
+
+  - title: "Business Operations Engineer II"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2022 -- 2023"
+    tags: [sre, devops, infrastructure, data, operations, automation]
+    summary: "Primary on-call engineer for MDES tokenization platform; maintained high availability through proactive monitoring, automated remediation, & rapid incident response."
+    achievements:
+      - "Engineered custom Python-based terminal platform & companion VSCode toolkit for Tomcat monitoring, disk management, log rotation, & service control; integrated API healthchecks, Splunk/Dynatrace queries, & database actions into unified workflows, replacing manual host-by-host operations. #sre #devops #automation"
+      - "Built Splunk & Dynatrace dashboards purpose-built for L1 support to trace failed transactions & tokenizations to root cause, linked to Confluence runbooks explaining issues & remediation in plain language; reduced escalation volume & improved first-contact resolution. #sre #devops #automation #operations"
+      - "Led onboarding & technical training for new SRE team members during platform expansion, delivering comprehensive instruction across 100+ microservices architectures, dozens of customer-specific call paths, & complex multi-service transaction flows. #sre #leadership #community"
+      - "Developed Python & Bash automation for deployment validation, health checks, & compliance reporting, reducing hours of manual operational toil to scripted workflows. #sre #devops #automation"
+
+  - title: "Business Operations Engineer I"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2021 -- 2022"
+    tags: [sre, devops, data, operations, reporting]
+    summary: "Supported operational reporting & incident response for distributed payment systems."
+    achievements:
+      - "First in operations to detect active exploitation of a critical zero-day vulnerability (CVE-2021-44228) across production payment infrastructure; rapid identification enabled immediate organizational response. #sre #devops #operations #evaluation #research"
+      - "Earned on-call rotation within 3 months of hire; resolved 1,000+ production incidents annually across payment systems. #sre #operations"
+      - "Self-directed learning of Splunk & Dynatrace to fill a team gap in monitoring capacity; became subject matter expert on observability & built dashboards adopted across the team. #sre #devops #data #reporting #operations"
+      - "Supported CI/CD pipeline development in Jenkins & XLR for Pivotal Cloud deployments. #sre #devops #infrastructure"
+
+  - title: "DevOps Assistantship"
+    company: "SIU Edwardsville / Illinois Department of Transportation"
+    location: "Edwardsville, IL"
+    dates: "2020 -- 2021"
+    tags: [sre, devops, operations, automation, data, infrastructure]
+    summary: "Graduate assistantship supporting infrastructure & delivery workflows for public-sector systems."
+    achievements:
+      - "Migrated Illinois DOT's legacy traffic & weather data website from UNIX Apache to Windows Server IIS as part of a platform decommission; recompiled & rewrote site code in JavaScript, C++, Bash, & HTML/CSS for the new architecture. #sre #devops #infrastructure"
+
+
+  - title: "Associate Consultant"
+    company: "SIU Applied Research Consultants"
+    location: "Carbondale, IL"
+    dates: "2019 -- 2020"
+    tags: [evaluation, data, reporting, community, research]
+    summary: "Delivered end-to-end survey research & evaluation consulting for local & regional stakeholders."
+    achievements:
+      - "Designed & executed end-to-end survey projects for multiple regional clients: stakeholder intake, survey design in Qualtrics & SurveyMonkey, data analysis in R, Python, SQL, & SPSS, & final reporting. #evaluation #data"
+      - "Built R-based analysis & visualization pipelines for client reports including descriptive statistics, ANOVA, multiple regression, factor analysis, & data visualizations. #data #reporting #evaluation"
+      - "Proactively sourced 4–5 new client engagements through direct outreach to regional businesses & university departments, generating projects the consultancy would not otherwise have had. #evaluation #community"
+      - "Built & maintained entrance/exit surveys to develop curriculum & ease transitions for incoming graduate students. #evaluation #community"
+      - "Built an interdisciplinary statistics education platform & trained fellow consultants on R-based analysis & visualization, shifting team capabilities beyond SPSS-only workflows. #data #community"
+
+  - title: "Research Assistant"
+    company: "SIU Neuroscience Labs"
+    location: "Carbondale, IL"
+    dates: "2018 -- 2020"
+    tags: [data, automation, research, evaluation]
+    summary: "Built data processing pipelines & conducted research across two neuroscience labs (Integrative Neuroscience; Neurotrauma & Rehabilitation)."
+    achievements:
+      - "Volunteered to port MatLab & Octave EEG pipelines to Linux supercomputer environments, enabling the lab's first tomographic (LORETA) research — a capability previously blocked by slow, platform-incompatible processing pipelines. #data #automation"
+      - "Configured 3D imaging software for construction of high-precision electroencephalographic head models. #data"
+      - "Performed regression & ANOVA analyses for multiple studies across both labs. #data #evaluation"
+
+  - title: "President"
+    company: "SIU Photogenesis"
+    location: "Carbondale, IL"
+    dates: "2018 -- 2019"
+    tags: [community, nonprofit, organizing, leadership, creative, photography, design]
+    summary: "Led university photography organization; grew membership & revenue through client services, fundraising, & event programming."
+    achievements:
+      - "Grew organization membership from 5 to 40 members in a single semester through direct marketing & outreach. #community #organizing #leadership #creative"
+      - "Grew org revenue from $2,000 to $10,000+ via new fundraising activities & client photography services. #leadership #organizing #creative #photography"
+      - "Oversaw publication of Lux, a nationally recognized fine art photography journal. #community #leadership #creative #photography #design"
+      - "Designed new organizational branding, email newsletters, & wrote a new constitution. #community #organizing #creative #design"
+
+  - title: "Analog Process Technician"
+    company: "Southern Illinois University"
+    location: "Carbondale, IL"
+    dates: "2017 -- 2019"
+    tags: [creative, photography]
+    summary: "Operated & maintained analog film processing equipment for university photography program."
+    achievements:
+      - "Processed C41 & E6 color film in multiple formats using JOBO equipment for all enrolled photography students. #creative #photography"
+
+  - title: "Research Intern"
+    company: "SIU Office of the Assistant Director of Retention"
+    location: "Carbondale, IL"
+    dates: "2016 -- 2017"
+    tags: [evaluation, research]
+    summary: "Analyzed student enrollment & retention data for university undergraduate admissions."
+    achievements:
+      - "Performed detailed analysis on student enrollment & retention data in R & SPSS. #evaluation #research"
+
+education:
+  - degree: "Graduate Coursework, Computer Science, SIU Edwardsville"
+    dates: "2020 -- 2021"
+    details: "Data Science Focus"
+    achievements:
+      - "Graduate assistantship focused on CI/CD & data pipeline development with Illinois DOT."
+
+  - degree: "M.S. Applied Psychology, Southern Illinois University"
+    dates: "2019 -- 2020"
+    details: "Data Science Specialization"
+    achievements:
+      - "1.5 years practicum experience with focus on statistical analysis & research methodology. 3.8 GPA."
+      - "President, SIU Statistics Club. Graduate Advisor, SIU Photogenesis. Chair, 4+1 Program Committee. #community #creative"
+
+  - degree: "B.A. Psychology, Southern Illinois University"
+    dates: "2014 -- 2019"
+    details: "Neuroscience Specialization"
+    achievements:
+      - "Specializations: Addiction Neurophysiology; Neurotrauma & Rehabilitation. Led student groups. #research #evaluation #data"
+
+  - degree: "B.A. Photography, Southern Illinois University"
+    dates: "2014 -- 2019"
+    details: "Documentary Specialization"
+    achievements:
+      - "President, SIU Photogenesis. Photography Merit Scholarship recipient; Lux & Little Muddy Film Festival awards. #creative #photography #community"
+
+projects:
+  - name: "Proxmox Homelab"
+    description: "Terraform/Ansible IaC workflows & GitLab CI/CD pipelines with separate production & staging environments with physical isolation. Containerized with Docker Compose; networking using OPNsense."
+    type: "homelab"
+    tags: [sre, devops, infrastructure, automation]
+
+  - name: "instant_resume"
+    description: "Full-stack resume platform built with Next.js featuring a live paginated editor, YAML-driven content with profile-based filtering, DOM-aware PDF generation, & role-targeted views for multiple career tracks."
+    url: "https://github.com/aeholbrook/instant_resume"
+    type: "github"
+    tags: [sre, devops, automation, data, creative, design]
+
+  - name: "The Energy Illinois Project"
+    description: "Founded student-mentor energy audit program; presented to regional engineering board."
+    type: "project"
+    tags: [community, nonprofit, organizing, leadership]
+
+  - name: "net4nets (EEG Deep Learning Classification Pipeline)"
+    description: "Convolutional neural net achieving 94% accuracy classifying smokers from resting-state EEGs; end-to-end pipeline with time-frequency/PSD features & CNN validation workflows."
+    url: "https://github.com/aeholbrook/net4nets"
+    type: "github"
+    tags: [data, automation]
+
+  - name: "sequence_align"
+    description: "NumPy-based protein sequence alignment algorithms with substitution matrix scoring."
+    url: "https://github.com/aeholbrook/sequence_align"
+    type: "github"
+    tags: [data, automation]
+
+  - name: "regression_lesson_jupyter"
+    description: "Intuitive Python tutorial on core linear regression concepts with visual walk-throughs."
+    url: "https://github.com/aeholbrook/regression-lesson-jupyter"
+    type: "github"
+    tags: [data, evaluation, research]
+
+  - name: "2020 Commencement Report Pipeline"
+    description: "R-based survey data processing pipeline; automated cleaning & aggregation"
+    url: "https://github.com/aeholbrook/2020_commencement_report_pipeline"
+    type: "github"
+    tags: [data, evaluation, reporting, research]
+
+  - name: "aeholbrook.com"
+    description: "Personal portfolio site built with Next.js; visual contact-sheet layout linking photography galleries, resume, & project repos with custom typography & scrollable storytelling."
+    url: "https://aeholbrook.com"
+    type: "github"
+    tags: [community, data, automation, creative, photography, design]
+
+  - name: "smalltown.gallery"
+    description: "Interactive documentary photography platform showcasing small towns in Southern Illinois; searchable map interface with image galleries organized by town & year."
+    url: "https://smalltown.gallery"
+    type: "github"
+    tags: [community, nonprofit, creative, photography, design]
+
+skills:
+  "Community & Program Operations":
+    - Program Design
+    - Community Outreach
+    - Event Logistics
+    - Volunteer Coordination
+    - Stakeholder Communication
+    - Partnership Development
+    - Budget Management
+    - Accessibility Planning
+    - Needs Assessment
+    - Mutual Aid
+    - Public Speaking
+
+  "Program Evaluation & Research":
+    - Program Evaluation
+    - Needs Assessment
+    - Survey Design
+    - Survey Methodology
+    - Qualtrics
+    - SurveyMonkey
+    - Research Design
+    - Mixed Methods
+    - Qualitative Analysis
+    - ANOVA
+    - Multiple Regression
+    - Factor Analysis
+    - Descriptive Statistics
+    - Data Visualization
+    - SPSS
+    - Logic Models & Theory of Change
+    - IRB & Human Subjects
+
+  "Data, Reporting & Analysis":
+    - Python
+    - R
+    - SPSS
+    - Excel
+    - SQL
+    - Pandas/NumPy
+    - Tableau
+    - Domo
+    - Qualtrics
+    - Jupyter
+    - KPI Design
+
+  "Systems & Automation":
+    - Dashboards & Monitoring (Splunk, Dynatrace, Grafana, Prometheus)
+    - Salesforce
+    - Process Documentation & Training
+    - Jira
+    - Git
+    - Docker
+
+  "Infrastructure":
+    - Docker
+    - Chef
+    - Groovy
+    - Terraform
+    - Ansible
+    - Pivotal Cloud Foundry
+    - Linux
+    - Windows Server IIS
+    - Tomcat
+    - Proxmox
+    - OPNsense
+
+  "Observability":
+    - Grafana
+    - Prometheus
+    - Splunk
+    - Dynatrace
+    - Domo
+    - Omnibus
+    - Datadog
+
+  "CI/CD & Automation":
+    - Jenkins
+    - GitLab CI
+    - XLR
+    - Bitbucket
+    - Git
+    - Chef
+    - GitOps
+
+  "Development":
+    - Python
+    - JavaScript
+    - C++
+    - PowerShell
+    - Bash
+    - Java
+    - Spring
+    - Groovy
+    - R
+    - Node.js
+    - REST/SOAP APIs
+
+  "Security & Compliance":
+    - PCI-DSS
+    - CVE Triage
+    - Artifact Validation
+    - SSL/TLS
+    - VPN
+    - VLANs
+    - DNS
+    - Load Balancing
+
+  "Incident Management":
+    - 24/7 On-Call
+    - Incident Postmortems
+    - Root Cause Analysis
+    - Runbook Development
+    - Escalation Management
+    - SLO/SLI
+    - Paging Software
+    - Alerting
+
+  "Documentation":
+    - Atlassian Suite
+    - Confluence
+    - Jira
+    - Markdown
+    - Agile
+    - Chef Run Books
+
+  "Photography & Visual Media":
+    - Documentary Photography
+    - Studio Photography
+    - Fine Art Photography
+    - Large & Medium Format
+    - Analog Film Processing (C41, E6)
+    - Photo Editing & Post-Production
+    - Creative Writing
+    - Publication Design
+
+  "Design & Web":
+    - Next.js
+    - Typography
+    - Layout Design
+    - Branding & Identity
+    - HTML/CSS
+    - Responsive Design
+
+  "Databases":
+    - PostgreSQL
+    - MySQL
+    - Oracle
+    - MongoDB
+    - Kafka
+    - RabbitMQ
+    - Redis
+    - IBMMQ
+    - Elasticsearch

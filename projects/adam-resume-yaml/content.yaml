@@ -1,0 +1,160 @@
+# SECTION TITLES:
+# Customize how section headers appear in your resume
+section_titles:
+  employment: "Professional Experience"
+  education: "Education"
+  projects: "Projects"
+  skills: "Curated Skills"
+
+contact:
+  name: "Adam E. Holbrook"
+  email: "adam@aeholbrook.com"
+  phone: "(618) 520-5434"
+  location: "St. Louis, MO"
+  linkedin: "linkedin.com/in/aeholbrook"
+  github: "github.com/aeholbrook"
+  photo: "adam_headshot"
+  photo_scale: 0.23
+
+summary: |
+  Data and community engagement professional specializing in program operations, reporting, and stakeholder-ready insights. Build dashboards, operational reporting, and analytics tooling in complex environments. Community organizer leading recurring public events and mutual aid food distributions, strengthening participation, trust, and follow-through in high-touch community contexts.
+
+employment:
+  - title: "Volunteer Community Organizer"
+    company: "Local LGBTQ+ Mutual Aid Network"
+    location: "St. Louis, MO"
+    dates: "2024 -- Present"
+    summary: "Community-building effort centered on recurring public events, community spaces, and mutual support."
+    achievements:
+      - "Built and sustained a 100+ member community network through recurring public events and community spaces, strengthening participation, trust, and mutual support."
+      - "Planned and executed community events end-to-end: outreach, logistics, volunteer roles, accessibility planning, and partner coordination."
+      - "Synthesized community needs into actionable follow-ups, connecting individuals to resources and improving continuity across events."
+
+  - title: "Founder and Facilitator"
+    company: "Yes, Chef Mutual Aid Network"
+    location: "St. Louis, MO"
+    dates: "2025 -- Present"
+    summary: "Coordinate weekly surplus community food distributions and volunteer operations."
+    achievements:
+      - "Coordinate weekly surplus food prep and distribution for community members; manage donation logistics, volunteer scheduling, setup/teardown, and on-site operations."
+      - "Maintain consistent community communications supporting volunteer turnout, reliability, and repeat participation."
+
+  - title: "Senior Business Operations Engineer"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2023 -- 2025"
+    summary: "Led operational performance reporting and service monitoring for global payment infrastructure across 40+ countries."
+    achievements:
+      - "Built leadership dashboards integrating multiple data sources into unified reporting for stakeholders across 40+ countries; translated complex metrics into clear, accessible KPIs for decision-making."
+      - "Redesigned reporting workflows, reducing data delivery time from hours to seconds; documented processes enabling team self-service and sustainable operations."
+      - "Transformed operational data into clear narratives for leadership; created documentation and training materials supporting cross-functional alignment."
+      - "Designed monitoring strategies and service disruption response protocols; partnered with global teams to set alert thresholds and response workflows."
+
+  - title: "Business Operations Engineer II"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2022 -- 2023"
+    summary: "Built automation, reporting tools, and repeatable workflows supporting operational execution."
+    achievements:
+      - "Developed automation reducing manual operational work; created documentation supporting consistent, repeatable workflows across the team."
+      - "Built operational tools streamlining service disruption response; trained team members on processes that improved response consistency."
+      - "Led onboarding and enablement for new team members across complex service ecosystems; delivered documentation supporting knowledge transfer."
+
+  - title: "Business Operations Engineer I"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2021 -- 2022"
+    summary: "Supported operational reporting and incident response for distributed systems."
+    achievements:
+      - "Built dashboards for real-time system health visibility and operational reporting; improved stakeholder visibility and data-driven decision-making."
+      - "Resolved 1,000+ production incidents annually for distributed payment systems; coordinated cross-functional troubleshooting and long-term fixes."
+
+  - title: "DevOps Assistantship"
+    company: "SIU Edwardsville / Illinois Department of Transportation"
+    location: "Edwardsville, IL"
+    dates: "2020 -- 2021"
+    summary: "Graduate assistantship supporting infrastructure and delivery workflows for public-sector systems."
+    achievements:
+      - "Migrated and recompiled critical public-sector infrastructure from Linux to Windows Server, improving operational compatibility and maintainability."
+
+  - title: "Founder and Director"
+    company: "Energy Illinois"
+    location: "Illinois"
+    dates: "2019 -- 2020"
+    summary: "Designed a practicum-style program pairing engineering students with professional engineers and energy-industry mentors to deliver no-cost energy audits and efficiency improvement plans for local businesses and nonprofits."
+    achievements:
+      - "Designed program structure and workflows for student teams to deliver no-cost energy audits and efficiency recommendations with professional mentorship."
+      - "Presented program concept to the Illinois Professional Engineers Association; explored university funding pathways and external sponsorship options."
+      - "Created documentation including reporting templates and implementation planning; program paused March 2020 due to COVID-19 restrictions."
+
+  - title: "Volunteer Lab Associate"
+    company: "SIU Applied Research & Neuroscience Labs"
+    location: "Carbondale, IL"
+    dates: "2018 -- 2020"
+    summary: "Supported academic research through analysis tooling and automated processing workflows."
+    achievements:
+      - "Built automated data processing workflows in Python and R, accelerating analysis turnaround and improving reproducibility."
+
+education:
+  - degree: "Graduate Coursework in Computer Science, SIU Edwardsville"
+    dates: "2020 -- 2021"
+    details: "Data Science Focus"
+    achievements:
+      - "Graduate assistantship focused on CI/CD and data pipeline development with Illinois DOT."
+
+  - degree: "M.S. Applied Psychology, Southern Illinois University"
+    dates: "2019 -- 2020"
+    details: "Data Science Specialization"
+    achievements:
+      - "Practicum experience focused on statistical analysis and research methodology. 3.8 GPA."
+
+  - degree: "B.A. Psychology, Southern Illinois University"
+    dates: "2014 -- 2019"
+    details: "Neuroscience Specialization"
+    achievements:
+      - "Specializations: Addiction Neurophysiology; Neurotrauma & Rehabilitation. Led student groups."
+
+  - degree: "B.A. Photography, Southern Illinois University"
+    dates: "2014 -- 2019"
+    details: "Documentary Specialization"
+    achievements: []
+
+projects:
+  - name: "regression_lesson_jupyter"
+    description: "Python tutorial explaining linear regression concepts with intuitive examples and visual walk-throughs."
+    url: "https://github.com/aeholbrook/regression-lesson-jupyter"
+    type: "github"
+
+  - name: "2020 Commencement Report Pipeline"
+    description: "R-based survey processing pipeline for consulting project; automated cleaning, aggregation, and reporting outputs."
+    url: "https://github.com/aeholbrook/2020_commencement_report_pipeline"
+    type: "github"
+
+skills:
+  "Community & Program Operations":
+    - Event Logistics
+    - Volunteer Coordination
+    - Partner & Stakeholder Communication
+    - Accessibility Planning
+    - Community Needs Assessment
+    - Mutual Aid Operations
+    - Public Speaking
+
+  "Data, Reporting & Evaluation":
+    - Python
+    - R
+    - Excel
+    - SQL
+    - Tableau
+    - Domo
+    - Jupyter
+    - Data Storytelling
+    - KPI Design & Reporting
+
+  "Systems & Automation":
+    - Dashboards & Monitoring (Splunk, Dynatrace, Grafana, Prometheus)
+    - Process Documentation & Training
+    - Automation (Python, Bash, PowerShell)
+    - Jira / Confluence
+    - Git
+    - Docker

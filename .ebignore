@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.vscode/
+*.pdf
+*.aux
+*.log
+*.out
+*.synctex.gz
+.DS_Store
+*.swp
+*.swo
+.env
+node_modules/

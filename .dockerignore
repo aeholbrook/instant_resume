@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.vscode/
+*.md
+!DEPLOYMENT.md
+.env
+node_modules/
+.DS_Store
+*.swp
+*.swo
+Dockerfile
+docker-compose.yml
+.ebextensions/
+.ebignore
