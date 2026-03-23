@@ -1094,7 +1094,7 @@ a.contact-value {
 }
 
 [data-theme="modern"] .headshot-frame {
-  border-radius: 50%;
+  border-radius: 0;
 }
 
 [data-theme="modern"] .contact-icon.icon-mail svg,
@@ -1879,7 +1879,7 @@ a.contact-value {
   & [data-theme="modern"] .contact-icon svg { fill: #0f6faa !important; }
   & [data-theme="modern"] .project-name,
   & [data-theme="modern"] .project-name a { color: #0f6faa; }
-  & [data-theme="modern"] .headshot-frame { border-radius: 50%; }
+  & [data-theme="modern"] .headshot-frame { border-radius: 0; }
 
   /* Card & Dark are web-only themes — PDF export falls back to Modern styling */
   & [data-theme="card"] .section-title::after,
