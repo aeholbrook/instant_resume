@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { downloadPdf, downloadTextPdf, downloadDocx } from '@/lib/generate-pdf';
+import { downloadPdf, downloadTextPdf, downloadDocx, downloadAtsDocx } from '@/lib/generate-pdf';
 
 export default function ResumeActions({ profile, theme }: { profile?: string; theme?: string }) {
   const [downloading, setDownloading] = useState<string | null>(null);
 
-  const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx') => {
+  const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx' | 'ats') => {
     setDownloading(format);
     try {
       const base = profile ? `resume-${profile}` : 'resume';
@@ -19,6 +19,9 @@ export default function ResumeActions({ profile, theme }: { profile?: string; th
           break;
         case 'docx':
           await downloadDocx(profile, `${base}.docx`);
+          break;
+        case 'ats':
+          await downloadAtsDocx(profile, `${base}-ats.docx`);
           break;
       }
     } catch (err) {
@@ -46,6 +49,14 @@ export default function ResumeActions({ profile, theme }: { profile?: string; th
         title="Word document — ATS-friendly"
       >
         {downloading === 'docx' ? 'Preparing…' : 'Download DOCX'}
+      </button>
+      <button
+        className="button secondary"
+        onClick={() => handleExport('ats')}
+        disabled={!!downloading}
+        title="Plain DOCX optimized for ATS parsing — no styling, clear field separation"
+      >
+        {downloading === 'ats' ? 'Preparing…' : 'ATS DOCX'}
       </button>
       <button
         className="button secondary"
