@@ -128,6 +128,10 @@ a:hover {
   fill: #0077b5;
 }
 
+.contact-icon.icon-globe svg {
+  fill: #555;
+}
+
 .contact-value,
 a.contact-value {
   color: var(--ink);
@@ -1099,7 +1103,8 @@ a.contact-value {
 
 [data-theme="modern"] .contact-icon.icon-mail svg,
 [data-theme="modern"] .contact-icon.icon-github svg,
-[data-theme="modern"] .contact-icon.icon-linkedin svg {
+[data-theme="modern"] .contact-icon.icon-linkedin svg,
+[data-theme="modern"] .contact-icon.icon-globe svg {
   fill: #0f6faa;
 }
 
@@ -1200,7 +1205,8 @@ a.contact-value {
 
 [data-theme="card"] .contact-icon.icon-mail svg,
 [data-theme="card"] .contact-icon.icon-github svg,
-[data-theme="card"] .contact-icon.icon-linkedin svg {
+[data-theme="card"] .contact-icon.icon-linkedin svg,
+[data-theme="card"] .contact-icon.icon-globe svg {
   fill: #2d6a4f;
 }
 
@@ -1329,7 +1335,8 @@ a.contact-value {
 
 [data-theme="dark"] .contact-icon.icon-mail svg,
 [data-theme="dark"] .contact-icon.icon-github svg,
-[data-theme="dark"] .contact-icon.icon-linkedin svg {
+[data-theme="dark"] .contact-icon.icon-linkedin svg,
+[data-theme="dark"] .contact-icon.icon-globe svg {
   fill: #e94560;
 }
 
@@ -1463,6 +1470,7 @@ a.contact-value {
   .contact-icon.icon-mail svg { fill: #B6073F; }
   .contact-icon.icon-github svg { fill: #B6073F; }
   .contact-icon.icon-linkedin svg { fill: #B6073F; }
+  .contact-icon.icon-globe svg { fill: #B6073F; }
 
   .contact-value,
   a.contact-value {
@@ -1712,6 +1720,7 @@ a.contact-value {
   & .contact-icon.icon-mail svg { fill: #B6073F; }
   & .contact-icon.icon-github svg { fill: #B6073F; }
   & .contact-icon.icon-linkedin svg { fill: #B6073F; }
+  & .contact-icon.icon-globe svg { fill: #B6073F; }
   & .contact-value, & a.contact-value { color: var(--ink); }
 
   & .summary {

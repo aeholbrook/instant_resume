@@ -41,6 +41,7 @@ export type ResumeData = {
     photo?: string;
     photo_size?: number;       // width in px (default 150)
     photo_position?: 'left' | 'right'; // default 'left'
+    websites?: Array<{ label: string; url: string }>;
   };
   summary?: string;
   employment?: Array<{
