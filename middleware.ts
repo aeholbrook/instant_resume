@@ -25,5 +25,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/editor/:path*', '/api/editor/:path*'],
+  matcher: ['/editor/:path*', '/api/editor/:path*', '/cover-letter/:path*'],
 };

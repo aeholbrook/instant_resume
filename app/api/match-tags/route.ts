@@ -1,6 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 
+/* ── Simple in-memory rate limiter ──────────────────────────────── */
+const WINDOW_MS = 60_000; // 1 minute
+const MAX_REQUESTS = 5;   // per window per IP
+
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = hits.get(ip);
+  if (!entry || now > entry.resetAt) {
+    hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    return false;
+  }
+  entry.count++;
+  return entry.count > MAX_REQUESTS;
+}
+
+// Prune stale entries every 5 minutes to prevent memory leak
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of hits) {
+    if (now > entry.resetAt) hits.delete(ip);
+  }
+}, 300_000).unref?.();
+
 const TAG_DEFINITIONS: Record<string, string> = {
   sre: "Site Reliability Engineering, infrastructure, monitoring, uptime, incident response, observability",
   devops: "DevOps, CI/CD, automation, deployment, pipelines",
@@ -67,6 +92,17 @@ function parseResponse(text: string): TagWeight[] {
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+      || request.headers.get("x-real-ip")
+      || "unknown";
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again in a minute." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { title } = body;
 

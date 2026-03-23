@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { downloadPdf, downloadTextPdf, downloadDocx } from '@/lib/generate-pdf';
 
-export default function ResumeActions({ profile }: { profile?: string }) {
+export default function ResumeActions({ profile, theme }: { profile?: string; theme?: string }) {
   const [downloading, setDownloading] = useState<string | null>(null);
 
   const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx') => {
@@ -15,7 +15,7 @@ export default function ResumeActions({ profile }: { profile?: string }) {
           await downloadPdf(profile, `${base}.pdf`);
           break;
         case 'pdf-text':
-          await downloadTextPdf(profile, `${base}.pdf`);
+          await downloadTextPdf(profile, `${base}.pdf`, theme);
           break;
         case 'docx':
           await downloadDocx(profile, `${base}.docx`);

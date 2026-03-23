@@ -1,0 +1,216 @@
+.cl-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: 100vh;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+}
+
+/* ---- Form panel ---- */
+
+.cl-form-panel {
+  background: #fff;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid #e5e5e5;
+  overflow-y: auto;
+}
+
+.cl-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 0.25rem;
+}
+
+.cl-subtitle {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0 0 1.5rem;
+}
+
+.cl-field {
+  margin-bottom: 1rem;
+}
+
+.cl-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.cl-optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #aaa;
+}
+
+.cl-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 150ms;
+}
+
+.cl-input:focus {
+  border-color: #0f6faa;
+}
+
+.cl-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.cl-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 150ms;
+}
+
+.cl-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.cl-btn--generate {
+  width: 100%;
+  background: #0f6faa;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.cl-btn--generate:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.cl-error {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #b91c1c;
+  font-size: 0.82rem;
+}
+
+/* ---- Output panel ---- */
+
+.cl-output-panel {
+  background: #f7f6f3;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.cl-output-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.cl-btn--sm {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.cl-btn--sm:hover:not(:disabled) {
+  border-color: #0f6faa;
+  color: #0f6faa;
+}
+
+.cl-btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: #888;
+}
+
+.cl-btn--ghost:hover:not(:disabled) {
+  color: #0f6faa;
+  border-color: transparent;
+}
+
+.cl-sender {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cl-output {
+  flex: 1;
+  width: 100%;
+  min-height: 400px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 1.25rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #fff;
+  resize: none;
+  outline: none;
+}
+
+.cl-output:focus {
+  border-color: #0f6faa;
+}
+
+.cl-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #aaa;
+}
+
+.cl-placeholder p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cl-placeholder-hint {
+  font-size: 0.82rem !important;
+  margin-top: 0.3rem !important;
+  color: #ccc;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .cl-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cl-form-panel {
+    border-right: none;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .cl-output-panel {
+    min-height: 50vh;
+  }
+}

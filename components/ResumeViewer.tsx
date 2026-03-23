@@ -2,7 +2,15 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import ClassicResumeStack from '@/components/resume/ClassicResumeStack';
+import type { ResumeTheme } from '@/components/resume/ClassicResumeStack';
 import ResumeActions from '@/components/ResumeActions';
+
+const THEMES: { value: ResumeTheme; label: string }[] = [
+  { value: 'modern', label: 'Modern' },
+  { value: 'classic', label: 'Classic' },
+  { value: 'card', label: 'Card' },
+  { value: 'dark', label: 'Dark' },
+];
 import { filterContent, filterByTags } from '@/lib/profile-filter';
 import type { ResumeData } from '@/lib/resume';
 import type { ProfileInfo } from '@/lib/profile-filter';
@@ -12,6 +20,17 @@ type Props = {
   profiles: ProfileInfo[];
   initialProfile?: string;
 };
+
+/* ── Quick-pick roles shown on landing ─────────────────────────── */
+
+const QUICK_PICKS = [
+  { label: 'Site Reliability Engineer', role: 'Site Reliability Engineer' },
+  { label: 'Data Analyst', role: 'Data Analyst' },
+  { label: 'Research Analyst', role: 'Research Analyst Program Evaluation' },
+  { label: 'Visual Designer', role: 'Visual Designer' },
+  { label: 'Photographer', role: 'Photographer Visual Storyteller' },
+  { label: 'Community Organizer', role: 'Community Organizer Nonprofit' },
+];
 
 /* ── Landing screen ─────────────────────────────────────────────── */
 
@@ -31,12 +50,15 @@ function LandingScreen({
       <div className="landing-card">
         <h1 className="landing-name">{contactName}</h1>
         <p className="landing-subtitle">Interactive Resume</p>
+        <p className="landing-blurb">
+          This resume adapts to the role you're hiring for. Enter a job title below or pick a focus to see the most relevant experience.
+        </p>
 
         <div className="landing-input-group">
           <input
             type="text"
             className="landing-input"
-            placeholder="Enter a job title to tailor this resume..."
+            placeholder="What role are you hiring for?"
             value={role}
             onChange={(e) => setRole(e.target.value)}
             onKeyDown={(e) => {
@@ -53,8 +75,24 @@ function LandingScreen({
           </button>
         </div>
 
-        <button className="landing-btn landing-btn--ghost" onClick={onSkip}>
-          View Full Resume
+        <div className="landing-divider">
+          <span>or pick a focus</span>
+        </div>
+
+        <div className="landing-picks">
+          {QUICK_PICKS.map((pick) => (
+            <button
+              key={pick.role}
+              className="landing-pick-btn"
+              onClick={() => onSubmitRole(pick.role)}
+            >
+              {pick.label}
+            </button>
+          ))}
+        </div>
+
+        <button className="landing-pick-btn landing-pick-btn--ghost" onClick={onSkip}>
+          See Everything
         </button>
       </div>
     </div>
@@ -73,6 +111,8 @@ function HamburgerMenu({
   onCustomRoleChange,
   onMatch,
   currentProfile,
+  theme,
+  onThemeChange,
 }: {
   profiles: ProfileInfo[];
   selectedProfile: string;
@@ -83,6 +123,8 @@ function HamburgerMenu({
   onCustomRoleChange: (role: string) => void;
   onMatch: () => void;
   currentProfile?: string;
+  theme: ResumeTheme;
+  onThemeChange: (t: ResumeTheme) => void;
 }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -122,16 +164,6 @@ function HamburgerMenu({
         <div className="sidebar-section">
           <h3 className="sidebar-heading">Profile</h3>
           <div className="profile-radios">
-            <label className="profile-radio">
-              <input
-                type="radio"
-                name="profile"
-                value=""
-                checked={selectedProfile === '' && matchedTags === null}
-                onChange={() => { onProfileChange(''); setOpen(false); }}
-              />
-              <span>Full Resume</span>
-            </label>
             {profiles.map((p) => (
               <label key={p.name} className="profile-radio">
                 <input
@@ -142,6 +174,34 @@ function HamburgerMenu({
                   onChange={() => { onProfileChange(p.name); setOpen(false); }}
                 />
                 <span>{p.label}</span>
+              </label>
+            ))}
+            <label className="profile-radio">
+              <input
+                type="radio"
+                name="profile"
+                value=""
+                checked={selectedProfile === '' && matchedTags === null}
+                onChange={() => { onProfileChange(''); setOpen(false); }}
+              />
+              <span>All Experience</span>
+            </label>
+          </div>
+        </div>
+
+        <div className="sidebar-section">
+          <h3 className="sidebar-heading">Theme</h3>
+          <div className="profile-radios">
+            {THEMES.map((t) => (
+              <label key={t.value} className="profile-radio">
+                <input
+                  type="radio"
+                  name="theme"
+                  value={t.value}
+                  checked={theme === t.value}
+                  onChange={() => onThemeChange(t.value)}
+                />
+                <span>{t.label}</span>
               </label>
             ))}
           </div>
@@ -177,7 +237,7 @@ function HamburgerMenu({
 
         <div className="sidebar-section">
           <h3 className="sidebar-heading">Export</h3>
-          <ResumeActions profile={currentProfile} />
+          <ResumeActions profile={currentProfile} theme={theme} />
         </div>
       </div>
     </>
@@ -192,6 +252,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
   const [customRole, setCustomRole] = useState('');
   const [matching, setMatching] = useState(false);
   const [matchedTags, setMatchedTags] = useState<string[] | null>(null);
+  const [theme, setTheme] = useState<ResumeTheme>('modern');
 
   const filteredData = matchedTags
     ? filterByTags(rawData, matchedTags)
@@ -272,6 +333,8 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
         onCustomRoleChange={setCustomRole}
         onMatch={handleMatch}
         currentProfile={currentProfile}
+        theme={theme}
+        onThemeChange={setTheme}
       />
 
       <div className="viewer-center">
@@ -280,6 +343,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
           profiles={profiles}
           currentProfile={currentProfile}
           hideControls
+          theme={theme}
         />
       </div>
     </div>

@@ -75,3 +75,4 @@ tmp/
 .devcontainer/*.local
 .devcontainer/Dockerfile.local
 .devcontainer/devcontainer.local.json
+.vercel
