@@ -350,3 +350,22 @@ export async function downloadDocx(profile?: string, filename = 'resume.docx'): 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+export async function downloadAtsDocx(profile?: string, filename = 'resume-ats.docx'): Promise<void> {
+  const params = new URLSearchParams();
+  if (profile) params.set('profile', profile);
+  const res = await fetch(`/api/export/ats?${params}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(err.details || err.error || 'ATS DOCX generation failed');
+  }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
