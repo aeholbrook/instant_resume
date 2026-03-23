@@ -91,9 +91,9 @@ a:hover {
   list-style: none;
   margin: 0.35rem 0 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem 1.5rem;
 }
 
 .contact-line {
