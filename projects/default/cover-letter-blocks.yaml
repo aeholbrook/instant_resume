@@ -1,0 +1,117 @@
+# Cover letter building blocks
+# Claude Haiku selects and assembles these based on the target role.
+# Template variables: {{company}}, {{role}}, {{name}}
+
+settings:
+  sender_name: "Adam E. Holbrook"
+  sender_email: "adam@aeholbrook.com"
+  sender_phone: "(618) 520-5434"
+  sender_location: "St. Louis, MO"
+
+intros:
+  - id: intro-sre
+    tags: [sre, devops, infrastructure]
+    text: |
+      I am writing to express my interest in the {{role}} position at {{company}}. With over four years of experience building and maintaining reliable payment infrastructure at Mastercard, I bring deep expertise in observability, incident response, and infrastructure-as-code.
+
+  - id: intro-data
+    tags: [data, operations, reporting]
+    text: |
+      I am excited to apply for the {{role}} role at {{company}}. My background combines hands-on operational engineering with data pipeline development and stakeholder-facing reporting, built over four years at Mastercard.
+
+  - id: intro-community
+    tags: [community, nonprofit, organizing]
+    text: |
+      I am writing to apply for the {{role}} position at {{company}}. As a community organizer and program operations professional, I bring experience designing, facilitating, and evaluating programs that build trust and drive participation.
+
+  - id: intro-evaluation
+    tags: [evaluation, research, data]
+    text: |
+      I am interested in the {{role}} opportunity at {{company}}. My background in applied research consulting, survey methodology, and program evaluation positions me to contribute meaningful insights from day one.
+
+  - id: intro-creative
+    tags: [creative, photography, design]
+    text: |
+      I am writing to express my interest in the {{role}} position at {{company}}. As a photographer, visual storyteller, and web developer, I bring a unique combination of creative and technical skills to every project.
+
+  - id: intro-general
+    tags: []
+    text: |
+      I am writing to express my interest in the {{role}} position at {{company}}. I bring a diverse background spanning infrastructure engineering, data analysis, program evaluation, and community organizing.
+
+body:
+  - id: body-observability
+    tags: [sre, devops, operations]
+    text: |
+      At Mastercard, I architected over 200 observability monitors and built a monitoring-as-code framework that enabled developers to validate alerts before production, contributing to 99.99% uptime across global payment systems. I designed dashboards in Splunk, Dynatrace, and Domo that reduced report generation from hours to seconds.
+
+  - id: body-incident-response
+    tags: [sre, devops, operations]
+    text: |
+      I served as primary on-call engineer with a sub-five-minute response SLA, resolving over 1,000 production incidents annually. I led postmortems, drove SLO/SLI adoption, and built runbook documentation that improved first-contact resolution rates across the team.
+
+  - id: body-automation
+    tags: [sre, devops, automation, infrastructure]
+    text: |
+      I have a strong track record of eliminating operational toil through automation. I built Python-based terminal platforms, deployment validation scripts, and CI/CD pipelines in Jenkins and GitLab CI that replaced hours of manual work with scripted, repeatable workflows.
+
+  - id: body-data-pipelines
+    tags: [data, operations, reporting, automation]
+    text: |
+      I built an operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, and Remedy into Domo, delivering self-service BI dashboards with SLO/SLI metrics. I have hands-on experience designing KPIs and translating complex data into stakeholder-ready reporting.
+
+  - id: body-community-organizing
+    tags: [community, nonprofit, organizing, leadership]
+    text: |
+      As a volunteer community organizer, I have built and sustained a 100+ member mutual aid network through recurring public events and community spaces. I manage end-to-end logistics for large-scale events and coordinate weekly food distributions, strengthening participation and trust across our network.
+
+  - id: body-research
+    tags: [evaluation, research, data]
+    text: |
+      As an associate consultant at SIU Applied Research Consultants, I designed and executed end-to-end survey projects, from stakeholder intake through data analysis in R, Python, and SPSS to final reporting. I built analysis pipelines using descriptive statistics, ANOVA, multiple regression, and factor analysis.
+
+  - id: body-mentorship
+    tags: [sre, leadership, community]
+    text: |
+      I am passionate about knowledge sharing and team development. At Mastercard, I led onboarding and technical training for new SRE team members across 100+ microservice architectures, and I built documentation catalogs that became team-wide resources.
+
+  - id: body-creative-work
+    tags: [creative, photography, design]
+    text: |
+      I have experience in documentary photography, publication design, and web development. I grew a university photography organization from 5 to 40 members, oversaw publication of a nationally recognized fine art journal, and have built interactive portfolio platforms using Next.js and modern web technologies.
+
+  - id: body-food-mutual-aid
+    tags: [community, nonprofit, organizing]
+    text: |
+      I founded and facilitate a mutual aid food distribution network, coordinating weekly surplus food prep and distribution, managing donation logistics, volunteer scheduling, and on-site operations. This work reflects my commitment to building sustainable, community-driven systems.
+
+  - id: body-neuroscience
+    tags: [research, data, evaluation]
+    text: |
+      My research background includes work across two neuroscience labs where I ported EEG processing pipelines to supercomputer environments, configured 3D neuroimaging software, and performed statistical analyses for multiple studies. This experience gave me strong foundations in data processing and scientific rigor.
+
+  - id: body-security
+    tags: [sre, devops, infrastructure]
+    text: |
+      I have a sharp eye for security. I was the first in operations to detect active exploitation of the Log4Shell zero-day vulnerability across Mastercard's production payment infrastructure, and my rapid identification enabled immediate organizational response.
+
+closings:
+  - id: closing-general
+    tags: []
+    text: |
+      I would welcome the opportunity to discuss how my experience aligns with the needs of your team. Thank you for your time and consideration.
+
+  - id: closing-technical
+    tags: [sre, devops, infrastructure, data, automation]
+    text: |
+      I would welcome the opportunity to discuss how my technical background and operational experience can contribute to {{company}}'s engineering goals. Thank you for your time and consideration.
+
+  - id: closing-community
+    tags: [community, nonprofit, organizing, evaluation]
+    text: |
+      I would welcome the opportunity to discuss how my program operations experience and community-building work align with {{company}}'s mission. Thank you for your time and consideration.
+
+  - id: closing-creative
+    tags: [creative, photography, design]
+    text: |
+      I would love to share my portfolio and discuss how my creative and technical background can contribute to {{company}}'s visual identity. Thank you for your time and consideration.

@@ -75,16 +75,19 @@ async function getOrCreateBrowser() {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const profile = searchParams.get('profile') || undefined;
+  const theme = searchParams.get('theme') || 'classic';
 
   let page: any;
   try {
     // Run data fetching + HTML rendering in parallel with browser startup
     const [browser, html] = await Promise.all([
       getOrCreateBrowser(),
-      getResumeData(profile).then(data => renderResumeHTML(data)),
+      getResumeData(profile).then(data => renderResumeHTML(data, theme)),
     ]);
 
     page = await browser.newPage();
+    // Set viewport to letter width so CSS media queries don't trigger mobile breakpoints
+    await page.setViewport({ width: 816, height: 1056 });
 
     // setContent with inlined fonts — no network requests needed
     await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 10000 });

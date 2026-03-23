@@ -254,14 +254,17 @@ function resolveModuleOrder(data: ResumeData): ResumeModuleId[] {
   return sanitized.length ? sanitized : DEFAULT_MODULE_ORDER;
 }
 
+export type ResumeTheme = 'classic' | 'modern' | 'card' | 'dark';
+
 type StackProps = {
   data: ResumeData;
   profiles?: ProfileInfo[];
   currentProfile?: string;
   hideControls?: boolean;
+  theme?: ResumeTheme;
 };
 
-export default function ClassicResumeStack({ data, profiles, currentProfile, hideControls }: StackProps) {
+export default function ClassicResumeStack({ data, profiles, currentProfile, hideControls, theme }: StackProps) {
   const modules = resolveModuleOrder(data);
 
   const moduleRenderer: Record<ResumeModuleId, () => JSX.Element | null> = {
@@ -274,7 +277,7 @@ export default function ClassicResumeStack({ data, profiles, currentProfile, hid
 
   return (
     <main className="main">
-      <div className="sheet">
+      <div className="sheet" data-theme={theme || 'modern'}>
         {modules.map((moduleId) => (
           <Fragment key={moduleId}>{moduleRenderer[moduleId]()}</Fragment>
         ))}

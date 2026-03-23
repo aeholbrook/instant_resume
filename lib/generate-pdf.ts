@@ -302,9 +302,10 @@ export async function downloadPdf(profile?: string, filename = 'resume.pdf'): Pr
  * Generate a text-based, ATS-friendly PDF via server-side Puppeteer.
  * The PDF preserves full CSS styling AND has selectable/parseable text.
  */
-export async function generateTextPdfBlob(profile?: string): Promise<Blob> {
+export async function generateTextPdfBlob(profile?: string, theme?: string): Promise<Blob> {
   const params = new URLSearchParams();
   if (profile) params.set('profile', profile);
+  if (theme) params.set('theme', theme);
   const res = await fetch(`/api/export/pdf?${params}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Unknown error' }));
@@ -316,8 +317,8 @@ export async function generateTextPdfBlob(profile?: string): Promise<Blob> {
 /**
  * Generate and immediately download the text-based PDF.
  */
-export async function downloadTextPdf(profile?: string, filename = 'resume.pdf'): Promise<void> {
-  const blob = await generateTextPdfBlob(profile);
+export async function downloadTextPdf(profile?: string, filename = 'resume.pdf', theme?: string): Promise<void> {
+  const blob = await generateTextPdfBlob(profile, theme);
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
