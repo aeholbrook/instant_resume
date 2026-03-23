@@ -13,6 +13,13 @@ contact:
   location: "St. Louis, MO"
   linkedin: "linkedin.com/in/aeholbrook"
   github: "github.com/aeholbrook"
+  websites:
+    - label: "Portfolio"
+      url: "https://aeholbrook.com"
+    - label: "Virtual Resume"
+      url: "https://resume.aeholbrook.com"
+    - label: "Photography"
+      url: "https://photo.aeholbrook.com"
   photo: "adam_headshot"
   photo_size: 150
   photo_position: left
