@@ -74,23 +74,39 @@ function HeaderModule({ data, profiles, currentProfile, hideControls }: { data: 
   const photoSize = contact.photo_size ?? 150;
   const photoPosition = contact.photo_position ?? 'left';
 
-  const contactRows = [
+  // Build left & right columns, then interleave for CSS grid (row-first flow)
+  const websites = (contact.websites || []).map(site => ({
+    icon: GlobeIcon,
+    iconClass: 'icon-globe',
+    value: `${site.label}: ${site.url.replace(/^https?:\/\//, '')}`,
+    href: site.url,
+  }));
+
+  const leftCol: (ContactRow | null)[] = [
     contact.email
       ? { icon: MailIcon, iconClass: 'icon-mail', value: contact.email, href: `mailto:${contact.email}` }
       : null,
-    contact.github
-      ? { icon: GitHubIcon, iconClass: 'icon-github', value: `http://${contact.github.replace(/^https?:\/\//, '')}`, href: normalizeExternalUrl(contact.github) }
-      : null,
     contact.linkedin
-      ? { icon: LinkedInIcon, iconClass: 'icon-linkedin', value: `http://${contact.linkedin.replace(/^https?:\/\//, '')}`, href: normalizeExternalUrl(contact.linkedin) }
+      ? { icon: LinkedInIcon, iconClass: 'icon-linkedin', value: contact.linkedin.replace(/^https?:\/\//, ''), href: normalizeExternalUrl(contact.linkedin) }
       : null,
-    ...(contact.websites || []).map(site => ({
-      icon: GlobeIcon,
-      iconClass: 'icon-globe',
-      value: `${site.label}: ${site.url.replace(/^https?:\/\//, '')}`,
-      href: site.url,
-    })),
-  ].filter((row): row is NonNullable<typeof row> => Boolean(row));
+    websites[1] || null, // Virtual Resume
+  ];
+
+  const rightCol: (ContactRow | null)[] = [
+    contact.github
+      ? { icon: GitHubIcon, iconClass: 'icon-github', value: contact.github.replace(/^https?:\/\//, ''), href: normalizeExternalUrl(contact.github) }
+      : null,
+    websites[0] || null, // Portfolio
+    websites[2] || null, // Photography
+  ];
+
+  // Interleave: left1, right1, left2, right2, ... so CSS grid rows are correct
+  const contactRows: ContactRow[] = [];
+  const maxLen = Math.max(leftCol.length, rightCol.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (leftCol[i]) contactRows.push(leftCol[i]!);
+    if (rightCol[i]) contactRows.push(rightCol[i]!);
+  }
 
   const photoEl = photoPath ? (
     <aside className="header-aside" style={{ order: photoPosition === 'right' ? 2 : 0 }}>
