@@ -258,6 +258,20 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
     ? filterByTags(rawData, matchedTags)
     : filterContent(rawData, selectedProfile || undefined);
 
+  // Update page title based on active role/profile
+  useEffect(() => {
+    if (showLanding) {
+      document.title = 'Resume';
+    } else if (customRole.trim() && matchedTags) {
+      document.title = `Resume - ${customRole.trim()}`;
+    } else if (selectedProfile) {
+      const profile = profiles.find(p => p.name === selectedProfile);
+      document.title = `Resume - ${profile?.label || selectedProfile}`;
+    } else {
+      document.title = 'Resume';
+    }
+  }, [showLanding, customRole, matchedTags, selectedProfile, profiles]);
+
   const handleProfileChange = useCallback((profileName: string) => {
     setSelectedProfile(profileName);
     setMatchedTags(null);
