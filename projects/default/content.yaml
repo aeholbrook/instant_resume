@@ -16,10 +16,13 @@ contact:
   websites:
     - label: "Portfolio"
       url: "https://aeholbrook.com"
+      icon: briefcase
     - label: "Resume"
       url: "https://resume.aeholbrook.com"
+      icon: document
     - label: "Photography"
       url: "https://photo.aeholbrook.com"
+      icon: camera
   photo: "adam_headshot"
   photo_size: 150
   photo_position: left
