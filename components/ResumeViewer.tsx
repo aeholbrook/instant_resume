@@ -171,7 +171,7 @@ function HamburgerMenu({
                   name="profile"
                   value={p.name}
                   checked={selectedProfile === p.name && matchedTags === null}
-                  onChange={() => { onProfileChange(p.name); setOpen(false); }}
+                  onChange={() => { onProfileChange(p.name); }}
                 />
                 <span>{p.label}</span>
               </label>
@@ -182,7 +182,7 @@ function HamburgerMenu({
                 name="profile"
                 value=""
                 checked={selectedProfile === '' && matchedTags === null}
-                onChange={() => { onProfileChange(''); setOpen(false); }}
+                onChange={() => { onProfileChange(''); }}
               />
               <span>All Experience</span>
             </label>
@@ -217,12 +217,12 @@ function HamburgerMenu({
               value={customRole}
               onChange={(e) => onCustomRoleChange(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') { onMatch(); setOpen(false); }
+                if (e.key === 'Enter') { onMatch(); }
               }}
             />
             <button
               className="role-match-btn"
-              onClick={() => { onMatch(); setOpen(false); }}
+              onClick={() => { onMatch(); }}
               disabled={matching || !customRole.trim()}
             >
               {matching ? 'Matching...' : 'Match'}
