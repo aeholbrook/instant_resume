@@ -237,7 +237,7 @@ function HamburgerMenu({
 
         <div className="sidebar-section">
           <h3 className="sidebar-heading">Export</h3>
-          <ResumeActions profile={currentProfile} theme={theme} />
+          <ResumeActions profile={currentProfile} theme={theme} roleLabel={customRole.trim() && matchedTags ? customRole.trim() : profiles.find(p => p.name === selectedProfile)?.label} />
         </div>
       </div>
     </>

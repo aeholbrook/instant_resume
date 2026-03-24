@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import { downloadPdf, downloadTextPdf, downloadDocx, downloadAtsDocx } from '@/lib/generate-pdf';
 
-export default function ResumeActions({ profile, theme }: { profile?: string; theme?: string }) {
+export default function ResumeActions({ profile, theme, roleLabel }: { profile?: string; theme?: string; roleLabel?: string }) {
   const [downloading, setDownloading] = useState<string | null>(null);
 
   const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx' | 'ats') => {
     setDownloading(format);
     try {
-      const base = profile ? `resume-${profile}` : 'resume';
+      const slug = roleLabel ? roleLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : profile;
+      const base = slug ? `resume-${slug}` : 'resume';
       switch (format) {
         case 'pdf':
           await downloadPdf(profile, `${base}.pdf`);
