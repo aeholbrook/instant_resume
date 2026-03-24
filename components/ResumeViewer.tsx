@@ -247,29 +247,63 @@ function HamburgerMenu({
 /* ── Main viewer ────────────────────────────────────────────────── */
 
 export default function ResumeViewer({ rawData, profiles, initialProfile }: Props) {
-  const [showLanding, setShowLanding] = useState(!initialProfile);
+  // Check URL for persisted role param
+  const initialRole = typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search).get('role') || ''
+    : '';
+  const hasInitialSelection = !!(initialProfile || initialRole);
+
+  const [showLanding, setShowLanding] = useState(!hasInitialSelection);
   const [selectedProfile, setSelectedProfile] = useState<string>(initialProfile ?? '');
-  const [customRole, setCustomRole] = useState('');
+  const [customRole, setCustomRole] = useState(initialRole);
   const [matching, setMatching] = useState(false);
   const [matchedTags, setMatchedTags] = useState<string[] | null>(null);
   const [theme, setTheme] = useState<ResumeTheme>('modern');
+
+  // Auto-match if we loaded with a role param
+  const [didAutoMatch, setDidAutoMatch] = useState(false);
+  useEffect(() => {
+    if (initialRole && !didAutoMatch) {
+      setDidAutoMatch(true);
+      setMatching(true);
+      fetch('/api/match-tags', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: initialRole }),
+      })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => { if (data?.tags) { setMatchedTags(data.tags); setSelectedProfile(''); } })
+        .catch(() => {})
+        .finally(() => setMatching(false));
+    }
+  }, [initialRole, didAutoMatch]);
 
   const filteredData = matchedTags
     ? filterByTags(rawData, matchedTags)
     : filterContent(rawData, selectedProfile || undefined);
 
-  // Update page title based on active role/profile
+  // Update page title and URL based on active role/profile
   useEffect(() => {
+    const url = new URL(window.location.href);
     if (showLanding) {
       document.title = 'Resume';
+      url.searchParams.delete('profile');
+      url.searchParams.delete('role');
     } else if (customRole.trim() && matchedTags) {
       document.title = `Resume - ${customRole.trim()}`;
+      url.searchParams.delete('profile');
+      url.searchParams.set('role', customRole.trim());
     } else if (selectedProfile) {
       const profile = profiles.find(p => p.name === selectedProfile);
       document.title = `Resume - ${profile?.label || selectedProfile}`;
+      url.searchParams.set('profile', selectedProfile);
+      url.searchParams.delete('role');
     } else {
       document.title = 'Resume';
+      url.searchParams.delete('profile');
+      url.searchParams.delete('role');
     }
+    window.history.replaceState({}, '', url.toString());
   }, [showLanding, customRole, matchedTags, selectedProfile, profiles]);
 
   const handleProfileChange = useCallback((profileName: string) => {
