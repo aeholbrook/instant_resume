@@ -9,8 +9,8 @@ export default function ResumeActions({ profile, theme, roleLabel }: { profile?:
   const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx' | 'ats') => {
     setDownloading(format);
     try {
-      const slug = roleLabel ? roleLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : profile;
-      const base = slug ? `resume-${slug}` : 'resume';
+      const roleSlug = roleLabel ? roleLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : profile;
+      const base = roleSlug ? `adam-holbrook-resume-${roleSlug}` : 'adam-holbrook-resume';
       switch (format) {
         case 'pdf':
           await downloadPdf(profile, `${base}.pdf`);
