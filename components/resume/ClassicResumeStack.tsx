@@ -59,6 +59,40 @@ function GlobeIcon() {
   );
 }
 
+function CameraIcon() {
+  return (
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 384c-53 0-96-43-96-96s43-96 96-96s96 43 96 96s-43 96-96 96z" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon() {
+  return (
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
+    </svg>
+  );
+}
+
+function DocumentIcon() {
+  return (
+    <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z" />
+    </svg>
+  );
+}
+
+const ICON_MAP: Record<string, () => JSX.Element> = {
+  globe: GlobeIcon,
+  camera: CameraIcon,
+  briefcase: BriefcaseIcon,
+  document: DocumentIcon,
+  mail: MailIcon,
+  github: GitHubIcon,
+  linkedin: LinkedInIcon,
+};
+
 type ContactRow = {
   icon: () => JSX.Element;
   iconClass: string;
@@ -75,12 +109,16 @@ function HeaderModule({ data, profiles, currentProfile, hideControls }: { data: 
   const photoPosition = contact.photo_position ?? 'left';
 
   // Build left & right columns, then interleave for CSS grid (row-first flow)
-  const websites = (contact.websites || []).map(site => ({
-    icon: GlobeIcon,
-    iconClass: 'icon-globe',
-    value: `${site.label}: ${site.url.replace(/^https?:\/\//, '')}`,
-    href: site.url,
-  }));
+  const websites = (contact.websites || []).map(site => {
+    const iconName = site.icon || 'globe';
+    const IconComponent = ICON_MAP[iconName] || GlobeIcon;
+    return {
+      icon: IconComponent,
+      iconClass: `icon-${iconName}`,
+      value: `${site.label}: ${site.url.replace(/^https?:\/\//, '')}`,
+      href: site.url,
+    };
+  });
 
   const leftCol: (ContactRow | null)[] = [
     contact.email
