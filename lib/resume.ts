@@ -41,7 +41,7 @@ export type ResumeData = {
     photo?: string;
     photo_size?: number;       // width in px (default 150)
     photo_position?: 'left' | 'right'; // default 'left'
-    websites?: Array<{ label: string; url: string }>;
+    websites?: Array<{ label: string; url: string; icon?: string }>;
   };
   summary?: string;
   employment?: Array<{
@@ -82,11 +82,15 @@ async function loadYamlResume(): Promise<ResumeData> {
 export async function getRawResumeData(): Promise<ResumeData> {
   try {
     const dbData = await getResume();
-    if (dbData) return dbData;
+    if (dbData) {
+      console.log('DEBUG getResume websites:', JSON.stringify((dbData as any).contact?.websites));
+      return dbData;
+    }
   } catch (error) {
     console.warn('Failed to load resume from database, falling back to YAML.', error);
   }
 
+  console.log('DEBUG: falling back to YAML');
   return loadYamlResume();
 }
 
