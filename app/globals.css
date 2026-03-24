@@ -114,10 +114,7 @@ a:hover {
 .contact-icon svg {
   width: 14px;
   height: 14px;
-}
-
-.contact-icon.icon-mail svg {
-  fill: var(--accent);
+  fill: var(--accent, #555);
 }
 
 .contact-icon.icon-github svg {
@@ -126,10 +123,6 @@ a:hover {
 
 .contact-icon.icon-linkedin svg {
   fill: #0077b5;
-}
-
-.contact-icon.icon-globe svg {
-  fill: #555;
 }
 
 .contact-value,
@@ -1101,10 +1094,7 @@ a.contact-value {
   border-radius: 0;
 }
 
-[data-theme="modern"] .contact-icon.icon-mail svg,
-[data-theme="modern"] .contact-icon.icon-github svg,
-[data-theme="modern"] .contact-icon.icon-linkedin svg,
-[data-theme="modern"] .contact-icon.icon-globe svg {
+[data-theme="modern"] .contact-icon svg {
   fill: #0f6faa;
 }
 
@@ -1203,10 +1193,7 @@ a.contact-value {
   color: #2d6a4f;
 }
 
-[data-theme="card"] .contact-icon.icon-mail svg,
-[data-theme="card"] .contact-icon.icon-github svg,
-[data-theme="card"] .contact-icon.icon-linkedin svg,
-[data-theme="card"] .contact-icon.icon-globe svg {
+[data-theme="card"] .contact-icon svg {
   fill: #2d6a4f;
 }
 
@@ -1333,10 +1320,7 @@ a.contact-value {
   border: 3px solid #e94560;
 }
 
-[data-theme="dark"] .contact-icon.icon-mail svg,
-[data-theme="dark"] .contact-icon.icon-github svg,
-[data-theme="dark"] .contact-icon.icon-linkedin svg,
-[data-theme="dark"] .contact-icon.icon-globe svg {
+[data-theme="dark"] .contact-icon svg {
   fill: #e94560;
 }
 
@@ -1467,10 +1451,7 @@ a.contact-value {
     height: 12px;
   }
 
-  .contact-icon.icon-mail svg { fill: #B6073F; }
-  .contact-icon.icon-github svg { fill: #B6073F; }
-  .contact-icon.icon-linkedin svg { fill: #B6073F; }
-  .contact-icon.icon-globe svg { fill: #B6073F; }
+  .contact-icon svg { fill: #B6073F; }
 
   .contact-value,
   a.contact-value {
@@ -1716,11 +1697,7 @@ a.contact-value {
   & .contact-list { margin-top: 0.5em; gap: 0.2em; }
   & .contact-line { font-size: 9pt; gap: 0.4rem; }
   & .contact-icon { width: 1.8em; }
-  & .contact-icon svg { width: 12px; height: 12px; }
-  & .contact-icon.icon-mail svg { fill: #B6073F; }
-  & .contact-icon.icon-github svg { fill: #B6073F; }
-  & .contact-icon.icon-linkedin svg { fill: #B6073F; }
-  & .contact-icon.icon-globe svg { fill: #B6073F; }
+  & .contact-icon svg { width: 12px; height: 12px; fill: #B6073F; }
   & .contact-value, & a.contact-value { color: var(--ink); }
 
   & .summary {
