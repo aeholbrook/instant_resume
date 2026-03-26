@@ -290,9 +290,18 @@ function buildAtsDocx(data: ResumeData): Document {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const profile = searchParams.get('profile') || undefined;
+  const tagsParam = searchParams.get('tags');
 
   try {
-    const data = await getResumeData(profile);
+    let data: ResumeData;
+    if (tagsParam && !profile) {
+      const { filterByTags } = await import('@/lib/profile-filter');
+      const { getRawResumeData } = await import('@/lib/resume');
+      const raw = await getRawResumeData();
+      data = filterByTags(raw, tagsParam.split(','));
+    } else {
+      data = await getResumeData(profile);
+    }
     const doc = buildAtsDocx(data);
     const buffer = await Packer.toBuffer(doc);
 

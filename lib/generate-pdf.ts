@@ -302,10 +302,11 @@ export async function downloadPdf(profile?: string, filename = 'resume.pdf'): Pr
  * Generate a text-based, ATS-friendly PDF via server-side Puppeteer.
  * The PDF preserves full CSS styling AND has selectable/parseable text.
  */
-export async function generateTextPdfBlob(profile?: string, theme?: string): Promise<Blob> {
+export async function generateTextPdfBlob(profile?: string, theme?: string, tags?: string[]): Promise<Blob> {
   const params = new URLSearchParams();
   if (profile) params.set('profile', profile);
   if (theme) params.set('theme', theme);
+  if (tags) params.set('tags', tags.join(','));
   const res = await fetch(`/api/export/pdf?${params}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Unknown error' }));
@@ -317,8 +318,8 @@ export async function generateTextPdfBlob(profile?: string, theme?: string): Pro
 /**
  * Generate and immediately download the text-based PDF.
  */
-export async function downloadTextPdf(profile?: string, filename = 'resume.pdf', theme?: string): Promise<void> {
-  const blob = await generateTextPdfBlob(profile, theme);
+export async function downloadTextPdf(profile?: string, filename = 'resume.pdf', theme?: string, tags?: string[]): Promise<void> {
+  const blob = await generateTextPdfBlob(profile, theme, tags);
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -332,9 +333,10 @@ export async function downloadTextPdf(profile?: string, filename = 'resume.pdf',
 /**
  * Generate and download a DOCX file via the server-side API.
  */
-export async function downloadDocx(profile?: string, filename = 'resume.docx'): Promise<void> {
+export async function downloadDocx(profile?: string, filename = 'resume.docx', tags?: string[]): Promise<void> {
   const params = new URLSearchParams();
   if (profile) params.set('profile', profile);
+  if (tags) params.set('tags', tags.join(','));
   const res = await fetch(`/api/export/docx?${params}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Unknown error' }));
@@ -351,9 +353,10 @@ export async function downloadDocx(profile?: string, filename = 'resume.docx'): 
   URL.revokeObjectURL(url);
 }
 
-export async function downloadAtsDocx(profile?: string, filename = 'resume-ats.docx'): Promise<void> {
+export async function downloadAtsDocx(profile?: string, filename = 'resume-ats.docx', tags?: string[]): Promise<void> {
   const params = new URLSearchParams();
   if (profile) params.set('profile', profile);
+  if (tags) params.set('tags', tags.join(','));
   const res = await fetch(`/api/export/ats?${params}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Unknown error' }));
