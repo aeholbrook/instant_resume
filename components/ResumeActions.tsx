@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { downloadPdf, downloadTextPdf, downloadDocx, downloadAtsDocx } from '@/lib/generate-pdf';
 
-export default function ResumeActions({ profile, theme, roleLabel }: { profile?: string; theme?: string; roleLabel?: string }) {
+export default function ResumeActions({ profile, theme, roleLabel, matchedTags }: { profile?: string; theme?: string; roleLabel?: string; matchedTags?: string[] | null }) {
   const [downloading, setDownloading] = useState<string | null>(null);
 
   const handleExport = async (format: 'pdf' | 'pdf-text' | 'docx' | 'ats') => {
@@ -11,18 +11,19 @@ export default function ResumeActions({ profile, theme, roleLabel }: { profile?:
     try {
       const roleSlug = roleLabel ? roleLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : profile;
       const base = roleSlug ? `adam-holbrook-resume-${roleSlug}` : 'adam-holbrook-resume';
+      const tags = !profile && matchedTags ? matchedTags : undefined;
       switch (format) {
         case 'pdf':
           await downloadPdf(profile, `${base}.pdf`);
           break;
         case 'pdf-text':
-          await downloadTextPdf(profile, `${base}.pdf`, theme);
+          await downloadTextPdf(profile, `${base}.pdf`, theme, tags);
           break;
         case 'docx':
-          await downloadDocx(profile, `${base}.docx`);
+          await downloadDocx(profile, `${base}.docx`, tags);
           break;
         case 'ats':
-          await downloadAtsDocx(profile, `${base}-ats.docx`);
+          await downloadAtsDocx(profile, `${base}-ats.docx`, tags);
           break;
       }
     } catch (err) {

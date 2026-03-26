@@ -76,13 +76,23 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const profile = searchParams.get('profile') || undefined;
   const theme = searchParams.get('theme') || 'classic';
+  const tagsParam = searchParams.get('tags');
 
   let page: any;
   try {
     // Run data fetching + HTML rendering in parallel with browser startup
+    const getData = async () => {
+      if (tagsParam && !profile) {
+        const { filterByTags } = await import('@/lib/profile-filter');
+        const { getRawResumeData } = await import('@/lib/resume');
+        const raw = await getRawResumeData();
+        return filterByTags(raw, tagsParam.split(','));
+      }
+      return getResumeData(profile);
+    };
     const [browser, html] = await Promise.all([
       getOrCreateBrowser(),
-      getResumeData(profile).then(data => renderResumeHTML(data, theme)),
+      getData().then(data => renderResumeHTML(data, theme)),
     ]);
 
     page = await browser.newPage();
