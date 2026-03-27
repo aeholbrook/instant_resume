@@ -40,10 +40,12 @@ function LandingScreen({
   onSkip,
 }: {
   contactName: string;
-  onSubmitRole: (role: string) => void;
+  onSubmitRole: (role: string, description?: string) => void;
   onSkip: () => void;
 }) {
   const [role, setRole] = useState('');
+  const [description, setDescription] = useState('');
+  const [showDesc, setShowDesc] = useState(false);
 
   return (
     <div className="landing">
@@ -62,13 +64,30 @@ function LandingScreen({
             value={role}
             onChange={(e) => setRole(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && role.trim()) onSubmitRole(role.trim());
+              if (e.key === 'Enter' && role.trim()) onSubmitRole(role.trim(), description.trim() || undefined);
             }}
             autoFocus
           />
+          {!showDesc && (
+            <button
+              className="landing-desc-toggle"
+              onClick={() => setShowDesc(true)}
+            >
+              + Paste job description for better matching
+            </button>
+          )}
+          {showDesc && (
+            <textarea
+              className="landing-textarea"
+              placeholder="Paste the job description here (optional)"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={5}
+            />
+          )}
           <button
             className="landing-btn landing-btn--primary"
-            onClick={() => onSubmitRole(role.trim())}
+            onClick={() => onSubmitRole(role.trim(), description.trim() || undefined)}
             disabled={!role.trim()}
           >
             Tailor Resume
@@ -332,7 +351,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
     }
   }, [customRole]);
 
-  const handleLandingSubmit = useCallback(async (role: string) => {
+  const handleLandingSubmit = useCallback(async (role: string, description?: string) => {
     setCustomRole(role);
     setShowLanding(false);
     // Trigger match after switching to resume view
@@ -341,7 +360,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
       const res = await fetch('/api/match-tags', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: role }),
+        body: JSON.stringify({ title: role, description }),
       });
       if (res.ok) {
         const data = await res.json();

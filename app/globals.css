@@ -505,6 +505,37 @@ a.contact-value {
   width: 100%;
 }
 
+.landing-desc-toggle {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  padding: 0;
+}
+.landing-desc-toggle:hover {
+  color: #555;
+}
+
+.landing-textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
+  color: #333;
+}
+.landing-textarea:focus {
+  outline: none;
+  border-color: #999;
+}
+
 .landing-btn-inline {
   padding: 0.5rem 0.7rem;
   background: rgba(0, 0, 0, 0.5);
@@ -1038,6 +1069,10 @@ a.contact-value {
 
   .entry-right {
     text-align: left;
+  }
+
+  .contact-list {
+    grid-template-columns: 1fr;
   }
 }
 

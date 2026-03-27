@@ -27,16 +27,27 @@ setInterval(() => {
 }, 300_000).unref?.();
 
 const TAG_DEFINITIONS: Record<string, string> = {
-  sre: "Site Reliability Engineering, infrastructure, monitoring, uptime, incident response, observability",
-  devops: "DevOps, CI/CD, automation, deployment, pipelines",
-  infrastructure: "Cloud infrastructure, AWS, networking, systems administration",
-  automation: "Scripting, tooling, process automation, Python",
-  operations: "Operations management, incident management, on-call, runbooks",
-  data: "Data engineering, data pipelines, ETL, analytics",
-  community: "Community building, mentoring, leadership, nonprofit, volunteer work",
-  payments: "Payment systems, financial technology, transaction processing",
-  security: "Security, compliance, PCI-DSS, access management",
-  development: "Software development, programming, APIs, microservices",
+  sre: "Site Reliability Engineering, monitoring, uptime, incident response, observability, on-call",
+  devops: "DevOps, CI/CD, deployment pipelines, Jenkins, Git, infrastructure as code",
+  infrastructure: "Cloud infrastructure, AWS, networking, systems administration, servers, Linux",
+  automation: "Scripting, tooling, process automation, Python, Bash",
+  operations: "Operations management, incident management, runbooks, production support",
+  data: "Data engineering, data pipelines, ETL, analytics, databases, SQL, dashboards",
+  community: "Community building, mutual aid, volunteer work, public events, outreach",
+  nonprofit: "Nonprofit organizations, social services, food distribution, grassroots organizing",
+  organizing: "Community organizing, event planning, coalition building, civic engagement",
+  leadership: "Team leadership, mentoring, onboarding, organizational management, growing teams",
+  evaluation: "Program evaluation, needs assessment, outcomes measurement, logic models",
+  reporting: "Reporting, dashboards, KPIs, BI tools, Domo, Tableau, data visualization",
+  research: "Research methods, survey design, statistical analysis, ANOVA, regression, R, SPSS",
+  survey: "Survey design, Qualtrics, SurveyMonkey, questionnaire development, data collection",
+  creative: "Creative work, content creation, visual storytelling, branding",
+  photography: "Photography, photo editing, Lightroom, visual media, film, darkroom",
+  design: "Graphic design, visual design, layout, typography, Canva, Adobe Suite",
+  visualization: "Data visualization, charts, infographics, Plotly, Dash, interactive dashboards",
+  payments: "Payment systems, financial technology, transaction processing, tokenization",
+  security: "Security, compliance, certificate management, vulnerability response",
+  development: "Software development, programming, APIs, microservices, web applications",
 };
 
 const VALID_TAGS = new Set(Object.keys(TAG_DEFINITIONS));
@@ -46,12 +57,17 @@ interface TagWeight {
   weight: number;
 }
 
-function buildPrompt(title: string): string {
+function buildPrompt(title: string, description?: string): string {
   const tagList = Object.entries(TAG_DEFINITIONS)
     .map(([tag, desc]) => `- ${tag}: ${desc}`)
     .join("\n");
 
-  return `Given the job title "${title}", rate how relevant each resume tag is on a scale of 0 to 1. Only include tags with relevance > 0.3.
+  let context = `Given the job title "${title}"`;
+  if (description) {
+    context += ` and the following job description:\n\n${description}\n\n`;
+  }
+
+  return `${context}rate how relevant each resume tag is on a scale of 0 to 1. Only include tags with relevance > 0.3. When a job description is provided, pay close attention to the specific skills, tools, and responsibilities mentioned.
 
 Tags:
 ${tagList}
@@ -104,7 +120,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { title } = body;
+    const { title, description } = body;
 
     if (!title || typeof title !== "string") {
       return NextResponse.json(
@@ -119,6 +135,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const descText = typeof description === "string" ? description.trim().slice(0, 5000) : undefined;
 
     const apiKey = process.env.RESUME_ANTHROPIC_KEY || process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
@@ -136,7 +154,7 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: "user",
-          content: buildPrompt(title.trim()),
+          content: buildPrompt(title.trim(), descText),
         },
       ],
     });
