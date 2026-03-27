@@ -94,13 +94,13 @@ profiles:
 # Categories without an entry here are always included.
 skills_tags:
   "Community & Program Operations": [community, nonprofit, organizing]
-  "Program Evaluation & Research": [evaluation, data, community, nonprofit, research]
-  "Data, Reporting & Analysis": [data, operations, reporting, automation]
+  "Program Evaluation & Research": [evaluation, data, community, nonprofit, research, survey]
+  "Data, Reporting & Analysis": [data, operations, reporting, automation, visualization]
   "Systems & Automation": [operations, automation, data, sre, devops]
   "Infrastructure": [sre, devops, infrastructure]
-  "Observability": [sre, devops, operations, data]
+  "Observability": [sre, devops, operations, data, visualization]
   "CI/CD & Automation": [sre, devops, automation, infrastructure]
-  "Development": [sre, devops, data, automation]
+  "Development": [sre, devops, data, automation, development]
   "Security & Compliance": [sre, devops, infrastructure]
   "Incident Management": [sre, devops, operations]
   "Photography & Visual Media": [creative, photography, design]
@@ -137,7 +137,7 @@ employment:
     summary: "Senior engineer for global payment infrastructure processing billions in transactions annually across 40+ countries."
     achievements:
       - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime with monitoring-as-code framework enabling developers to validate alerts before production. #sre #devops #operations #automation #infrastructure"
-      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; rebuilt data pipelines reducing report generation from 2+ hours to seconds with SLO/SLI metrics & BI dashboards. #data #reporting #operations #sre #automation #design"
+      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; rebuilt data pipelines reducing report generation from 2+ hours to seconds with SLO/SLI metrics & BI dashboards. #data #reporting #visualization #operations #sre #automation #design"
       - "Led incident response as primary on-call engineer with <5min response SLA; conducted postmortems & drove reliability improvements through SLO/SLI metric adoption. #sre #devops #operations"
       - "Built monitoring documentation for Vocalink (account-to-account payments) with catalog of 200+ monitors & self-updating tables; coached teams on observability, security-first engineering, & infrastructure architecture. #sre #devops #operations #leadership #community"
 
@@ -148,10 +148,10 @@ employment:
     tags: [sre, devops, infrastructure, data, operations, automation]
     summary: "Primary on-call engineer for MDES tokenization platform; maintained high availability through proactive monitoring, automated remediation, & rapid incident response."
     achievements:
-      - "Engineered custom Python-based terminal platform & companion VSCode toolkit for Tomcat monitoring, disk management, log rotation, & service control; integrated API healthchecks, Splunk/Dynatrace queries, & database actions into unified workflows, replacing manual host-by-host operations. #sre #devops #automation"
-      - "Built Splunk & Dynatrace dashboards purpose-built for L1 support to trace failed transactions & tokenizations to root cause, linked to Confluence runbooks explaining issues & remediation in plain language; reduced escalation volume & improved first-contact resolution. #sre #devops #automation #operations"
+      - "Engineered custom Python-based terminal platform & companion VSCode toolkit for Tomcat monitoring, disk management, log rotation, & service control; integrated API healthchecks, Splunk/Dynatrace queries, & database actions into unified workflows, replacing manual host-by-host operations. #sre #devops #automation #development"
+      - "Built Splunk & Dynatrace dashboards purpose-built for L1 support to trace failed transactions & tokenizations to root cause, linked to Confluence runbooks explaining issues & remediation in plain language; reduced escalation volume & improved first-contact resolution. #sre #devops #automation #operations #visualization #reporting"
       - "Led onboarding & technical training for new SRE team members during platform expansion, delivering comprehensive instruction across 100+ microservices architectures, dozens of customer-specific call paths, & complex multi-service transaction flows. #sre #leadership #community"
-      - "Developed Python & Bash automation for deployment validation, health checks, & compliance reporting, reducing hours of manual operational toil to scripted workflows. #sre #devops #automation"
+      - "Developed Python & Bash automation for deployment validation, health checks, & compliance reporting, reducing hours of manual operational toil to scripted workflows. #sre #devops #automation #development"
 
   - title: "Business Operations Engineer I"
     company: "Mastercard"
@@ -162,7 +162,7 @@ employment:
     achievements:
       - "First in operations to detect active exploitation of a critical zero-day vulnerability (CVE-2021-44228) across production payment infrastructure; rapid identification enabled immediate organizational response. #sre #devops #operations #evaluation #research"
       - "Earned on-call rotation within 3 months of hire; resolved 1,000+ production incidents annually across payment systems. #sre #operations"
-      - "Self-directed learning of Splunk & Dynatrace to fill a team gap in monitoring capacity; became subject matter expert on observability & built dashboards adopted across the team. #sre #devops #data #reporting #operations"
+      - "Self-directed learning of Splunk & Dynatrace to fill a team gap in monitoring capacity; became subject matter expert on observability & built dashboards adopted across the team. #sre #devops #data #reporting #visualization #operations"
       - "Supported CI/CD pipeline development in Jenkins & XLR for Pivotal Cloud deployments. #sre #devops #infrastructure"
 
   - title: "DevOps Assistantship"
@@ -172,7 +172,7 @@ employment:
     tags: [sre, devops, operations, automation, data, infrastructure]
     summary: "Graduate assistantship supporting infrastructure & delivery workflows for public-sector systems."
     achievements:
-      - "Migrated Illinois DOT's legacy traffic & weather data website from UNIX Apache to Windows Server IIS as part of a platform decommission; recompiled & rewrote site code in JavaScript, C++, Bash, & HTML/CSS for the new architecture. #sre #devops #infrastructure"
+      - "Migrated Illinois DOT's legacy traffic & weather data website from UNIX Apache to Windows Server IIS as part of a platform decommission; recompiled & rewrote site code in JavaScript, C++, Bash, & HTML/CSS for the new architecture. #sre #devops #infrastructure #development"
 
 
   - title: "Associate Consultant"
@@ -182,11 +182,11 @@ employment:
     tags: [evaluation, data, reporting, community, research]
     summary: "Delivered end-to-end survey research & evaluation consulting for local & regional stakeholders."
     achievements:
-      - "Designed & executed end-to-end survey projects for multiple regional clients: stakeholder intake, survey design in Qualtrics & SurveyMonkey, data analysis in R, Python, SQL, & SPSS, & final reporting. #evaluation #data"
-      - "Built R-based analysis & visualization pipelines for client reports including descriptive statistics, ANOVA, multiple regression, factor analysis, & data visualizations. #data #reporting #evaluation"
+      - "Designed & executed end-to-end survey projects for multiple regional clients: stakeholder intake, survey design in Qualtrics & SurveyMonkey, data analysis in R, Python, SQL, & SPSS, & final reporting. #evaluation #data #survey #research #reporting"
+      - "Built R-based analysis & visualization pipelines for client reports including descriptive statistics, ANOVA, multiple regression, factor analysis, & data visualizations. #data #reporting #visualization #evaluation #research"
       - "Proactively sourced 4–5 new client engagements through direct outreach to regional businesses & university departments, generating projects the consultancy would not otherwise have had. #evaluation #community"
-      - "Built & maintained entrance/exit surveys to develop curriculum & ease transitions for incoming graduate students. #evaluation #community"
-      - "Built an interdisciplinary statistics education platform & trained fellow consultants on R-based analysis & visualization, shifting team capabilities beyond SPSS-only workflows. #data #community"
+      - "Built & maintained entrance/exit surveys to develop curriculum & ease transitions for incoming graduate students. #evaluation #survey #community"
+      - "Built an interdisciplinary statistics education platform & trained fellow consultants on R-based analysis & visualization, shifting team capabilities beyond SPSS-only workflows. #data #research #leadership #community"
 
   - title: "Research Assistant"
     company: "SIU Neuroscience Labs"
