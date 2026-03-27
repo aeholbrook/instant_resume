@@ -45,7 +45,6 @@ function LandingScreen({
 }) {
   const [role, setRole] = useState('');
   const [description, setDescription] = useState('');
-  const [showDesc, setShowDesc] = useState(false);
 
   return (
     <div className="landing">
@@ -68,23 +67,13 @@ function LandingScreen({
             }}
             autoFocus
           />
-          {!showDesc && (
-            <button
-              className="landing-desc-toggle"
-              onClick={() => setShowDesc(true)}
-            >
-              + Paste job description for better matching
-            </button>
-          )}
-          {showDesc && (
-            <textarea
-              className="landing-textarea"
-              placeholder="Paste the job description here (optional)"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={5}
-            />
-          )}
+          <textarea
+            className="landing-textarea"
+            placeholder="Paste job description for better matching (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
+          />
           <button
             className="landing-btn landing-btn--primary"
             onClick={() => onSubmitRole(role.trim(), description.trim() || undefined)}
