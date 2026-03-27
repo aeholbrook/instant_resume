@@ -940,6 +940,27 @@ a.contact-value {
   color: #999;
 }
 
+.role-description-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  resize: vertical;
+  min-height: 60px;
+  max-height: 150px;
+  transition: border-color 150ms;
+}
+.role-description-input:focus {
+  border-color: var(--accent);
+}
+.role-description-input::placeholder {
+  color: #999;
+}
+
 .role-match-btn {
   border: 1px solid var(--accent);
   background: var(--accent);
