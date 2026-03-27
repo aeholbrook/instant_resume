@@ -114,9 +114,11 @@ function HamburgerMenu({
   selectedProfile,
   matchedTags,
   customRole,
+  customDescription,
   matching,
   onProfileChange,
   onCustomRoleChange,
+  onCustomDescriptionChange,
   onMatch,
   currentProfile,
   theme,
@@ -126,9 +128,11 @@ function HamburgerMenu({
   selectedProfile: string;
   matchedTags: string[] | null;
   customRole: string;
+  customDescription: string;
   matching: boolean;
   onProfileChange: (name: string) => void;
   onCustomRoleChange: (role: string) => void;
+  onCustomDescriptionChange: (desc: string) => void;
   onMatch: () => void;
   currentProfile?: string;
   theme: ResumeTheme;
@@ -228,6 +232,13 @@ function HamburgerMenu({
                 if (e.key === 'Enter') { onMatch(); }
               }}
             />
+            <textarea
+              className="role-description-input"
+              placeholder="Paste job description (optional)"
+              value={customDescription}
+              onChange={(e) => onCustomDescriptionChange(e.target.value)}
+              rows={4}
+            />
             <button
               className="role-match-btn"
               onClick={() => { onMatch(); }}
@@ -264,6 +275,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
   const [showLanding, setShowLanding] = useState(!hasInitialSelection);
   const [selectedProfile, setSelectedProfile] = useState<string>(initialProfile ?? '');
   const [customRole, setCustomRole] = useState(initialRole);
+  const [customDescription, setCustomDescription] = useState('');
   const [matching, setMatching] = useState(false);
   const [matchedTags, setMatchedTags] = useState<string[] | null>(null);
   const [theme, setTheme] = useState<ResumeTheme>('modern');
@@ -323,10 +335,12 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
     if (!customRole.trim()) return;
     setMatching(true);
     try {
+      const body: Record<string, string> = { title: customRole.trim() };
+      if (customDescription.trim()) body.description = customDescription.trim();
       const res = await fetch('/api/match-tags', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: customRole.trim() }),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
         const data = await res.json();
@@ -338,7 +352,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
     } finally {
       setMatching(false);
     }
-  }, [customRole]);
+  }, [customRole, customDescription]);
 
   const handleLandingSubmit = useCallback(async (role: string, description?: string) => {
     setCustomRole(role);
@@ -384,9 +398,11 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
         selectedProfile={selectedProfile}
         matchedTags={matchedTags}
         customRole={customRole}
+        customDescription={customDescription}
         matching={matching}
         onProfileChange={handleProfileChange}
         onCustomRoleChange={setCustomRole}
+        onCustomDescriptionChange={setCustomDescription}
         onMatch={handleMatch}
         currentProfile={currentProfile}
         theme={theme}
