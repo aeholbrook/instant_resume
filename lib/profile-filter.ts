@@ -103,6 +103,40 @@ function tagsMatch(entryTags: string[] | undefined, profileTags: Set<string>): b
   return entryTags.some((t) => profileTags.has(t));
 }
 
+/**
+ * Resolve entry groups: if any entry in a group matched, pull in the rest of that group.
+ * Entries with group_alt point to an alternative group — when the alt group is present,
+ * this entry is excluded (they're mutually exclusive representations).
+ */
+function resolveGroups<T extends { group?: string; group_alt?: string }>(
+  allEntries: T[],
+  matchedEntries: T[],
+): T[] {
+  // Collect groups that matched
+  const matchedGroups = new Set<string>();
+  for (const e of matchedEntries) {
+    if (e.group) matchedGroups.add(e.group);
+  }
+
+  // If no groups matched, nothing to resolve
+  if (matchedGroups.size === 0) return matchedEntries;
+
+  // Pull in unmatched entries whose group was matched
+  const result = [...matchedEntries];
+  const matchedSet = new Set(matchedEntries);
+  for (const e of allEntries) {
+    if (!matchedSet.has(e) && e.group && matchedGroups.has(e.group)) {
+      result.push(e);
+    }
+  }
+
+  // Remove entries whose group_alt is present (mutually exclusive)
+  return result.filter((e) => {
+    if (!e.group_alt) return true;
+    return !matchedGroups.has(e.group_alt);
+  });
+}
+
 export type ProfileInfo = {
   name: string;
   label: string;
@@ -145,29 +179,33 @@ export function filterByTags(content: ResumeData, tags: string[]): ResumeData {
   delete result.skills_tags;
 
   if (content.employment) {
-    result.employment = content.employment
-      .filter((e) => tagsMatch(e.tags, profileTags))
-      .map((e) => {
-        const cleaned = { ...e };
-        delete cleaned.tags;
-        if (cleaned.achievements) {
-          cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
-        }
-        return cleaned;
-      });
+    const matched = content.employment.filter((e) => tagsMatch(e.tags, profileTags));
+    const resolved = resolveGroups(content.employment, matched);
+    result.employment = resolved.map((e) => {
+      const cleaned = { ...e };
+      delete cleaned.tags;
+      delete cleaned.group;
+      delete cleaned.group_alt;
+      if (cleaned.achievements) {
+        cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
+      }
+      return cleaned;
+    });
   }
 
   if (content.education) {
-    result.education = content.education
-      .filter((e) => tagsMatch(e.tags, profileTags))
-      .map((e) => {
-        const cleaned = { ...e };
-        delete cleaned.tags;
-        if (cleaned.achievements) {
-          cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
-        }
-        return cleaned;
-      });
+    const matched = content.education.filter((e) => tagsMatch(e.tags, profileTags));
+    const resolved = resolveGroups(content.education, matched);
+    result.education = resolved.map((e) => {
+      const cleaned = { ...e };
+      delete cleaned.tags;
+      delete cleaned.group;
+      delete cleaned.group_alt;
+      if (cleaned.achievements) {
+        cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
+      }
+      return cleaned;
+    });
   }
 
   if (content.projects) {
@@ -206,18 +244,23 @@ export function filterContent(content: ResumeData, profileName?: string): Resume
   delete result.skills_tags;
 
   // No profile → flatten achievements to strings, remove tags, return everything
+  // Show detailed group entries, hide summary alternates (group_alt entries)
   if (!profileName || !(profileName in profiles)) {
     for (const section of ['employment', 'education'] as const) {
       const entries = result[section];
       if (!entries) continue;
-      (result as any)[section] = entries.map((entry: any) => {
-        const cleaned = { ...entry };
-        delete cleaned.tags;
-        if (cleaned.achievements) {
-          cleaned.achievements = flattenAchievements(cleaned.achievements);
-        }
-        return cleaned;
-      });
+      (result as any)[section] = entries
+        .filter((entry: any) => !entry.group_alt)
+        .map((entry: any) => {
+          const cleaned = { ...entry };
+          delete cleaned.tags;
+          delete cleaned.group;
+          delete cleaned.group_alt;
+          if (cleaned.achievements) {
+            cleaned.achievements = flattenAchievements(cleaned.achievements);
+          }
+          return cleaned;
+        });
     }
     if (result.projects) {
       result.projects = result.projects.map((p) => {
@@ -239,36 +282,40 @@ export function filterContent(content: ResumeData, profileName?: string): Resume
 
   // Filter employment
   if (content.employment) {
-    let filtered = content.employment
-      .filter((e) => tagsMatch(e.tags, profileTags))
-      .map((e) => {
-        const cleaned = { ...e };
-        delete cleaned.tags;
-        if (cleaned.achievements) {
-          cleaned.achievements = filterAchievements(
-            cleaned.achievements,
-            profileTags,
-            limits.max_achievements,
-          );
-        }
-        return cleaned;
-      });
+    const matched = content.employment.filter((e) => tagsMatch(e.tags, profileTags));
+    const resolved = resolveGroups(content.employment, matched);
+    let filtered = resolved.map((e) => {
+      const cleaned = { ...e };
+      delete cleaned.tags;
+      delete cleaned.group;
+      delete cleaned.group_alt;
+      if (cleaned.achievements) {
+        cleaned.achievements = filterAchievements(
+          cleaned.achievements,
+          profileTags,
+          limits.max_achievements,
+        );
+      }
+      return cleaned;
+    });
     if (limits.max_jobs != null) filtered = filtered.slice(0, limits.max_jobs);
     result.employment = filtered;
   }
 
   // Filter education
   if (content.education) {
-    let filtered = content.education
-      .filter((e) => tagsMatch(e.tags, profileTags))
-      .map((e) => {
-        const cleaned = { ...e };
-        delete cleaned.tags;
-        if (cleaned.achievements) {
-          cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
-        }
-        return cleaned;
-      });
+    const matched = content.education.filter((e) => tagsMatch(e.tags, profileTags));
+    const resolved = resolveGroups(content.education, matched);
+    let filtered = resolved.map((e) => {
+      const cleaned = { ...e };
+      delete cleaned.tags;
+      delete cleaned.group;
+      delete cleaned.group_alt;
+      if (cleaned.achievements) {
+        cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
+      }
+      return cleaned;
+    });
     if (limits.max_education != null) filtered = filtered.slice(0, limits.max_education);
     result.education = filtered;
   }

@@ -52,6 +52,8 @@ export type ResumeData = {
     summary?: string;
     achievements?: AchievementInput[];
     tags?: string[];
+    group?: string;
+    group_alt?: string;
   }>;
   education?: Array<{
     degree: string;
@@ -59,6 +61,8 @@ export type ResumeData = {
     details?: string;
     achievements?: AchievementInput[];
     tags?: string[];
+    group?: string;
+    group_alt?: string;
   }>;
   projects?: Array<{
     name: string;
@@ -82,15 +86,11 @@ async function loadYamlResume(): Promise<ResumeData> {
 export async function getRawResumeData(): Promise<ResumeData> {
   try {
     const dbData = await getResume();
-    if (dbData) {
-      console.log('DEBUG getResume websites:', JSON.stringify((dbData as any).contact?.websites));
-      return dbData;
-    }
+    if (dbData) return dbData;
   } catch (error) {
     console.warn('Failed to load resume from database, falling back to YAML.', error);
   }
 
-  console.log('DEBUG: falling back to YAML');
   return loadYamlResume();
 }
 

@@ -133,6 +133,7 @@ employment:
     company: "Mastercard"
     location: "St. Louis, MO"
     dates: "2023 -- 2025"
+    group: mastercard-detailed
     tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation]
     summary: "Senior engineer for global payment infrastructure processing billions in transactions annually across 40+ countries."
     achievements:
@@ -145,6 +146,7 @@ employment:
     company: "Mastercard"
     location: "St. Louis, MO"
     dates: "2022 -- 2023"
+    group: mastercard-detailed
     tags: [sre, devops, infrastructure, data, operations, automation]
     summary: "Primary on-call engineer for MDES tokenization platform; maintained high availability through proactive monitoring, automated remediation, & rapid incident response."
     achievements:
@@ -157,6 +159,7 @@ employment:
     company: "Mastercard"
     location: "St. Louis, MO"
     dates: "2021 -- 2022"
+    group: mastercard-detailed
     tags: [sre, devops, data, operations, reporting]
     summary: "Supported operational reporting & incident response for distributed payment systems."
     achievements:
@@ -164,6 +167,21 @@ employment:
       - "Earned on-call rotation within 3 months of hire; resolved 1,000+ production incidents annually across payment systems. #sre #operations"
       - "Self-directed learning of Splunk & Dynatrace to fill a team gap in monitoring capacity; became subject matter expert on observability & built dashboards adopted across the team. #sre #devops #data #reporting #visualization #operations"
       - "Supported CI/CD pipeline development in Jenkins & XLR for Pivotal Cloud deployments. #sre #devops #infrastructure"
+
+  - title: "Business Operations Engineer I → II → Senior"
+    company: "Mastercard"
+    location: "St. Louis, MO"
+    dates: "2021 -- 2025"
+    group: mastercard-summary
+    group_alt: mastercard-detailed
+    tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation]
+    summary: "Progressed from entry-level to senior engineer supporting global payment infrastructure processing billions in transactions annually across 40+ countries."
+    achievements:
+      - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime. #sre #devops #operations #automation #infrastructure"
+      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; reduced report generation from 2+ hours to seconds. #data #reporting #visualization #operations"
+      - "Primary on-call engineer with <5min response SLA; resolved 1,000+ production incidents annually. #sre #operations"
+      - "Engineered Python-based terminal platform & VSCode toolkit for Tomcat monitoring, deployment validation, & service control. #sre #devops #automation #development"
+      - "First in operations to detect active exploitation of Log4Shell (CVE-2021-44228) across production payment infrastructure. #sre #devops #operations"
 
   - title: "DevOps Assistantship"
     company: "SIU Edwardsville / Illinois Department of Transportation"
