@@ -28,52 +28,51 @@
   overflow: hidden;
 }
 
-/* ── Top Bar with Elbow ── */
-/* The elbow is an L-shape: a tall vertical piece on the left that curves
-   into a horizontal bar across the top. The inner corner is cut out with
-   a ::after pseudo-element using border-radius + background: black. */
+/* ── Top Elbow + Bar ── */
+/* Structure: a vertical piece on the left, a horizontal bar on top-right.
+   They share a corner where the vertical meets the horizontal.
+   The inner curve is a black circle that cuts into the corner. */
 
 .lcars-top-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--lcars-btn-w) 1fr;
+  grid-template-rows: var(--lcars-elbow-h) 1fr;
   flex-shrink: 0;
-  position: relative;
-  min-height: calc(var(--lcars-elbow-h) * 2.5);
 }
 
-/* The elbow piece — fills the full top-left corner as an L */
+/* Top-left cell: solid fill (part of the L) */
 .lcars-top-elbow {
-  width: var(--lcars-btn-w);
-  min-width: var(--lcars-btn-w);
+  grid-row: 1 / 3;
+  grid-column: 1;
   background: var(--lcars-lilac);
   position: relative;
-  /* Outer rounded corner on bottom-left */
-  border-bottom-left-radius: var(--lcars-elbow-r);
 }
 
-/* Inner cutout — punches out the inside of the L */
+/* Inner curve cutout — sits in the bottom-right of the elbow */
 .lcars-top-elbow::after {
   content: '';
   position: absolute;
   bottom: 0;
   right: 0;
-  width: calc(var(--lcars-btn-w) * 0.55);
+  width: 60%;
   height: calc(100% - var(--lcars-elbow-h));
   background: var(--lcars-bg);
-  border-top-left-radius: var(--lcars-elbow-r);
+  border-top-left-radius: calc(var(--lcars-elbow-r) * 1.5);
 }
 
-/* The horizontal bar portion (right of the elbow) */
+/* Top-right cell: horizontal bar */
 .lcars-top-bar-content {
-  flex: 1;
+  grid-row: 1;
+  grid-column: 2;
   background: var(--lcars-lilac);
-  height: var(--lcars-elbow-h);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2rem;
   padding: 0 20px;
+  gap: 1.5rem;
   border-bottom-right-radius: var(--lcars-elbow-r);
 }
+
+/* Empty space below the top bar (row 2, col 2) — just black */
 
 .lcars-top-text {
   font-family: var(--lcars-font);
@@ -146,7 +145,8 @@
   padding: 10px 16px;
   border-left: 3px solid;
   animation: lcars-fade-in 0.25s ease-out;
-  overflow: hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .lcars-row-content--header {
@@ -340,20 +340,20 @@
   color: var(--lcars-periwinkle);
 }
 
-/* ── Bottom Bar with Elbow ── */
+/* ── Bottom Elbow + Bar ── */
 .lcars-bottom-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--lcars-btn-w) 1fr;
+  grid-template-rows: 1fr var(--lcars-elbow-h);
   flex-shrink: 0;
-  position: relative;
   min-height: calc(var(--lcars-elbow-h) * 2.5);
 }
 
 .lcars-bottom-elbow {
-  width: var(--lcars-btn-w);
-  min-width: var(--lcars-btn-w);
+  grid-row: 1 / 3;
+  grid-column: 1;
   background: var(--lcars-tan);
   position: relative;
-  border-top-left-radius: var(--lcars-elbow-r);
 }
 
 .lcars-bottom-elbow::after {
@@ -361,22 +361,21 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: calc(var(--lcars-btn-w) * 0.55);
+  width: 60%;
   height: calc(100% - var(--lcars-elbow-h));
   background: var(--lcars-bg);
-  border-bottom-left-radius: var(--lcars-elbow-r);
+  border-bottom-left-radius: calc(var(--lcars-elbow-r) * 1.5);
 }
 
 .lcars-bottom-bar-content {
-  flex: 1;
+  grid-row: 2;
+  grid-column: 2;
   background: var(--lcars-tan);
-  height: var(--lcars-elbow-h);
-  align-self: flex-end;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 2rem;
   padding: 0 20px;
+  gap: 1.5rem;
   border-top-right-radius: var(--lcars-elbow-r);
 }
 
