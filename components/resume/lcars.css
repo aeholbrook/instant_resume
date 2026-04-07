@@ -29,30 +29,47 @@
 }
 
 /* ── Top Elbow + Bar ── */
+/* The elbow is an L: horizontal bar on top, vertical piece dropping down
+   on the left side, with a smooth inner concave curve at the corner.
+   Built as: a wrapper with the horizontal bar + a tall elbow piece below. */
 
 .lcars-top-bar {
-  display: flex;
   flex-shrink: 0;
-  gap: var(--lcars-gap);
-  height: var(--lcars-elbow-h);
 }
 
-/* Simple elbow — just the left cap of the bar with rounded bottom-left */
-.lcars-top-elbow {
-  width: var(--lcars-btn-w);
-  min-width: var(--lcars-btn-w);
-  background: var(--lcars-lilac);
-  border-bottom-left-radius: calc(var(--lcars-elbow-r) * 2);
-}
-
+/* Horizontal bar across the top */
 .lcars-top-bar-content {
-  flex: 1;
+  height: var(--lcars-elbow-h);
   background: var(--lcars-lilac);
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding: 0 20px;
   gap: 1.5rem;
   border-bottom-right-radius: var(--lcars-elbow-r);
+}
+
+/* The elbow drop-down: vertical piece under the left side of the bar.
+   Full width of sidebar, with a concave inner curve on the right side. */
+.lcars-top-elbow {
+  width: var(--lcars-btn-w);
+  height: 60px;
+  background: var(--lcars-lilac);
+  position: relative;
+  margin-bottom: var(--lcars-gap);
+}
+
+/* Concave inner curve: a black box with border-radius that eats into
+   the bottom-right corner of the elbow, creating the LCARS sweep. */
+.lcars-top-elbow::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--lcars-bg);
+  border-top-left-radius: calc(var(--lcars-elbow-r) * 2);
 }
 
 .lcars-top-text {
@@ -323,21 +340,32 @@
 
 /* ── Bottom Elbow + Bar ── */
 .lcars-bottom-bar {
-  display: flex;
   flex-shrink: 0;
-  gap: var(--lcars-gap);
-  height: var(--lcars-elbow-h);
 }
 
+/* Vertical piece rising up from the bottom bar on the left */
 .lcars-bottom-elbow {
   width: var(--lcars-btn-w);
-  min-width: var(--lcars-btn-w);
+  height: 60px;
   background: var(--lcars-tan);
-  border-top-left-radius: calc(var(--lcars-elbow-r) * 2);
+  position: relative;
+  margin-top: var(--lcars-gap);
 }
 
+.lcars-bottom-elbow::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--lcars-bg);
+  border-bottom-left-radius: calc(var(--lcars-elbow-r) * 2);
+}
+
+/* Horizontal bar across the bottom */
 .lcars-bottom-bar-content {
-  flex: 1;
+  height: var(--lcars-elbow-h);
   background: var(--lcars-tan);
   display: flex;
   align-items: center;
