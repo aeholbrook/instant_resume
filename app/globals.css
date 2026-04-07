@@ -1495,9 +1495,32 @@ a.contact-value {
 }
 
 /* Headshot */
+/* Headshot with LCARS frame graphic underneath */
 [data-theme="lcars"] .headshot-frame {
   border-radius: 0;
   border: 3px solid var(--lcars-tan);
+  position: relative;
+  margin-left: 48px;
+  margin-top: 12px;
+  z-index: 2;
+}
+
+[data-theme="lcars"] .headshot-frame::after {
+  content: 'PERSONNEL FILE';
+  position: absolute;
+  bottom: -24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--lcars-font);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lcars-tan);
+  background: var(--lcars-bg);
+  padding: 4px 0;
+  border: 2px solid var(--lcars-tan);
+  border-top: none;
 }
 
 /* Summary / tagline */
