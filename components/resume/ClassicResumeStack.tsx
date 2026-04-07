@@ -395,7 +395,7 @@ function resolveModuleOrder(data: ResumeData): ResumeModuleId[] {
   return sanitized.length ? sanitized : DEFAULT_MODULE_ORDER;
 }
 
-export type ResumeTheme = 'classic' | 'modern' | 'card' | 'dark';
+export type ResumeTheme = 'classic' | 'modern' | 'card' | 'dark' | 'lcars';
 
 type StackProps = {
   data: ResumeData;
