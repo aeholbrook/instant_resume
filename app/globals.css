@@ -1408,6 +1408,12 @@ a.contact-value {
 .main:has([data-theme="lcars"]) {
   background: #000;
   padding: 0;
+  margin: 0;
+}
+
+.viewer-center:has([data-theme="lcars"]) {
+  padding: 0;
+  max-width: 100%;
 }
 
 [data-theme="lcars"] {
@@ -1501,8 +1507,8 @@ a.contact-value {
   border: 3px solid var(--lcars-tan);
   position: relative;
   margin-left: 16px;
-  margin-top: 12px;
-  margin-bottom: 28px;
+  margin-top: 28px;
+  margin-bottom: 8px;
   z-index: 2;
   overflow: visible;
 }
@@ -1510,7 +1516,7 @@ a.contact-value {
 [data-theme="lcars"] .headshot-frame::after {
   content: 'PERSONNEL FILE';
   position: absolute;
-  bottom: -22px;
+  top: -22px;
   left: -3px;
   right: -3px;
   text-align: center;
@@ -1521,7 +1527,7 @@ a.contact-value {
   color: var(--lcars-bg);
   background: var(--lcars-tan);
   padding: 3px 0;
-  border-radius: 0 0 6px 6px;
+  border-radius: 6px 6px 0 0;
 }
 
 /* Summary / tagline */
