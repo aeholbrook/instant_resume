@@ -50,6 +50,7 @@ export type ResumeData = {
     location?: string;
     dates?: string;
     summary?: string;
+    summaries?: Array<{ text: string; tags?: string[]; default?: boolean }>;
     achievements?: AchievementInput[];
     tags?: string[];
     group?: string;

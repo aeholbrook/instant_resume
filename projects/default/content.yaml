@@ -175,7 +175,15 @@ employment:
     group: mastercard-summary
     group_alt: mastercard-detailed
     tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation, creative, photography, design, community, evaluation, research]
-    summary: "Progressed from entry-level to senior engineer supporting global payment infrastructure processing billions in transactions annually across 40+ countries."
+    summaries:
+      - text: "Progressed from entry-level to senior engineer supporting global payment infrastructure processing billions in transactions annually across 40+ countries."
+        tags: [sre, devops, infrastructure]
+      - text: "Progressed from entry-level to senior engineer; built operational dashboards & data pipelines integrating Splunk, Dynatrace, Salesforce, & Domo for global payment systems."
+        tags: [data, operations, reporting, visualization]
+      - text: "Progressed from entry-level to senior engineer; led cross-functional training, onboarding, & documentation initiatives across a global enterprise."
+        tags: [leadership, community, evaluation, research]
+      - text: "Progressed from entry-level to senior engineer at a Fortune 500 fintech company over four years."
+        default: true
     achievements:
       - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime. #sre #devops #operations #automation #infrastructure"
       - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; reduced report generation from 2+ hours to seconds. #data #reporting #visualization #operations"
