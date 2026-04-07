@@ -174,7 +174,7 @@ employment:
     dates: "2021 -- 2025"
     group: mastercard-summary
     group_alt: mastercard-detailed
-    tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation]
+    tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation, creative, photography, design, community, evaluation, research]
     summary: "Progressed from entry-level to senior engineer supporting global payment infrastructure processing billions in transactions annually across 40+ countries."
     achievements:
       - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime. #sre #devops #operations #automation #infrastructure"
