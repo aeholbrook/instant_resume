@@ -3,9 +3,12 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import ClassicResumeStack from '@/components/resume/ClassicResumeStack';
 import type { ResumeTheme } from '@/components/resume/ClassicResumeStack';
+import LCARSResume from '@/components/resume/LCARSResume';
 import ResumeActions from '@/components/ResumeActions';
 
-const THEMES: { value: ResumeTheme; label: string }[] = [
+type StyleOption = ResumeTheme | 'lcars';
+
+const THEMES: { value: StyleOption; label: string }[] = [
   { value: 'modern', label: 'Modern' },
   { value: 'classic', label: 'Classic' },
   { value: 'card', label: 'Card' },
@@ -136,8 +139,8 @@ function HamburgerMenu({
   onCustomDescriptionChange: (desc: string) => void;
   onMatch: () => void;
   currentProfile?: string;
-  theme: ResumeTheme;
-  onThemeChange: (t: ResumeTheme) => void;
+  theme: StyleOption;
+  onThemeChange: (t: StyleOption) => void;
 }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -279,7 +282,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
   const [customDescription, setCustomDescription] = useState('');
   const [matching, setMatching] = useState(false);
   const [matchedTags, setMatchedTags] = useState<string[] | null>(null);
-  const [theme, setTheme] = useState<ResumeTheme>('modern');
+  const [theme, setTheme] = useState<StyleOption>('modern');
 
   // Auto-match if we loaded with a role param
   const [didAutoMatch, setDidAutoMatch] = useState(false);
@@ -410,14 +413,18 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
         onThemeChange={setTheme}
       />
 
-      <div className="viewer-center">
-        <ClassicResumeStack
-          data={filteredData}
-          profiles={profiles}
-          currentProfile={currentProfile}
-          hideControls
-          theme={theme}
-        />
+      <div className={`viewer-center${theme === 'lcars' ? ' viewer-center--lcars' : ''}`}>
+        {theme === 'lcars' ? (
+          <LCARSResume data={filteredData} />
+        ) : (
+          <ClassicResumeStack
+            data={filteredData}
+            profiles={profiles}
+            currentProfile={currentProfile}
+            hideControls
+            theme={theme}
+          />
+        )}
       </div>
     </div>
   );

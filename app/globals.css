@@ -809,6 +809,11 @@ a.contact-value {
   min-height: auto;
 }
 
+.viewer-center--lcars {
+  background: #000;
+  padding: 0;
+}
+
 .sidebar-section {
   margin-bottom: 1.5rem;
 }
@@ -1404,377 +1409,59 @@ a.contact-value {
   color: #888;
 }
 
-/* ---- LCARS: Star Trek computer interface ---- */
-.main:has([data-theme="lcars"]) {
-  background: #000;
-  padding: 0;
-  margin: 0;
-}
 
-.viewer-center:has([data-theme="lcars"]) {
-  padding: 0;
-  max-width: 100%;
-}
-
-[data-theme="lcars"] {
-  --lcars-tan: #FFCC66;
-  --lcars-orange: #FF9933;
-  --lcars-lilac: #CC99CC;
-  --lcars-blue: #9999FF;
-  --lcars-pale: #FFFF99;
-  --lcars-red: #CC6666;
-  --lcars-periwinkle: #CCDDFF;
-  --lcars-bg: #000;
-  --lcars-sidebar-width: 28px;
-  --lcars-bar-height: 40px;
-  --lcars-elbow-radius: 28px;
-  --lcars-font: 'Antonio', sans-serif;
-  --lcars-frame-pad: 48px;
-
-  background: var(--lcars-bg);
-  color: var(--lcars-periwinkle);
-  font-family: var(--lcars-font);
-  font-size: 10pt;
-  line-height: 1.4;
-  padding: calc(var(--lcars-bar-height) + 8px) 12px calc(var(--lcars-bar-height) + 8px) calc(var(--lcars-sidebar-width) + 12px);
-  max-width: 100%;
-  border-radius: 0;
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-}
 
 /* Header area */
-[data-theme="lcars"] .header-block {
-  position: relative;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
 
 /* Name */
-[data-theme="lcars"] .name {
-  font-family: var(--lcars-font);
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--lcars-tan);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 24px 24px 4px 48px;
-  background: var(--lcars-bg);
-}
 
-/* Top elbow bar — handled by frame ::before now */
-[data-theme="lcars"] .header-block::before {
-  display: none;
-}
 
 /* Contact list */
-[data-theme="lcars"] .contact-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.2rem;
-  padding: 8px 24px 16px 48px;
-  border-bottom: none;
-}
 
-[data-theme="lcars"] .contact-icon svg {
-  fill: var(--lcars-orange);
-}
 
-[data-theme="lcars"] .contact-value,
-[data-theme="lcars"] a.contact-value {
-  color: var(--lcars-periwinkle);
-  font-family: var(--lcars-font);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-}
 
-[data-theme="lcars"] a.contact-value:hover {
-  color: var(--lcars-pale);
-}
 
 /* Headshot */
-/* Headshot with LCARS frame */
-[data-theme="lcars"] .headshot-frame {
-  border-radius: 0;
-  border: 3px solid var(--lcars-tan);
-  position: relative;
-  margin-left: 0;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  z-index: 2;
-  overflow: visible;
-}
 
-[data-theme="lcars"] .headshot-frame::after {
-  content: 'PERSONNEL FILE';
-  position: absolute;
-  top: -22px;
-  left: -3px;
-  right: -3px;
-  text-align: center;
-  font-family: var(--lcars-font);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--lcars-bg);
-  background: var(--lcars-tan);
-  padding: 3px 0;
-  border-radius: 6px 6px 0 0;
-}
 
 /* Summary / tagline */
-[data-theme="lcars"] .summary {
-  border-left: 4px solid var(--lcars-orange);
-  color: var(--lcars-periwinkle);
-  padding: 12px 24px 12px 48px;
-  font-size: 0.92rem;
-  font-style: normal;
-  font-family: var(--lcars-font);
-  letter-spacing: 0.02em;
-  margin: 0;
-}
 
 /* Section headings with LCARS bar */
-[data-theme="lcars"] .section-heading {
-  font-family: var(--lcars-font);
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--lcars-bg);
-  background: var(--lcars-tan);
-  margin: 0;
-  padding: 4px 20px 4px 48px;
-  border: none;
-  border-radius: 0 20px 20px 0;
-  position: relative;
-}
 
 /* Alternate section colors */
-[data-theme="lcars"] .classic-stack > div:nth-child(3) .section-heading {
-  background: var(--lcars-lilac);
-}
-[data-theme="lcars"] .classic-stack > div:nth-child(4) .section-heading {
-  background: var(--lcars-blue);
-}
-[data-theme="lcars"] .classic-stack > div:nth-child(5) .section-heading {
-  background: var(--lcars-orange);
-}
-[data-theme="lcars"] .classic-stack > div:nth-child(6) .section-heading {
-  background: var(--lcars-lilac);
-}
 
 /* ── LCARS Frame: top bar with elbow + left sidebar ── */
 
 /* Top bar — full width, with elbow curve into left sidebar */
-[data-theme="lcars"]::before {
-  content: 'PERSONNEL FILE  •  UNITED FEDERATION OF PLANETS  •  STARDATE 78432.9  •  LCARS 47291';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--lcars-bar-height);
-  background: var(--lcars-lilac);
-  border-bottom-right-radius: var(--lcars-elbow-radius);
-  z-index: 3;
-  font-family: var(--lcars-font);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--lcars-bg);
-  display: flex;
-  align-items: center;
-  padding-left: calc(var(--lcars-sidebar-width) + 16px);
-  padding-right: 16px;
-}
 
 /* Left sidebar strip */
-[data-theme="lcars"]::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--lcars-sidebar-width);
-  bottom: 0;
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    var(--lcars-lilac) 0px,
-    var(--lcars-lilac) var(--lcars-bar-height),
-    var(--lcars-bg) var(--lcars-bar-height),
-    var(--lcars-bg) calc(var(--lcars-bar-height) + 4px),
-    var(--lcars-tan) calc(var(--lcars-bar-height) + 4px),
-    var(--lcars-tan) 25%,
-    var(--lcars-bg) 25%,
-    var(--lcars-bg) calc(25% + 3px),
-    var(--lcars-blue) calc(25% + 3px),
-    var(--lcars-blue) 45%,
-    var(--lcars-bg) 45%,
-    var(--lcars-bg) calc(45% + 3px),
-    var(--lcars-orange) calc(45% + 3px),
-    var(--lcars-orange) 60%,
-    var(--lcars-bg) 60%,
-    var(--lcars-bg) calc(60% + 3px),
-    var(--lcars-lilac) calc(60% + 3px),
-    var(--lcars-lilac) 80%,
-    var(--lcars-bg) 80%,
-    var(--lcars-bg) calc(80% + 3px),
-    var(--lcars-tan) calc(80% + 3px),
-    var(--lcars-tan) 100%
-  );
-  border-bottom-left-radius: var(--lcars-elbow-radius);
-}
 
 /* Employment entries */
-[data-theme="lcars"] .entry-header {
-  padding-left: 48px;
-  padding-right: 24px;
-  padding-top: 12px;
-}
 
-[data-theme="lcars"] .entry-title {
-  color: var(--lcars-tan);
-  font-family: var(--lcars-font);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
 
-[data-theme="lcars"] .entry-company {
-  color: var(--lcars-orange);
-  font-family: var(--lcars-font);
-}
 
-[data-theme="lcars"] .entry-dates {
-  color: var(--lcars-blue);
-  font-family: var(--lcars-font);
-  letter-spacing: 0.06em;
-}
 
-[data-theme="lcars"] .entry-location {
-  color: var(--lcars-lilac);
-  font-family: var(--lcars-font);
-}
 
-[data-theme="lcars"] .entry-subtitle {
-  color: var(--lcars-periwinkle);
-  font-style: normal;
-  font-family: var(--lcars-font);
-}
 
 /* Bullet points */
-[data-theme="lcars"] .stack-bullets {
-  padding-left: 48px;
-  padding-right: 24px;
-}
 
-[data-theme="lcars"] .stack-bullets li {
-  color: var(--lcars-periwinkle);
-  font-family: var(--lcars-font);
-  font-size: 0.88rem;
-  letter-spacing: 0.01em;
-}
 
-[data-theme="lcars"] .stack-bullets li::marker {
-  color: var(--lcars-orange);
-}
 
 /* Projects */
-[data-theme="lcars"] .projects-list {
-  padding-left: 48px;
-  padding-right: 24px;
-}
 
-[data-theme="lcars"] .project-name {
-  color: var(--lcars-tan);
-  font-family: var(--lcars-font);
-}
 
-[data-theme="lcars"] .project-name a {
-  color: var(--lcars-tan);
-}
 
-[data-theme="lcars"] .projects-list li {
-  color: var(--lcars-periwinkle);
-  font-family: var(--lcars-font);
-}
 
 /* Skills */
-[data-theme="lcars"] .skills-section {
-  padding-left: 48px;
-  padding-right: 24px;
-}
 
-[data-theme="lcars"] .skill-category {
-  color: var(--lcars-orange);
-  font-family: var(--lcars-font);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.85rem;
-}
 
-[data-theme="lcars"] .skill-items {
-  color: var(--lcars-periwinkle);
-  font-family: var(--lcars-font);
-}
 
 /* Education */
-[data-theme="lcars"] .edu-degree {
-  color: var(--lcars-tan);
-  font-family: var(--lcars-font);
-  font-weight: 600;
-}
 
-[data-theme="lcars"] .edu-detail {
-  color: var(--lcars-blue);
-  font-family: var(--lcars-font);
-}
 
-/* Bottom bar — positioned at absolute bottom of frame */
-[data-theme="lcars"] .classic-stack::after {
-  content: 'RESUME FILE ACTIVE  •  NCC-1701  •  SEC 47-ALPHA';
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: var(--lcars-bar-height);
-  background: var(--lcars-tan);
-  border-top-right-radius: var(--lcars-elbow-radius);
-  margin-top: 20px;
-  margin-left: calc(-1 * var(--lcars-sidebar-width) - 12px);
-  margin-right: -12px;
-  margin-bottom: calc(-1 * var(--lcars-bar-height) - 8px);
-  padding-right: 16px;
-  padding-left: calc(var(--lcars-sidebar-width) + 16px);
-  font-family: var(--lcars-font);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--lcars-bg);
-  position: relative;
-  z-index: 3;
-}
 
 /* Toolbar */
-[data-theme="lcars"] ~ .toolbar .button {
-  background: var(--lcars-tan);
-  color: #000;
-  font-family: var(--lcars-font);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-radius: 20px;
-  border: none;
-}
 
-[data-theme="lcars"] ~ .toolbar .button.secondary {
-  background: var(--lcars-lilac);
-}
 
 /* ---------- print & print-preview ---------- */
 /* Matched to LaTeX output: Fira Sans, letter paper, 2cm/1.6cm margins,
