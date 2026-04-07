@@ -1404,6 +1404,311 @@ a.contact-value {
   color: #888;
 }
 
+/* ---- LCARS: Star Trek computer interface ---- */
+.main:has([data-theme="lcars"]) {
+  background: #000;
+  padding: 0;
+}
+
+[data-theme="lcars"] {
+  --lcars-tan: #FFCC66;
+  --lcars-orange: #FF9933;
+  --lcars-lilac: #CC99CC;
+  --lcars-blue: #9999FF;
+  --lcars-pale: #FFFF99;
+  --lcars-red: #CC6666;
+  --lcars-periwinkle: #CCDDFF;
+  --lcars-bg: #000;
+  --lcars-sidebar-width: 140px;
+  --lcars-bar-height: 32px;
+  --lcars-elbow-radius: 32px;
+  --lcars-font: 'Antonio', sans-serif;
+
+  background: var(--lcars-bg);
+  color: var(--lcars-periwinkle);
+  font-family: var(--lcars-font);
+  font-size: 10pt;
+  line-height: 1.4;
+  padding: 0;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+/* Header area */
+[data-theme="lcars"] .header-block {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Name */
+[data-theme="lcars"] .name {
+  font-family: var(--lcars-font);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--lcars-tan);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 24px 24px 4px 160px;
+  background: var(--lcars-bg);
+}
+
+/* Top elbow bar */
+[data-theme="lcars"] .header-block::before {
+  content: '';
+  display: block;
+  height: var(--lcars-bar-height);
+  background: var(--lcars-lilac);
+  border-bottom-left-radius: var(--lcars-elbow-radius);
+  margin-right: 8px;
+}
+
+/* Contact list */
+[data-theme="lcars"] .contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  padding: 8px 24px 16px 160px;
+  border-bottom: none;
+}
+
+[data-theme="lcars"] .contact-icon svg {
+  fill: var(--lcars-orange);
+}
+
+[data-theme="lcars"] .contact-value,
+[data-theme="lcars"] a.contact-value {
+  color: var(--lcars-periwinkle);
+  font-family: var(--lcars-font);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+[data-theme="lcars"] a.contact-value:hover {
+  color: var(--lcars-pale);
+}
+
+/* Headshot */
+[data-theme="lcars"] .headshot-frame {
+  border-radius: 0;
+  border: 3px solid var(--lcars-tan);
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 2;
+}
+
+/* Summary / tagline */
+[data-theme="lcars"] .summary {
+  border-left: 4px solid var(--lcars-orange);
+  color: var(--lcars-periwinkle);
+  padding: 12px 24px 12px 160px;
+  font-size: 0.92rem;
+  font-style: normal;
+  font-family: var(--lcars-font);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* Section headings with LCARS bar */
+[data-theme="lcars"] .section-heading {
+  font-family: var(--lcars-font);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--lcars-bg);
+  background: var(--lcars-tan);
+  margin: 0;
+  padding: 4px 20px 4px 160px;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  position: relative;
+}
+
+/* Alternate section colors */
+[data-theme="lcars"] .classic-stack > div:nth-child(3) .section-heading {
+  background: var(--lcars-lilac);
+}
+[data-theme="lcars"] .classic-stack > div:nth-child(4) .section-heading {
+  background: var(--lcars-blue);
+}
+[data-theme="lcars"] .classic-stack > div:nth-child(5) .section-heading {
+  background: var(--lcars-orange);
+}
+[data-theme="lcars"] .classic-stack > div:nth-child(6) .section-heading {
+  background: var(--lcars-lilac);
+}
+
+/* Left sidebar strip */
+[data-theme="lcars"]::before {
+  content: '';
+  position: absolute;
+  top: var(--lcars-bar-height);
+  left: 0;
+  width: var(--lcars-sidebar-width);
+  bottom: 0;
+  background: var(--lcars-lilac);
+  border-bottom-left-radius: var(--lcars-elbow-radius);
+  z-index: 0;
+}
+
+/* Sidebar decorative blocks */
+[data-theme="lcars"]::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--lcars-bar-height) + 8px);
+  left: 8px;
+  width: calc(var(--lcars-sidebar-width) - 16px);
+  bottom: 40px;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--lcars-bg) 0px,
+    var(--lcars-bg) 4px,
+    transparent 4px,
+    transparent 6px
+  );
+  pointer-events: none;
+}
+
+/* Employment entries */
+[data-theme="lcars"] .entry-header {
+  padding-left: 160px;
+  padding-right: 24px;
+  padding-top: 12px;
+}
+
+[data-theme="lcars"] .entry-title {
+  color: var(--lcars-tan);
+  font-family: var(--lcars-font);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+[data-theme="lcars"] .entry-company {
+  color: var(--lcars-orange);
+  font-family: var(--lcars-font);
+}
+
+[data-theme="lcars"] .entry-dates {
+  color: var(--lcars-blue);
+  font-family: var(--lcars-font);
+  letter-spacing: 0.06em;
+}
+
+[data-theme="lcars"] .entry-location {
+  color: var(--lcars-lilac);
+  font-family: var(--lcars-font);
+}
+
+[data-theme="lcars"] .entry-subtitle {
+  color: var(--lcars-periwinkle);
+  font-style: normal;
+  font-family: var(--lcars-font);
+}
+
+/* Bullet points */
+[data-theme="lcars"] .stack-bullets {
+  padding-left: 160px;
+  padding-right: 24px;
+}
+
+[data-theme="lcars"] .stack-bullets li {
+  color: var(--lcars-periwinkle);
+  font-family: var(--lcars-font);
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="lcars"] .stack-bullets li::marker {
+  color: var(--lcars-orange);
+}
+
+/* Projects */
+[data-theme="lcars"] .projects-list {
+  padding-left: 160px;
+  padding-right: 24px;
+}
+
+[data-theme="lcars"] .project-name {
+  color: var(--lcars-tan);
+  font-family: var(--lcars-font);
+}
+
+[data-theme="lcars"] .project-name a {
+  color: var(--lcars-tan);
+}
+
+[data-theme="lcars"] .projects-list li {
+  color: var(--lcars-periwinkle);
+  font-family: var(--lcars-font);
+}
+
+/* Skills */
+[data-theme="lcars"] .skills-section {
+  padding-left: 160px;
+  padding-right: 24px;
+}
+
+[data-theme="lcars"] .skill-category {
+  color: var(--lcars-orange);
+  font-family: var(--lcars-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+[data-theme="lcars"] .skill-items {
+  color: var(--lcars-periwinkle);
+  font-family: var(--lcars-font);
+}
+
+/* Education */
+[data-theme="lcars"] .edu-degree {
+  color: var(--lcars-tan);
+  font-family: var(--lcars-font);
+  font-weight: 600;
+}
+
+[data-theme="lcars"] .edu-detail {
+  color: var(--lcars-blue);
+  font-family: var(--lcars-font);
+}
+
+/* Bottom bar */
+[data-theme="lcars"] .classic-stack::after {
+  content: '';
+  display: block;
+  height: var(--lcars-bar-height);
+  background: var(--lcars-tan);
+  border-top-left-radius: var(--lcars-elbow-radius);
+  margin-top: 16px;
+  margin-right: 8px;
+}
+
+/* Toolbar */
+[data-theme="lcars"] ~ .toolbar .button {
+  background: var(--lcars-tan);
+  color: #000;
+  font-family: var(--lcars-font);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 20px;
+  border: none;
+}
+
+[data-theme="lcars"] ~ .toolbar .button.secondary {
+  background: var(--lcars-lilac);
+}
+
 /* ---------- print & print-preview ---------- */
 /* Matched to LaTeX output: Fira Sans, letter paper, 2cm/1.6cm margins,
    gradient section lines (#7a1d0a), accent markers (#B6073F)

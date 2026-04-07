@@ -10,6 +10,7 @@ const THEMES: { value: ResumeTheme; label: string }[] = [
   { value: 'classic', label: 'Classic' },
   { value: 'card', label: 'Card' },
   { value: 'dark', label: 'Dark' },
+  { value: 'lcars', label: 'LCARS' },
 ];
 import { filterContent, filterByTags } from '@/lib/profile-filter';
 import type { ResumeData } from '@/lib/resume';
