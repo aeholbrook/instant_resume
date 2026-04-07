@@ -82,13 +82,13 @@ export default function LCARSResume({ data }: { data: ResumeData }) {
     <div className="lcars-root">
       {/* ── Top Bar ── */}
       <div className="lcars-top-bar">
+        <div className="lcars-top-elbow" />
         <div className="lcars-top-bar-content">
           <span className="lcars-top-text">PERSONNEL FILE</span>
           <span className="lcars-top-text lcars-top-text--dim">UNITED FEDERATION OF PLANETS</span>
           <span className="lcars-top-text lcars-top-text--dim">STARDATE 78432.9</span>
           <span className="lcars-top-text">LCARS 47291</span>
         </div>
-        <div className="lcars-top-elbow" />
       </div>
 
       {/* ── Header Row (always visible) ── */}
