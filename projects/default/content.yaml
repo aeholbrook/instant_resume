@@ -134,7 +134,7 @@ employment:
     location: "St. Louis, MO"
     dates: "2023 -- 2025"
     group: mastercard-detailed
-    tags: [sre, devops, infrastructure, data, operations, reporting, leadership, automation]
+    tags: [sre, devops, infrastructure]
     summary: "Senior engineer for global payment infrastructure processing billions in transactions annually across 40+ countries."
     achievements:
       - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime with monitoring-as-code framework enabling developers to validate alerts before production. #sre #devops #operations #automation #infrastructure"
@@ -147,7 +147,7 @@ employment:
     location: "St. Louis, MO"
     dates: "2022 -- 2023"
     group: mastercard-detailed
-    tags: [sre, devops, infrastructure, data, operations, automation]
+    tags: [sre, devops, infrastructure]
     summary: "Primary on-call engineer for MDES tokenization platform; maintained high availability through proactive monitoring, automated remediation, & rapid incident response."
     achievements:
       - "Engineered custom Python-based terminal platform & companion VSCode toolkit for Tomcat monitoring, disk management, log rotation, & service control; integrated API healthchecks, Splunk/Dynatrace queries, & database actions into unified workflows, replacing manual host-by-host operations. #sre #devops #automation #development"
@@ -160,7 +160,7 @@ employment:
     location: "St. Louis, MO"
     dates: "2021 -- 2022"
     group: mastercard-detailed
-    tags: [sre, devops, data, operations, reporting]
+    tags: [sre, devops]
     summary: "Supported operational reporting & incident response for distributed payment systems."
     achievements:
       - "First in operations to detect active exploitation of a critical zero-day vulnerability (CVE-2021-44228) across production payment infrastructure; rapid identification enabled immediate organizational response. #sre #devops #operations #evaluation #research"
