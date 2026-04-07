@@ -1495,32 +1495,33 @@ a.contact-value {
 }
 
 /* Headshot */
-/* Headshot with LCARS frame graphic underneath */
+/* Headshot with LCARS frame */
 [data-theme="lcars"] .headshot-frame {
   border-radius: 0;
   border: 3px solid var(--lcars-tan);
   position: relative;
-  margin-left: 48px;
+  margin-left: 16px;
   margin-top: 12px;
+  margin-bottom: 28px;
   z-index: 2;
+  overflow: visible;
 }
 
 [data-theme="lcars"] .headshot-frame::after {
   content: 'PERSONNEL FILE';
   position: absolute;
-  bottom: -24px;
-  left: 0;
-  right: 0;
+  bottom: -22px;
+  left: -3px;
+  right: -3px;
   text-align: center;
   font-family: var(--lcars-font);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--lcars-tan);
-  background: var(--lcars-bg);
-  padding: 4px 0;
-  border: 2px solid var(--lcars-tan);
-  border-top: none;
+  color: var(--lcars-bg);
+  background: var(--lcars-tan);
+  padding: 3px 0;
+  border-radius: 0 0 6px 6px;
 }
 
 /* Summary / tagline */
@@ -1565,36 +1566,33 @@ a.contact-value {
   background: var(--lcars-lilac);
 }
 
-/* Left sidebar strip */
+/* Left sidebar strip — solid bar connecting top elbow to bottom elbow */
 [data-theme="lcars"]::before {
   content: '';
   position: absolute;
-  top: var(--lcars-bar-height);
+  top: 0;
   left: 0;
   width: var(--lcars-sidebar-width);
   bottom: 0;
-  background: var(--lcars-lilac);
-  border-bottom-left-radius: var(--lcars-elbow-radius);
-  z-index: 0;
-}
-
-/* Sidebar decorative blocks */
-[data-theme="lcars"]::after {
-  content: '';
-  position: absolute;
-  top: calc(var(--lcars-bar-height) + 8px);
-  left: 4px;
-  width: calc(var(--lcars-sidebar-width) - 8px);
-  bottom: 40px;
-  z-index: 1;
-  background: repeating-linear-gradient(
+  background: linear-gradient(
     to bottom,
-    var(--lcars-bg) 0px,
-    var(--lcars-bg) 4px,
-    transparent 4px,
-    transparent 6px
+    var(--lcars-lilac) 0%,
+    var(--lcars-lilac) 30%,
+    var(--lcars-tan) 30%,
+    var(--lcars-tan) 35%,
+    var(--lcars-blue) 35%,
+    var(--lcars-blue) 50%,
+    var(--lcars-orange) 50%,
+    var(--lcars-orange) 55%,
+    var(--lcars-lilac) 55%,
+    var(--lcars-lilac) 70%,
+    var(--lcars-tan) 70%,
+    var(--lcars-tan) 75%,
+    var(--lcars-blue) 75%,
+    var(--lcars-blue) 100%
   );
-  pointer-events: none;
+  border-radius: 0 0 0 var(--lcars-elbow-radius);
+  z-index: 0;
 }
 
 /* Employment entries */
