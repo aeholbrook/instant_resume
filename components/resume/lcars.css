@@ -28,32 +28,51 @@
   overflow: hidden;
 }
 
-/* ── Top Bar ── */
+/* ── Top Bar with Elbow ── */
+/* The elbow is an L-shape: a tall vertical piece on the left that curves
+   into a horizontal bar across the top. The inner corner is cut out with
+   a ::after pseudo-element using border-radius + background: black. */
+
 .lcars-top-bar {
   display: flex;
-  height: var(--lcars-elbow-h);
-  gap: var(--lcars-gap);
   flex-shrink: 0;
+  position: relative;
+  min-height: calc(var(--lcars-elbow-h) * 2.5);
 }
 
-/* The elbow is the L-shaped connector: top bar curves down into left sidebar */
+/* The elbow piece — fills the full top-left corner as an L */
 .lcars-top-elbow {
   width: var(--lcars-btn-w);
   min-width: var(--lcars-btn-w);
-  height: var(--lcars-elbow-h);
   background: var(--lcars-lilac);
-  border-bottom-right-radius: var(--lcars-elbow-r);
+  position: relative;
+  /* Outer rounded corner on bottom-left */
+  border-bottom-left-radius: var(--lcars-elbow-r);
 }
 
+/* Inner cutout — punches out the inside of the L */
+.lcars-top-elbow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: calc(var(--lcars-btn-w) * 0.55);
+  height: calc(100% - var(--lcars-elbow-h));
+  background: var(--lcars-bg);
+  border-top-left-radius: var(--lcars-elbow-r);
+}
+
+/* The horizontal bar portion (right of the elbow) */
 .lcars-top-bar-content {
   flex: 1;
   background: var(--lcars-lilac);
-  border-bottom-right-radius: var(--lcars-elbow-r);
+  height: var(--lcars-elbow-h);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 2rem;
   padding: 0 20px;
+  border-bottom-right-radius: var(--lcars-elbow-r);
 }
 
 .lcars-top-text {
@@ -321,31 +340,44 @@
   color: var(--lcars-periwinkle);
 }
 
-/* ── Bottom Bar ── */
+/* ── Bottom Bar with Elbow ── */
 .lcars-bottom-bar {
   display: flex;
-  height: var(--lcars-elbow-h);
-  gap: var(--lcars-gap);
   flex-shrink: 0;
+  position: relative;
+  min-height: calc(var(--lcars-elbow-h) * 2.5);
 }
 
 .lcars-bottom-elbow {
   width: var(--lcars-btn-w);
   min-width: var(--lcars-btn-w);
-  height: var(--lcars-elbow-h);
   background: var(--lcars-tan);
-  border-top-right-radius: var(--lcars-elbow-r);
+  position: relative;
+  border-top-left-radius: var(--lcars-elbow-r);
+}
+
+.lcars-bottom-elbow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--lcars-btn-w) * 0.55);
+  height: calc(100% - var(--lcars-elbow-h));
+  background: var(--lcars-bg);
+  border-bottom-left-radius: var(--lcars-elbow-r);
 }
 
 .lcars-bottom-bar-content {
   flex: 1;
   background: var(--lcars-tan);
-  border-top-right-radius: var(--lcars-elbow-r);
+  height: var(--lcars-elbow-h);
+  align-self: flex-end;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 2rem;
   padding: 0 20px;
+  border-top-right-radius: var(--lcars-elbow-r);
 }
 
 /* ── Print ── */
