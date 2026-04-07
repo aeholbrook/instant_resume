@@ -104,6 +104,32 @@ function tagsMatch(entryTags: string[] | undefined, profileTags: Set<string>): b
 }
 
 /**
+ * Pick the best summary from a `summaries` array based on tag overlap.
+ * Falls back to the entry marked `default: true`, then to `summary` field.
+ */
+function resolveSummary(
+  entry: { summary?: string; summaries?: Array<{ text: string; tags?: string[]; default?: boolean }> },
+  profileTags: Set<string>,
+): string | undefined {
+  if (!entry.summaries || entry.summaries.length === 0) return entry.summary;
+
+  let best: { text: string; score: number } | null = null;
+  let defaultSummary: string | undefined;
+
+  for (const s of entry.summaries) {
+    if (s.default) defaultSummary = s.text;
+    if (s.tags) {
+      const score = s.tags.filter((t) => profileTags.has(t)).length;
+      if (score > 0 && (!best || score > best.score)) {
+        best = { text: s.text, score };
+      }
+    }
+  }
+
+  return best?.text ?? defaultSummary ?? entry.summary;
+}
+
+/**
  * Resolve entry groups: if any entry in a group matched, pull in the rest of that group.
  * Entries with group_alt point to an alternative group — when the alt group is present,
  * this entry is excluded (they're mutually exclusive representations).
@@ -183,9 +209,11 @@ export function filterByTags(content: ResumeData, tags: string[]): ResumeData {
     const resolved = resolveGroups(content.employment, matched);
     result.employment = resolved.map((e) => {
       const cleaned = { ...e };
+      cleaned.summary = resolveSummary(e, profileTags);
       delete cleaned.tags;
       delete cleaned.group;
       delete cleaned.group_alt;
+      delete cleaned.summaries;
       if (cleaned.achievements) {
         cleaned.achievements = filterAchievements(cleaned.achievements, profileTags);
       }
@@ -256,6 +284,7 @@ export function filterContent(content: ResumeData, profileName?: string): Resume
           delete cleaned.tags;
           delete cleaned.group;
           delete cleaned.group_alt;
+          delete cleaned.summaries;
           if (cleaned.achievements) {
             cleaned.achievements = flattenAchievements(cleaned.achievements);
           }
@@ -286,9 +315,11 @@ export function filterContent(content: ResumeData, profileName?: string): Resume
     const resolved = resolveGroups(content.employment, matched);
     let filtered = resolved.map((e) => {
       const cleaned = { ...e };
+      cleaned.summary = resolveSummary(e, profileTags);
       delete cleaned.tags;
       delete cleaned.group;
       delete cleaned.group_alt;
+      delete cleaned.summaries;
       if (cleaned.achievements) {
         cleaned.achievements = filterAchievements(
           cleaned.achievements,
