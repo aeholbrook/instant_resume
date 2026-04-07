@@ -270,10 +270,10 @@ function HamburgerMenu({
 /* ── Main viewer ────────────────────────────────────────────────── */
 
 export default function ResumeViewer({ rawData, profiles, initialProfile }: Props) {
-  // Check URL for persisted role param
-  const initialRole = typeof window !== 'undefined'
-    ? new URLSearchParams(window.location.search).get('role') || ''
-    : '';
+  // Check URL for persisted params
+  const initialParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+  const initialRole = initialParams?.get('role') || '';
+  const initialStyle = initialParams?.get('style') as StyleOption | null;
   const hasInitialSelection = !!(initialProfile || initialRole);
 
   const [showLanding, setShowLanding] = useState(!hasInitialSelection);
@@ -282,7 +282,7 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
   const [customDescription, setCustomDescription] = useState('');
   const [matching, setMatching] = useState(false);
   const [matchedTags, setMatchedTags] = useState<string[] | null>(null);
-  const [theme, setTheme] = useState<StyleOption>('modern');
+  const [theme, setTheme] = useState<StyleOption>(initialStyle && THEMES.some(t => t.value === initialStyle) ? initialStyle : 'modern');
 
   // Auto-match if we loaded with a role param
   const [didAutoMatch, setDidAutoMatch] = useState(false);
@@ -327,8 +327,14 @@ export default function ResumeViewer({ rawData, profiles, initialProfile }: Prop
       url.searchParams.delete('profile');
       url.searchParams.delete('role');
     }
+    // Persist style in URL
+    if (theme && theme !== 'modern') {
+      url.searchParams.set('style', theme);
+    } else {
+      url.searchParams.delete('style');
+    }
     window.history.replaceState({}, '', url.toString());
-  }, [showLanding, customRole, matchedTags, selectedProfile, profiles]);
+  }, [showLanding, customRole, matchedTags, selectedProfile, profiles, theme]);
 
   const handleProfileChange = useCallback((profileName: string) => {
     setSelectedProfile(profileName);
