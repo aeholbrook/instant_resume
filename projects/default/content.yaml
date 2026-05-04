@@ -111,25 +111,18 @@ skills_tags:
   "Databases": [sre, devops, data, infrastructure, development]
 
 employment:
-  - title: "Volunteer Community Organizer"
-    company: "Local LGBTQ+ Mutual Aid Network"
+  - title: "Founder & President"
+    company: "Soup House, Inc."
     location: "St. Louis, MO"
     dates: "2024 -- Present"
-    tags: [community, nonprofit, organizing, leadership]
-    summary: "Community-building effort centered on recurring public events, community spaces, & mutual support."
+    tags: [community, nonprofit, organizing, leadership, operations, evaluation]
+    summary: "Founded a Missouri public-benefit nonprofit (501(c)(3) pending) operating a community kitchen & food-distribution program in the St. Louis metro."
     achievements:
-      - "Built & sustained a 100+ member community network through recurring public events & community spaces, strengthening participation, trust, & mutual support."
-      - "Primary organizer for ~4 large-scale events per year: manage outreach, band booking, vendor tabling, volunteer wrangling, & day-of logistics end-to-end."
-
-  - title: "Founder & Facilitator"
-    company: "Yes, Chef Mutual Aid Network"
-    location: "St. Louis, MO"
-    dates: "2025 -- Present"
-    tags: [community, nonprofit, organizing, leadership]
-    summary: "Coordinate weekly surplus community food distributions & volunteer operations."
-    achievements:
-      - "Coordinate weekly surplus food prep & distribution for community members; manage donation logistics, volunteer scheduling, setup/teardown, & on-site operations."
-      - "Maintain consistent community communications supporting volunteer turnout & participation."
+      - "Founded & incorporated Soup House, Inc. as a Missouri public-benefit nonprofit; 501(c)(3) application in progress."
+      - "Recruited a seven-member founding board, drafted bylaws & nondiscrimination policy, and led the organization through formation & its first board meeting."
+      - "Built a 100+ member community network through recurring public events & shared spaces — the founding volunteer corps for Soup House programs."
+      - "Lead organizer for ~4 large-scale public events per year: outreach, band booking, vendor tabling, volunteer coordination, & day-of logistics end-to-end."
+      - "Run weekly community food preparation & distribution: donation logistics, volunteer scheduling, on-site operations, & ongoing community communications."
 
   - title: "Senior Business Operations Engineer"
     company: "Mastercard"
