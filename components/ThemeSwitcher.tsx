@@ -1,6 +1,7 @@
 'use client';
 
 import type { ResumeData } from '@/lib/resume';
+import { getSkillName } from '@/lib/skills';
 import { useEffect, useMemo, useState } from 'react';
 import styles from './ThemeSwitcher.module.css';
 import ClassicResumeStack from '@/components/resume/ClassicResumeStack';
@@ -16,7 +17,7 @@ function buildTerminalScript(data: ResumeData): string[] {
     .map((role) => `  - ${role.title} | ${role.company}`);
   const skillLines = Object.entries(data.skills || {})
     .slice(0, 3)
-    .map(([group, skills]) => `  - ${group}: ${skills.slice(0, 3).join(', ')}`);
+    .map(([group, skills]) => `  - ${group}: ${skills.slice(0, 3).map(getSkillName).join(', ')}`);
 
   return [
     'boot> initializing MU/TH/UR interface... done',

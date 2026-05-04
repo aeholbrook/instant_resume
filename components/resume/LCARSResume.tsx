@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { ResumeData } from '@/lib/resume';
+import { getSkillName } from '@/lib/skills';
 import Image from 'next/image';
 import './lcars.css';
 
@@ -232,7 +233,7 @@ export default function LCARSResume({ data }: { data: ResumeData }) {
             {Object.entries(data.skills).map(([category, items]) => (
               <div key={category} className="lcars-skill-group">
                 <span className="lcars-skill-category">{category}</span>
-                <span className="lcars-skill-items">{items.join(' • ')}</span>
+                <span className="lcars-skill-items">{items.map(getSkillName).join(' • ')}</span>
               </div>
             ))}
           </div>

@@ -11,7 +11,7 @@ import {
   BorderStyle,
   convertInchesToTwip,
 } from 'docx';
-import { getResumeData } from '@/lib/resume';
+import { getResumeData, getSkillName } from '@/lib/resume';
 import type { ResumeData } from '@/lib/resume';
 
 /*
@@ -263,7 +263,7 @@ function buildAtsDocx(data: ResumeData): Document {
           spacing: { before: 40, after: 0 },
           children: [
             new TextRun({ text: `${category}: `, font: FONT, size: SIZE_SMALL, bold: true, color: '000000' }),
-            new TextRun({ text: items.join(', '), font: FONT, size: SIZE_SMALL, color: '000000' }),
+            new TextRun({ text: items.map(getSkillName).join(', '), font: FONT, size: SIZE_SMALL, color: '000000' }),
           ],
         }),
       );

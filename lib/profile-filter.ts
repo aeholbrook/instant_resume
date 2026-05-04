@@ -10,6 +10,39 @@
  */
 
 import type { ResumeData, AchievementInput, Achievement } from './resume';
+import type { SkillInput } from './skills';
+import { getSkillOwnTags } from './skills';
+
+// ── Skills filtering ────────────────────────────────────────────────
+
+/**
+ * Filter the skills map per individual skill.
+ *
+ * Each skill is included if any of its effective tags is in profileTags.
+ * Effective tags = the skill's own tags (if structured) OR the category's
+ * skills_tags entry (legacy fallback). If the effective tag set is empty,
+ * the skill is treated as universal and always shown.
+ *
+ * Categories with zero surviving skills are dropped from the output.
+ */
+function filterSkills(
+  skills: Record<string, SkillInput[]>,
+  skillsTags: Record<string, string[]>,
+  profileTags: Set<string>,
+): Record<string, SkillInput[]> {
+  const out: Record<string, SkillInput[]> = {};
+  for (const [category, list] of Object.entries(skills)) {
+    const categoryTags = skillsTags[category];
+    const kept = list.filter((s) => {
+      const own = getSkillOwnTags(s);
+      const effective = own && own.length > 0 ? own : categoryTags;
+      if (!effective || effective.length === 0) return true;
+      return effective.some((t) => profileTags.has(t));
+    });
+    if (kept.length > 0) out[category] = kept;
+  }
+  return out;
+}
 
 // ── Legacy hashtag support (for plain string achievements) ──────────
 
@@ -246,16 +279,8 @@ export function filterByTags(content: ResumeData, tags: string[]): ResumeData {
       });
   }
 
-  const skillsTags = content.skills_tags ?? {};
-  if (content.skills && Object.keys(skillsTags).length > 0) {
-    const filteredSkills: Record<string, string[]> = {};
-    for (const [category, skillList] of Object.entries(content.skills)) {
-      const catTags = skillsTags[category];
-      if (!catTags || catTags.some((t: string) => profileTags.has(t))) {
-        filteredSkills[category] = skillList;
-      }
-    }
-    result.skills = filteredSkills;
+  if (content.skills) {
+    result.skills = filterSkills(content.skills, content.skills_tags ?? {}, profileTags);
   }
 
   return result;
@@ -364,16 +389,9 @@ export function filterContent(content: ResumeData, profileName?: string): Resume
     result.projects = filtered;
   }
 
-  // Filter skills
-  if (content.skills && Object.keys(skillsTags).length > 0) {
-    const filteredSkills: Record<string, string[]> = {};
-    for (const [category, skillList] of Object.entries(content.skills)) {
-      const catTags = skillsTags[category];
-      if (!catTags || catTags.some((t: string) => profileTags.has(t))) {
-        filteredSkills[category] = skillList;
-      }
-    }
-    result.skills = filteredSkills;
+  // Filter skills (per-skill, with category tags as fallback)
+  if (content.skills) {
+    result.skills = filterSkills(content.skills, skillsTags, profileTags);
   }
 
   // Set section order

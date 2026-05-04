@@ -11,7 +11,7 @@ import {
   BorderStyle,
   convertInchesToTwip,
 } from 'docx';
-import { getResumeData } from '@/lib/resume';
+import { getResumeData, getSkillName } from '@/lib/resume';
 import type { ResumeData } from '@/lib/resume';
 
 const FONT = 'Calibri';
@@ -241,7 +241,7 @@ function buildDocx(data: ResumeData): Document {
           spacing: { before: 40, after: 0 },
           children: [
             new TextRun({ text: `${category}: `, font: FONT, size: FONT_SIZE_SMALL, bold: true }),
-            new TextRun({ text: items.join(', '), font: FONT, size: FONT_SIZE_SMALL, color: '3A3A3A' }),
+            new TextRun({ text: items.map(getSkillName).join(', '), font: FONT, size: FONT_SIZE_SMALL, color: '3A3A3A' }),
           ],
         }),
       );

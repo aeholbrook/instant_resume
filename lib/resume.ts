@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import yaml from 'yaml';
 import { getResume } from './db';
+import type { SkillInput } from './skills';
 
 export type ProfileDef = {
   label?: string;
@@ -24,6 +25,9 @@ export type Achievement = {
 
 /** An achievement can be a structured object or a legacy plain string */
 export type AchievementInput = string | Achievement;
+
+export type { Skill, SkillInput } from './skills';
+export { getSkillName, getSkillOwnTags } from './skills';
 
 export type ResumeData = {
   section_titles?: Record<string, string>;
@@ -72,7 +76,7 @@ export type ResumeData = {
     type?: string;
     tags?: string[];
   }>;
-  skills?: Record<string, string[]>;
+  skills?: Record<string, SkillInput[]>;
   profiles?: Record<string, ProfileDef>;
   skills_tags?: Record<string, string[]>;
 };

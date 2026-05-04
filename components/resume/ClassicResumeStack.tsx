@@ -1,4 +1,5 @@
 import type { ResumeData } from '@/lib/resume';
+import { getSkillName } from '@/lib/skills';
 import type { ProfileInfo } from '@/lib/profile-filter';
 import Image from 'next/image';
 import ResumeActions from '@/components/ResumeActions';
@@ -375,7 +376,7 @@ function SkillsModule({ data }: { data: ResumeData }) {
         {items.map(([group, skills]) => (
           <div className="skill-row" key={group}>
             <span className="skill-category">{group}</span>{' '}
-            <span className="skill-items">{skills.join(', ')}</span>
+            <span className="skill-items">{skills.map(getSkillName).join(', ')}</span>
           </div>
         ))}
       </div>
