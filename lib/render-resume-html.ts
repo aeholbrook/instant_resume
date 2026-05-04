@@ -5,6 +5,7 @@
  */
 
 import type { ResumeData } from './resume';
+import { getSkillName } from './resume';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -183,7 +184,7 @@ function renderSkills(data: ResumeData): string {
   const title = data.section_titles?.skills || 'Skills';
 
   const rows = entries.map(([group, items]) =>
-    `<div class="skill-row"><span class="skill-category">${esc(group)}</span> <span class="skill-items">${esc(items.join(', '))}</span></div>`
+    `<div class="skill-row"><span class="skill-category">${esc(group)}</span> <span class="skill-items">${esc(items.map(getSkillName).join(', '))}</span></div>`
   ).join('');
 
   return `<section class="resume-section" data-module="skills"><div class="section-title">${esc(title)}</div><div class="skills-block">${rows}</div></section>`;

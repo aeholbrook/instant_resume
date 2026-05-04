@@ -90,23 +90,25 @@ profiles:
       max_projects: 5
 
 # SKILLS TAGS:
-# Maps skills categories to profile tags for filtering.
-# Categories without an entry here are always included.
+# Category-level fallback for any skill that doesn't carry its own `tags`.
+# Per-skill tags (in the skills block below) override these. Categories not
+# listed here have no fallback — plain-string skills inside become universal.
 skills_tags:
   "Community & Program Operations": [community, nonprofit, organizing]
   "Program Evaluation & Research": [evaluation, data, community, nonprofit, research, survey]
-  "Data, Reporting & Analysis": [data, operations, reporting, automation, visualization]
+  "Data, Reporting & Analysis": [data, operations, reporting, automation, visualization, research, evaluation]
+  "AI & Agent Engineering": [development, automation, data, research]
   "Systems & Automation": [operations, automation, data, sre, devops]
-  "Infrastructure": [sre, devops, infrastructure]
+  "Infrastructure & Self-Hosting": [sre, devops, infrastructure, automation]
   "Observability": [sre, devops, operations, data, visualization]
-  "CI/CD & Automation": [sre, devops, automation, infrastructure]
+  "CI/CD & Automation": [sre, devops, automation, infrastructure, development]
   "Development": [sre, devops, data, automation, development]
-  "Security & Compliance": [sre, devops, infrastructure]
+  "Security & Compliance": [sre, devops, infrastructure, security]
   "Incident Management": [sre, devops, operations]
-  "Photography & Visual Media": [creative, photography, design]
-  "Design & Web": [creative, design, data]
-  "Documentation": [sre, devops, operations, data, leadership]
-  "Databases": [sre, devops, data, infrastructure]
+  "Photography & Visual Media": [creative, photography, design, community]
+  "Design & Web": [creative, design, development]
+  "Documentation": [sre, devops, operations, data, leadership, community, nonprofit, evaluation]
+  "Databases": [sre, devops, data, infrastructure, development]
 
 employment:
   - title: "Volunteer Community Organizer"
@@ -334,157 +336,206 @@ projects:
     type: "github"
     tags: [community, nonprofit, creative, photography, design]
 
+# SKILLS:
+# Each skill may be a plain string (inherits its category's skills_tags as
+# fallback) or a structured object {name, tags} that overrides with a more
+# specific tag set. Tagged skills are filtered individually — a skill shows up
+# whenever ANY of its tags matches the active profile.
 skills:
   "Community & Program Operations":
-    - Program Design
-    - Community Outreach
-    - Event Logistics
-    - Volunteer Coordination
-    - Stakeholder Communication
-    - Partnership Development
-    - Budget Management
-    - Accessibility Planning
-    - Needs Assessment
-    - Mutual Aid
-    - Public Speaking
+    - { name: "Program Design",                tags: [community, nonprofit, organizing, evaluation] }
+    - { name: "Community Outreach",            tags: [community, nonprofit, organizing] }
+    - { name: "Event Logistics",               tags: [community, organizing, operations] }
+    - { name: "Volunteer Coordination",        tags: [community, nonprofit, organizing, leadership] }
+    - { name: "Stakeholder Communication",     tags: [community, nonprofit, leadership, operations] }
+    - { name: "Partnership Development",       tags: [community, nonprofit, organizing, leadership] }
+    - { name: "Budget Management",             tags: [nonprofit, operations, leadership] }
+    - { name: "Accessibility Planning",        tags: [community, nonprofit, organizing, design] }
+    - { name: "Needs Assessment",              tags: [evaluation, community, nonprofit, research, survey] }
+    - { name: "Mutual Aid",                    tags: [community, nonprofit, organizing] }
+    - { name: "Public Speaking",               tags: [community, leadership, organizing] }
+    - { name: "Conflict Mediation",            tags: [community, nonprofit, leadership, organizing] }
+    - { name: "Fundraising",                   tags: [community, nonprofit, organizing, leadership] }
+    - { name: "CiviCRM",                       tags: [community, nonprofit, organizing, data, development] }
 
   "Program Evaluation & Research":
-    - Program Evaluation
-    - Needs Assessment
-    - Survey Design
-    - Survey Methodology
-    - Qualtrics
-    - SurveyMonkey
-    - Research Design
-    - Mixed Methods
-    - Qualitative Analysis
-    - ANOVA
-    - Multiple Regression
-    - Factor Analysis
-    - Descriptive Statistics
-    - Data Visualization
-    - SPSS
-    - Logic Models & Theory of Change
-    - IRB & Human Subjects
+    - { name: "Program Evaluation",            tags: [evaluation, research, community, nonprofit, data] }
+    - { name: "Needs Assessment",              tags: [evaluation, community, nonprofit, research, survey] }
+    - { name: "Survey Design",                 tags: [survey, research, evaluation, data] }
+    - { name: "Survey Methodology",            tags: [survey, research, evaluation] }
+    - { name: "Qualtrics",                     tags: [survey, research, evaluation] }
+    - { name: "SurveyMonkey",                  tags: [survey, research, evaluation] }
+    - { name: "Research Design",               tags: [research, evaluation, survey, data] }
+    - { name: "Mixed Methods",                 tags: [research, evaluation, data] }
+    - { name: "Qualitative Analysis",          tags: [research, evaluation, data] }
+    - { name: "ANOVA",                         tags: [research, data, evaluation] }
+    - { name: "Multiple Regression",           tags: [research, data, evaluation, reporting] }
+    - { name: "Factor Analysis",               tags: [research, data, evaluation] }
+    - { name: "Descriptive Statistics",        tags: [research, data, evaluation, reporting] }
+    - { name: "Data Visualization",            tags: [data, visualization, reporting, research, evaluation] }
+    - { name: "SPSS",                          tags: [research, data, evaluation] }
+    - { name: "Logic Models & Theory of Change", tags: [evaluation, nonprofit, research, community] }
+    - { name: "IRB & Human Subjects",          tags: [research, evaluation] }
 
   "Data, Reporting & Analysis":
-    - Python
-    - R
-    - SPSS
-    - Excel
-    - SQL
-    - Pandas/NumPy
-    - Tableau
-    - Domo
-    - Qualtrics
-    - Jupyter
-    - KPI Design
+    - { name: "Python",                        tags: [data, automation, development, research, evaluation, sre, devops] }
+    - { name: "R",                             tags: [data, research, evaluation, reporting, survey] }
+    - { name: "SPSS",                          tags: [research, data, evaluation] }
+    - { name: "Excel",                         tags: [data, reporting, evaluation, operations, nonprofit] }
+    - { name: "SQL",                           tags: [data, development, reporting, sre] }
+    - { name: "Pandas/NumPy",                  tags: [data, automation, research, development] }
+    - { name: "Tableau",                       tags: [data, reporting, visualization] }
+    - { name: "Domo",                          tags: [data, reporting, visualization, operations] }
+    - { name: "Qualtrics",                     tags: [survey, research, evaluation] }
+    - { name: "Jupyter",                       tags: [data, research, development, automation] }
+    - { name: "KPI Design",                    tags: [reporting, data, evaluation, operations, leadership] }
+
+  "AI & Agent Engineering":
+    - { name: "Anthropic Claude API",          tags: [development, automation, data, research] }
+    - { name: "Prompt Engineering",            tags: [development, automation, evaluation, research] }
+    - { name: "Prompt Caching",                tags: [development, automation, data] }
+    - { name: "Tool Use & Function Calling",   tags: [development, automation] }
+    - { name: "Model Context Protocol (MCP)",  tags: [development, automation, data] }
+    - { name: "Retrieval-Augmented Generation (RAG)", tags: [development, data, automation, research] }
+    - { name: "Agent Design",                  tags: [development, automation, research] }
+    - { name: "Claude Code / Agent SDK",       tags: [development, automation] }
+    - { name: "LLM Application Architecture",  tags: [development, automation, data] }
 
   "Systems & Automation":
-    - Dashboards & Monitoring (Splunk, Dynatrace, Grafana, Prometheus)
-    - Salesforce
-    - Process Documentation & Training
-    - Jira
-    - Git
-    - Docker
+    - { name: "Salesforce",                    tags: [data, operations, reporting, community, nonprofit] }
+    - { name: "Process Documentation & Training", tags: [sre, devops, operations, leadership, community] }
+    - { name: "Jira",                          tags: [sre, devops, operations, leadership] }
+    - { name: "Git",                           tags: [sre, devops, development, automation] }
+    - { name: "Shell Scripting (Bash, PowerShell)", tags: [sre, devops, automation, development] }
+    - { name: "Workflow Automation",           tags: [sre, devops, operations, automation] }
 
-  "Infrastructure":
-    - Docker
-    - Chef
-    - Groovy
-    - Terraform
-    - Ansible
-    - Pivotal Cloud Foundry
-    - Linux
-    - Windows Server IIS
-    - Tomcat
-    - Proxmox
-    - OPNsense
+  "Infrastructure & Self-Hosting":
+    - { name: "Linux Administration",          tags: [sre, devops, infrastructure, automation, security] }
+    - { name: "Docker",                        tags: [sre, devops, infrastructure, development, automation] }
+    - { name: "Docker Compose",                tags: [sre, devops, infrastructure, automation, development] }
+    - { name: "Proxmox VE",                    tags: [sre, devops, infrastructure, automation] }
+    - { name: "LXC Containers",                tags: [sre, devops, infrastructure, automation] }
+    - { name: "ZFS Storage",                   tags: [sre, devops, infrastructure, data] }
+    - { name: "Ansible",                       tags: [sre, devops, infrastructure, automation] }
+    - { name: "Terraform",                     tags: [sre, devops, infrastructure, automation] }
+    - { name: "Chef",                          tags: [sre, devops, infrastructure, automation] }
+    - { name: "OPNsense",                      tags: [sre, devops, infrastructure, security] }
+    - { name: "VLAN Trunking & Segmentation",  tags: [sre, devops, infrastructure, security] }
+    - { name: "WireGuard VPN",                 tags: [sre, devops, infrastructure, security] }
+    - { name: "Nginx Proxy Manager",           tags: [sre, devops, infrastructure, security] }
+    - { name: "Reverse Proxy & DNS",           tags: [sre, devops, infrastructure, security] }
+    - { name: "Pivotal Cloud Foundry",         tags: [sre, devops, infrastructure] }
+    - { name: "Windows Server IIS",            tags: [sre, devops, infrastructure] }
+    - { name: "Tomcat",                        tags: [sre, devops, infrastructure, development] }
+    - { name: "Home Assistant",                tags: [sre, infrastructure, automation, development] }
+    - { name: "GitLab CE (self-hosted)",       tags: [sre, devops, infrastructure, development] }
+    - { name: "Nextcloud",                     tags: [sre, infrastructure, operations] }
+    - { name: "CouchDB",                       tags: [sre, infrastructure, data, development] }
+    - { name: "Groovy",                        tags: [sre, devops, development, automation] }
 
   "Observability":
-    - Grafana
-    - Prometheus
-    - Splunk
-    - Dynatrace
-    - Domo
-    - Omnibus
-    - Datadog
+    - { name: "Grafana",                       tags: [sre, devops, data, visualization, operations] }
+    - { name: "Prometheus",                    tags: [sre, devops, data, operations] }
+    - { name: "Splunk",                        tags: [sre, devops, operations, data, security, reporting, visualization] }
+    - { name: "Dynatrace",                     tags: [sre, devops, operations, data, reporting, visualization] }
+    - { name: "Domo",                          tags: [sre, data, reporting, visualization, operations] }
+    - { name: "Datadog",                       tags: [sre, devops, operations, data, visualization] }
+    - { name: "Omnibus",                       tags: [sre, devops, operations] }
+    - { name: "LibreNMS",                      tags: [sre, devops, infrastructure, operations] }
 
   "CI/CD & Automation":
-    - Jenkins
-    - GitLab CI
-    - XLR
-    - Bitbucket
-    - Git
-    - Chef
-    - GitOps
+    - { name: "Jenkins",                       tags: [sre, devops, automation, infrastructure] }
+    - { name: "GitLab CI",                     tags: [sre, devops, automation, infrastructure, development] }
+    - { name: "GitHub Actions",                tags: [sre, devops, automation, development] }
+    - { name: "Vercel",                        tags: [devops, development, automation, infrastructure] }
+    - { name: "XLR",                           tags: [sre, devops, automation] }
+    - { name: "Bitbucket",                     tags: [sre, devops, development] }
+    - { name: "Git",                           tags: [sre, devops, development, automation] }
+    - { name: "Chef",                          tags: [sre, devops, infrastructure, automation] }
+    - { name: "GitOps",                        tags: [sre, devops, automation, infrastructure] }
 
   "Development":
-    - Python
-    - JavaScript
-    - C++
-    - PowerShell
-    - Bash
-    - Java
-    - Spring
-    - Groovy
-    - R
-    - Node.js
-    - REST/SOAP APIs
+    - { name: "Python",                        tags: [development, automation, data, sre, devops, research, evaluation] }
+    - { name: "TypeScript",                    tags: [development, sre, devops] }
+    - { name: "JavaScript",                    tags: [development, sre, devops] }
+    - { name: "React",                         tags: [development] }
+    - { name: "Next.js",                       tags: [development, devops] }
+    - { name: "Tailwind CSS",                  tags: [development] }
+    - { name: "Node.js",                       tags: [development, sre, devops] }
+    - { name: "REST/SOAP APIs",                tags: [development, sre, devops, data] }
+    - { name: "C++",                           tags: [development] }
+    - { name: "PowerShell",                    tags: [development, automation, sre, devops] }
+    - { name: "Bash",                          tags: [development, automation, sre, devops] }
+    - { name: "Java",                          tags: [development, sre, devops] }
+    - { name: "Spring",                        tags: [development, sre, devops] }
+    - { name: "Groovy",                        tags: [development, sre, devops, automation] }
+    - { name: "R",                             tags: [development, data, research, evaluation] }
 
   "Security & Compliance":
-    - PCI-DSS
-    - CVE Triage
-    - Artifact Validation
-    - SSL/TLS
-    - VPN
-    - VLANs
-    - DNS
-    - Load Balancing
+    - { name: "PCI-DSS",                       tags: [security, sre, devops, payments] }
+    - { name: "CVE Triage",                    tags: [security, sre, devops, operations] }
+    - { name: "Artifact Validation",           tags: [security, sre, devops] }
+    - { name: "SSL/TLS",                       tags: [security, sre, devops, infrastructure] }
+    - { name: "VPN",                           tags: [security, sre, devops, infrastructure] }
+    - { name: "VLANs",                         tags: [security, sre, devops, infrastructure] }
+    - { name: "DNS",                           tags: [security, sre, devops, infrastructure] }
+    - { name: "Load Balancing",                tags: [security, sre, devops, infrastructure] }
+    - { name: "Vulnerability Response",        tags: [security, sre, devops, operations] }
 
   "Incident Management":
-    - 24/7 On-Call
-    - Incident Postmortems
-    - Root Cause Analysis
-    - Runbook Development
-    - Escalation Management
-    - SLO/SLI
-    - Paging Software
-    - Alerting
+    - { name: "24/7 On-Call",                  tags: [sre, devops, operations] }
+    - { name: "Incident Postmortems",          tags: [sre, devops, operations, evaluation] }
+    - { name: "Root Cause Analysis",           tags: [sre, devops, operations, evaluation] }
+    - { name: "Runbook Development",           tags: [sre, devops, operations, leadership] }
+    - { name: "Escalation Management",         tags: [sre, devops, operations, leadership] }
+    - { name: "SLO/SLI",                       tags: [sre, devops, operations, data, reporting] }
+    - { name: "Paging Software",               tags: [sre, devops, operations] }
+    - { name: "Alerting",                      tags: [sre, devops, operations, data] }
 
   "Documentation":
-    - Atlassian Suite
-    - Confluence
-    - Jira
-    - Markdown
-    - Agile
-    - Chef Run Books
+    - { name: "Atlassian Suite",               tags: [sre, devops, operations, leadership] }
+    - { name: "Confluence",                    tags: [sre, devops, operations, leadership, community] }
+    - { name: "Jira",                          tags: [sre, devops, operations, leadership] }
+    - { name: "Markdown",                      tags: [sre, devops, operations, development, community, nonprofit, evaluation] }
+    - { name: "Agile",                         tags: [sre, devops, operations, leadership] }
+    - { name: "Chef Run Books",                tags: [sre, devops, operations, automation] }
+    - { name: "Technical Writing",             tags: [sre, devops, operations, leadership, community, nonprofit, evaluation, research] }
 
   "Photography & Visual Media":
-    - Documentary Photography
-    - Studio Photography
-    - Fine Art Photography
-    - Large & Medium Format
-    - Analog Film Processing (C41, E6)
-    - Photo Editing & Post-Production
-    - Creative Writing
-    - Publication Design
+    - { name: "Documentary Photography",       tags: [creative, photography, community, nonprofit] }
+    - { name: "Studio Photography",            tags: [creative, photography, design] }
+    - { name: "Fine Art Photography",          tags: [creative, photography, design] }
+    - { name: "Large & Medium Format",         tags: [creative, photography] }
+    - { name: "Analog Film Processing (C41, E6)", tags: [creative, photography] }
+    - { name: "Photo Editing & Post-Production", tags: [creative, photography, design] }
+    - { name: "Adobe Lightroom",               tags: [creative, photography, design] }
+    - { name: "Adobe Photoshop",               tags: [creative, photography, design] }
+    - { name: "Capture One",                   tags: [creative, photography, design] }
+    - { name: "Studio Lighting",               tags: [creative, photography, design] }
+    - { name: "Gallery & Exhibition Work",     tags: [creative, photography, community] }
+    - { name: "Creative Writing",              tags: [creative, design, community] }
+    - { name: "Publication Design",            tags: [creative, design, photography] }
 
   "Design & Web":
-    - Next.js
-    - Typography
-    - Layout Design
-    - Branding & Identity
-    - HTML/CSS
-    - Responsive Design
+    - { name: "React",                         tags: [development, design, creative] }
+    - { name: "Next.js",                       tags: [development, design, devops] }
+    - { name: "TypeScript",                    tags: [development, design] }
+    - { name: "Tailwind CSS",                  tags: [development, design, creative] }
+    - { name: "Typography",                    tags: [creative, design, photography] }
+    - { name: "Layout Design",                 tags: [creative, design, photography] }
+    - { name: "Branding & Identity",           tags: [creative, design, community, nonprofit] }
+    - { name: "HTML/CSS",                      tags: [development, design] }
+    - { name: "Responsive Design",             tags: [development, design] }
 
   "Databases":
-    - PostgreSQL
-    - MySQL
-    - Oracle
-    - MongoDB
-    - Kafka
-    - RabbitMQ
-    - Redis
-    - IBMMQ
-    - Elasticsearch
+    - { name: "PostgreSQL",                    tags: [data, sre, devops, infrastructure, development] }
+    - { name: "Neon (Serverless Postgres)",    tags: [data, devops, infrastructure, development] }
+    - { name: "MySQL",                         tags: [data, sre, devops, infrastructure, development] }
+    - { name: "Oracle",                        tags: [data, sre, devops, infrastructure] }
+    - { name: "MongoDB",                       tags: [data, sre, devops, infrastructure, development] }
+    - { name: "Kafka",                         tags: [data, sre, devops, infrastructure] }
+    - { name: "RabbitMQ",                      tags: [data, sre, devops, infrastructure] }
+    - { name: "Redis",                         tags: [data, sre, devops, infrastructure] }
+    - { name: "IBMMQ",                         tags: [data, sre, devops, infrastructure] }
+    - { name: "Elasticsearch",                 tags: [data, sre, devops, infrastructure, development] }
+    - { name: "CouchDB",                       tags: [data, sre, infrastructure, development] }

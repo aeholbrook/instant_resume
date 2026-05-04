@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import TagPicker from './TagPicker';
+import { getSkillName, type SkillInput } from '@/lib/skills';
 
 function SkillInput({ value, onCommit }: { value: string; onCommit: (v: string) => void }) {
   const [local, setLocal] = useState(value);
@@ -23,9 +24,9 @@ function SkillInput({ value, onCommit }: { value: string; onCommit: (v: string) 
 }
 
 type Props = {
-  skills: Record<string, string[]>;
+  skills: Record<string, SkillInput[]>;
   skillsTags: Record<string, string[]>;
-  onChange: (skills: Record<string, string[]>, skillsTags: Record<string, string[]>) => void;
+  onChange: (skills: Record<string, SkillInput[]>, skillsTags: Record<string, string[]>) => void;
   allTags: string[];
 };
 
@@ -38,7 +39,12 @@ export default function SkillsCard({ skills, skillsTags, onChange, allTags }: Pr
 
   const updateSkills = useCallback((category: string, value: string) => {
     const parsed = value.split(',').map((s) => s.trim()).filter(Boolean);
-    const next = { ...skills, [category]: parsed };
+    // Preserve per-skill tags by name match against the current list
+    const existing = skills[category] || [];
+    const byName = new Map<string, SkillInput>();
+    for (const item of existing) byName.set(getSkillName(item), item);
+    const merged: SkillInput[] = parsed.map((name) => byName.get(name) ?? name);
+    const next = { ...skills, [category]: merged };
     onChange(next, skillsTags);
   }, [skills, skillsTags, onChange]);
 
@@ -132,7 +138,7 @@ export default function SkillsCard({ skills, skillsTags, onChange, allTags }: Pr
               </div>
 
               <SkillInput
-                value={skills[cat].join(', ')}
+                value={skills[cat].map(getSkillName).join(', ')}
                 onCommit={(val) => updateSkills(cat, val)}
               />
 
