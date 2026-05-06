@@ -366,17 +366,29 @@ function ProjectsModule({ data }: { data: ResumeData }) {
 }
 
 function SkillsModule({ data }: { data: ResumeData }) {
-  const items = Object.entries(data.skills || {});
+  const skills = data.skills || {};
+  const order = data.skills_order ?? [];
+  const seen = new Set<string>();
+  const items: Array<[string, any[]]> = [];
+  for (const cat of order) {
+    if (cat in skills) {
+      items.push([cat, skills[cat]]);
+      seen.add(cat);
+    }
+  }
+  for (const [cat, list] of Object.entries(skills)) {
+    if (!seen.has(cat)) items.push([cat, list]);
+  }
   if (!items.length) return null;
 
   return (
     <section className="resume-section" data-module="skills">
       <div className="section-title">{data.section_titles?.skills || 'Skills'}</div>
       <div className="skills-block">
-        {items.map(([group, skills]) => (
+        {items.map(([group, list]) => (
           <div className="skill-row" key={group}>
             <span className="skill-category">{group}</span>{' '}
-            <span className="skill-items">{skills.map(getSkillName).join(', ')}</span>
+            <span className="skill-items">{list.map(getSkillName).join(', ')}</span>
           </div>
         ))}
       </div>
