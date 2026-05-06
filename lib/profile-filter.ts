@@ -82,7 +82,7 @@ function getAchievementTags(a: AchievementInput): string[] {
 /** Get display text from any achievement format */
 function getAchievementText(a: AchievementInput): string {
   if (typeof a === 'string') return stripHashtags(a);
-  return a.text;
+  return stripHashtags(a.text);
 }
 
 /** Get priority (undefined = lowest) */
