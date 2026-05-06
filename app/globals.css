@@ -329,7 +329,7 @@ a.contact-value {
 }
 
 .stack-bullets li::before {
-  content: '\25B8';
+  content: '\2022';
   position: absolute;
   left: -1.2rem;
   color: var(--accent);
@@ -357,7 +357,7 @@ a.contact-value {
 }
 
 .projects-list li::before {
-  content: '\25B8';
+  content: '\2022';
   position: absolute;
   left: -1.2rem;
   color: var(--accent);
@@ -1367,7 +1367,7 @@ a.contact-value {
 
 [data-theme="dark"] .stack-bullets li::before,
 [data-theme="dark"] .projects-list li::before {
-  content: '\25B8';
+  content: '\2022';
   color: #e94560;
 }
 
@@ -1677,7 +1677,7 @@ a.contact-value {
   .stack-bullets li::before {
     content: '\f0da';         /* FontAwesome caret-right equivalent */
     font-family: 'Fira Sans', sans-serif;
-    content: '\25B8';         /* Fallback: right-pointing triangle */
+    content: '\2022';         /* Fallback: right-pointing triangle */
     font-size: 8pt;
     left: -1.1rem;
     color: #922D3E;           /* MarkerColour!80!black ≈ #B6073F mixed 80% with black */
@@ -1893,7 +1893,7 @@ a.contact-value {
 
   & .stack-bullets li::before {
     font-family: 'Fira Sans', sans-serif;
-    content: '\25B8';
+    content: '\2022';
     font-size: 8pt;
     left: -1.1rem;
     color: #922D3E;
