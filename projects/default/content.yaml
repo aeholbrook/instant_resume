@@ -181,10 +181,13 @@ employment:
         default: true
     achievements:
       - "Architected 200+ observability monitors & IaC/CI/CD pipelines (Chef, Jenkins, Groovy, Splunk, Dynatrace, Domo); achieved 99.99% uptime. #sre #devops #operations #automation #infrastructure"
-      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; reduced report generation from 2+ hours to seconds. #data #reporting #visualization #operations"
-      - "Primary on-call engineer with <5min response SLA; resolved 1,000+ production incidents annually. #sre #operations"
+      - "Built Domo operational intelligence platform integrating Salesforce, Splunk, Dynatrace, Jira, & Remedy; reduced report generation from 2+ hours to seconds. #data #reporting #visualization #operations #evaluation"
+      - "Primary on-call engineer with <5min response SLA; resolved 1,000+ production incidents annually. #sre #operations #leadership"
       - "Engineered Python-based terminal platform & VSCode toolkit for Tomcat monitoring, deployment validation, & service control. #sre #devops #automation #development"
-      - "First in operations to detect active exploitation of Log4Shell (CVE-2021-44228) across production payment infrastructure. #sre #devops #operations"
+      - "First in operations to detect active exploitation of Log4Shell (CVE-2021-44228) across production payment infrastructure. #sre #devops #operations #evaluation #research"
+      - "Led onboarding & technical training for new engineers across 100+ microservices, dozens of customer call paths, & complex multi-service transaction flows; built training materials & runbooks adopted as team standards. #leadership #community #evaluation #reporting"
+      - "Translated production telemetry into stakeholder-ready BI dashboards & SLO/SLI reports for engineering leadership; replaced multi-hour manual reports with sub-second self-service analytics across global payment systems. #data #reporting #visualization #evaluation #leadership"
+      - "Drove postmortem & root-cause culture across the team — designed evaluation templates, ran retrospectives, & turned incident data into measurable reliability improvements adopted org-wide. #evaluation #research #leadership #data #reporting"
 
   - title: "DevOps Assistantship"
     company: "SIU Edwardsville / Illinois Department of Transportation"
