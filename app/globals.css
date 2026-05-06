@@ -1548,8 +1548,10 @@ a.contact-value {
   }
 
   .contact-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-top: 0.5em;        /* LaTeX: 0.5\baselineskip */
-    gap: 0.2em;               /* LaTeX: 0.2\baselineskip between lines */
+    gap: 0.2em 1.5rem;        /* LaTeX: 0.2\baselineskip between lines */
   }
 
   .contact-line {
@@ -1809,7 +1811,7 @@ a.contact-value {
     line-height: 1.1;
   }
 
-  & .contact-list { margin-top: 0.5em; gap: 0.2em; }
+  & .contact-list { display: grid; grid-template-columns: 1fr 1fr; margin-top: 0.5em; gap: 0.2em 1.5rem; }
   & .contact-line { font-size: 9pt; gap: 0.4rem; }
   & .contact-icon { width: 1.8em; }
   & .contact-icon svg { width: 12px; height: 12px; fill: #B6073F; }
