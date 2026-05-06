@@ -179,11 +179,22 @@ function renderProjects(data: ResumeData): string {
 
 function renderSkills(data: ResumeData): string {
   const skills = data.skills || {};
-  const entries = Object.entries(skills);
-  if (!entries.length) return '';
+  const order = data.skills_order ?? [];
+  const seen = new Set<string>();
+  const ordered: Array<[string, any[]]> = [];
+  for (const cat of order) {
+    if (cat in skills) {
+      ordered.push([cat, skills[cat]]);
+      seen.add(cat);
+    }
+  }
+  for (const [cat, items] of Object.entries(skills)) {
+    if (!seen.has(cat)) ordered.push([cat, items]);
+  }
+  if (!ordered.length) return '';
   const title = data.section_titles?.skills || 'Skills';
 
-  const rows = entries.map(([group, items]) =>
+  const rows = ordered.map(([group, items]) =>
     `<div class="skill-row"><span class="skill-category">${esc(group)}</span> <span class="skill-items">${esc(items.map(getSkillName).join(', '))}</span></div>`
   ).join('');
 

@@ -77,6 +77,8 @@ export type ResumeData = {
     tags?: string[];
   }>;
   skills?: Record<string, SkillInput[]>;
+  /** Optional ordering for skills categories. Categories not listed are appended after. */
+  skills_order?: string[];
   profiles?: Record<string, ProfileDef>;
   skills_tags?: Record<string, string[]>;
 };
