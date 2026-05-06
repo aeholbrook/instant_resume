@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     try {
       const dbData = await getResume(project);
       if (dbData) {
-        const yamlContent = yaml.stringify(dbData);
+        const yamlContent = yaml.stringify(dbData, { lineWidth: 0 });
         return NextResponse.json({
           filename,
           content: yamlContent,
