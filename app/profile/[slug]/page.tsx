@@ -3,6 +3,7 @@ import { filterContent, getAvailableProfiles } from '@/lib/profile-filter';
 import ClassicResumeStack from '@/components/resume/ClassicResumeStack';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export default async function ProfilePage({
   params,

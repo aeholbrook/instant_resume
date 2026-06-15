@@ -5,7 +5,8 @@ import type { ResumeData } from './resume';
 function getSql() {
   const url = process.env.POSTGRES_URL || process.env.DATABASE_URL;
   if (!url) throw new Error('No database URL configured (POSTGRES_URL or DATABASE_URL)');
-  return neon(url, { fetchOptions: { next: { revalidate: 60 } } });
+  // no-store: editor saves must show on the site immediately (no stale cache window)
+  return neon(url, { fetchOptions: { cache: 'no-store' } });
 }
 
 // ── Schema bootstrap ────────────────────────────────────────────────
